@@ -1,0 +1,164 @@
+#home_container {
+    background-color: #F5F6FA;
+    height: 100%;
+
+    #navbar_home {
+        height: 10%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 2rem 0 2rem;
+
+        .search {
+            .search_box {
+                width: 30rem;
+                height: 2.3rem;
+                border: 1px solid #cac8c8;
+                border-radius: 1.5rem;
+                display: flex;
+                align-items: center;
+                background-color: #FFFFFF;
+
+                i {
+                    margin-left: 1rem;
+                    color: #9e9b9b;
+                }
+
+                input {
+                    border: none;
+                    outline: none;
+                    margin-left: 0.5rem;
+                }
+
+                input::placeholder {
+                    color: #9e9b9b;
+                }
+            }
+
+        }
+
+        .filter {
+            .filter_box {
+                width: 6rem;
+                height: 2.3rem;
+                border: 1px solid #cac8c8;
+                border-radius: 1.5rem;
+                display: flex;
+                align-items: center;
+                background-color: #FFFFFF;
+                margin-left: 1rem;
+                align-items: center;
+                cursor: pointer;
+
+                img {
+                    width: 1.2rem;
+                    height: auto;
+                    margin-left: 1rem;
+                    margin-right: 0.5rem;
+                }
+
+                span {
+                    font-size: 0.8rem;
+                    font-weight: bold;
+                    color: #9e9b9b;
+                }
+
+            }
+        }
+    }
+
+    #main_home {
+        //justify-content: center;
+        //margin-left: 30px;
+        //float: left;
+        height: 90%;
+        width: 100%;
+        background: #F5F5F5;
+        //margin-bottom: 25px;
+
+        .cart_container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            overflow-y: auto;
+
+            .cart_box {
+                display: inline-block;
+                position: relative;
+                width: 30%;
+                height: 48%;
+                background-color: #FFFFFF;
+                margin: 0 0 1rem 2rem;
+                border-radius: 2rem;
+
+                .cart {
+                    width: 88%;
+                    padding: 1.5rem;
+                    display: flex;
+                    flex-direction: column;
+
+                    .cart_img {
+                        width: 100%;
+                        height: 70%;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 1rem;
+                        }
+                    }
+
+                    .cart_name {
+                        h2 {
+                            font-weight: bold;
+                            font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+                        }
+                    }
+
+                    .cart_decription {
+                        display: flex;
+                        flex-direction: row;
+
+                        .cart_decription_box {}
+
+                        .range {
+                            border: 1px solid #e81313;
+
+                            img {
+                                width: 20%;
+                                height: auto;
+                            }
+                        }
+
+                        // .range {
+                        //     width: 3rem;
+                        //     display: flex;
+                        //     flex-direction: row;
+                        //     border-radius: 2rem;
+                        //     border: 1px solid #cac8c8;
+                        //     align-items: center;
+                        //     justify-content: center;
+
+                        //     img {
+                        //         width: 20%;
+                        //         height: auto;
+                        //     }
+
+                        // }
+
+                    }
+                }
+            }
+        }
+
+        .cart_container::-webkit-scrollbar {
+            display: none;
+        }
+
+
+    }
+
+}
