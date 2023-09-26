@@ -1,0 +1,115 @@
+#sidebar_container {
+    height: 100%;
+
+    #logo {
+        height: 10%;
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 9%;
+            height: auto;
+            margin-right: 0.5rem;
+            margin-left: 1.4rem;
+        }
+
+        h2 {
+            margin: 0;
+            font-weight: bold;
+        }
+    }
+
+    #menu_list {
+        height: 80%;
+
+        .tui-list {
+            height: calc(100% - 6.25rem - 0.625rem);
+            display: flex;
+            flex-direction: column;
+            margin-top: 0.625rem;
+            gap: 1rem;
+            overflow: auto;
+            list-style-type: none;
+            padding: 0px;
+            color: #515670;
+            font-weight: bold;
+
+            .tui-list__item {
+                height: 2.5rem;
+                display: flex;
+                align-items: center;
+
+                .tui-list__item-title {
+                    width: fit-content;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    //color: black;
+                    font-size: 1rem;
+                    text-align: center;
+                    vertical-align: center;
+                    margin-left: 1.5rem;
+                }
+            }
+
+            .tui-list__item:last-child {
+                //margin-top: auto;
+                margin-bottom: 1.25rem;
+            }
+
+            .tui-list__item-active {
+                border-right: 5px solid #4B60EE;
+                background-color: #EDF5FF;
+
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 0rem;
+            min-height: 1.25rem;
+            height: 51%;
+        }
+    }
+
+    #profile {
+        display: flex;
+        height: 7%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 80%;
+        margin: 0 auto;
+
+        .profile_infor {
+            display: flex;
+            flex-direction: row;
+
+            .profile_img {
+                img {
+                    width: 3rem;
+                    height: 3rem;
+                    border-radius: 50%;
+                    margin-right: 0.5rem;
+                }
+            }
+
+            .profile_info {
+                h3 {
+                    margin: 0;
+                    font-weight: bold;
+                }
+
+                p {
+                    margin: 0;
+                    font-size: 0.75rem;
+                }
+            }
+        }
+
+        .profile_menu {
+            font-size: 1.2rem;
+            margin-left: 2rem;
+        }
+    }
+}
