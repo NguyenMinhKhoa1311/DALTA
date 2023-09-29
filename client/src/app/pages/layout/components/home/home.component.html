@@ -17,50 +17,46 @@
     <div id="main_home">
 
         <div class="cart_container">
-            <div class="cart_box">
+            <div class="cart_box" *ngFor="let car of carList">
                 <div class="cart">
                     <div class="cart_img">
                         <img src="../../../../../assets/images/pexels-adrian-dorobantu-2127733.jpg" alt="">
                     </div>
                     <div class="cart_name">
-                        <h2>Audio Q7</h2>
+                        <h2>{{car.name}}</h2>
                     </div>
                     <div class="cart_decription">
-                        <div class="cart_decription_box">
-                            <div class="range">
-                                <!-- <img src="../../../../../assets/images/car-icon.png" alt=""> -->
-                                <span>SUV</span>
+
+                        <div class="range">
+                            <div class="range_img">
+                                <img src="../../../../../assets/images/car-icon.png" alt="">
                             </div>
-                            <div>
-                                dasd
-                            </div>
+                            <span>SUV</span>
                         </div>
-
-
-
+                        <div class="range">
+                            <div class="range_img">
+                                <img src="../../../../../assets/images/car-door.png" alt="">
+                            </div>
+                            <span>4</span>
+                        </div>
+                        <div class="range">
+                            <div class="range_img">
+                                <img src="../../../../../assets/images/seat.png" alt="">
+                            </div>
+                            <span>6</span>
+                        </div>
                     </div>
                     <div class="cart_price">
+                        <div class="price_btn">
+                            <button>Rent Now</button>
+                        </div>
+                        <div class="price_value">
+                            <h3>$250</h3>
+                            <span>/DAY</span>
+                        </div>
 
                     </div>
                 </div>
-            </div>
-            <div class="cart_box">
-
-            </div>
-            <div class="cart_box">
-
-            </div>
-            <div class="cart_box">
-
-            </div>
-            <div class="cart_box">
-
-            </div>
-            <div class="cart_box">
-
-            </div>
-            <div class="cart_box">
-
             </div>
         </div>
 
