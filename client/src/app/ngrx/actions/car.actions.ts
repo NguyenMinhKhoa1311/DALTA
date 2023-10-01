@@ -2,16 +2,28 @@ import { Car } from 'src/app/models/car.model';
 import { createAction, props } from '@ngrx/store';
 
 export const get = createAction(
-  '[Course] get all'
+  '[Car] get all'
   // props<{ carId: string }>()
 );
 
 export const getSuccess = createAction(
-  '[Course] get all success',
+  '[Car] get all success',
   props<{ carList: Car[] }>()
 );
 
 export const getFailure = createAction(
-  '[Course] get all failure',
+  '[Car] get all failure',
   props<{ getErrMess: any }>()
+);
+
+export const add = createAction('[Car] add', props<{ car: Car }>());
+
+export const addSuccess = createAction(
+  '[Car] add success',
+  props<{ car: Car }>()
+);
+
+export const addFailure = createAction(
+  '[Car] add failure',
+  props<{ addErrMess: any }>()
 );

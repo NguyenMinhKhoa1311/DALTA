@@ -14,4 +14,11 @@ export class CarService {
   getCars() {
     return this.httpClient.get<Car[] | any>('http://localhost:3000/car/all');
   }
+
+  createCar() {
+    return this.httpClient.post<Car[] | any>(
+      'http://localhost:3000/car/create',
+      this.cars
+    );
+  }
 }

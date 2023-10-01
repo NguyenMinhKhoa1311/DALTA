@@ -155,6 +155,7 @@
                         flex-direction: row;
                         justify-content: space-between;
 
+
                         .price_btn {
                             button {
                                 border-radius: 2rem;
@@ -165,6 +166,13 @@
                                 background-color: #4B60EE;
                                 color: white;
                                 font-size: 11px;
+                                cursor: pointer;
+                            }
+                        }
+
+                        .price_btn:hover {
+                            button {
+                                background-color: #3c4ec7;
                             }
                         }
 
@@ -183,7 +191,6 @@
                             span {
                                 display: flex;
                                 align-items: flex-end;
-
                                 font-size: 12px;
                             }
                         }

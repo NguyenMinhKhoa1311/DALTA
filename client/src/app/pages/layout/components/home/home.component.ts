@@ -11,14 +11,9 @@ import { CarState } from 'src/app/ngrx/states/car.state';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   carList: Car[] = [];
-
   constructor(private store: Store<{ car: CarState }>) {}
-
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
 
   ngOnInit(): void {
     this.store.select('car').subscribe((val) => {

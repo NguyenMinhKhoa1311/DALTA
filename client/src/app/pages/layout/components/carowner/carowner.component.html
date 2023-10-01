@@ -1,0 +1,100 @@
+<div id="carowner_container">
+    <div id="title">
+        <h4>Đăng kí xe</h4>
+    </div>
+    <div id="main">
+        <div id="container">
+            <div class="palte_container" [formGroup]="addCarForm">
+                <div class="palte">
+                    <h2>Biển số xe</h2>
+                    <mat-form-field class="palte_box">
+                        <mat-label>Nhập biển số xe</mat-label>
+                        <input matInput #input formControlName="name">
+                    </mat-form-field>
+                </div>
+                <div class="palte">
+                    <h2>Hình ảnh</h2>
+                    <input type="file" accept="image/*" style="display: none" (change)="onFileSelected($event) "
+                        #fileInput formControlName="image" />
+                    <i class="fa-solid fa-cloud-arrow-up" style="cursor: pointer;" (click)="fileInput.click()"></i>
+                    <div class="img-file" *ngIf="file">
+                        <img [src]="selectedImage" alt="Selected Image" style="width: 100px;height: 100px;" />
+                    </div>
+                </div>
+            </div>
+
+
+            <h2>Thông tin cơ bản</h2>
+            <div class="info">
+                <div class=info1>
+                    <h4>Hãng xe</h4>
+                    <mat-form-field class="info_box">
+                        <mat-select [formControl]="position">
+                            <mat-option *ngFor="let positionOption of positionOptions" [value]="positionOption">
+                                {{positionOption}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class=info1>
+                    <h4>Mẫu xe</h4>
+                    <mat-form-field class="info_box">
+                        <mat-select [formControl]="mauxe">
+                            <mat-option *ngFor="let mauxeOption of mauxeOptions" [value]="mauxeOption">
+                                {{mauxeOption}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="info">
+                <div class=info1>
+                    <h4>Tên xe</h4>
+                    <mat-form-field class="info_box">
+                        <mat-label>Nhập tên xe</mat-label>
+                        <input matInput #input>
+                    </mat-form-field>
+                </div>
+                <div class=info1>
+                    <h4>Năm sản xuất</h4>
+                    <mat-form-field class="info_box">
+                        <mat-select [formControl]="nam">
+                            <mat-option *ngFor="let namOption of namOptions" [value]="namOption">
+                                {{namOption}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="info">
+                <div class=info1>
+                    <h4>Số ghế</h4>
+                    <mat-form-field class="info_box">
+                        <mat-select [formControl]="chair">
+                            <mat-option *ngFor="let chairOption of chairOptions" [value]="chairOption">
+                                {{chairOption}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class=info1>
+                    <h4>Số cửa</h4>
+                    <mat-form-field class="info_box">
+                        <mat-select [formControl]="door">
+                            <mat-option *ngFor="let doorOption of doorOptions" [value]="doorOption">
+                                {{doorOption}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="dangki_btn">
+                <button (click)="addCar()">Đăng kí</button>
+            </div>
+        </div>
+
+    </div>
+</div>

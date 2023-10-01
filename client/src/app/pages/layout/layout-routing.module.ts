@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { HistoryComponent } from './components/history/history.component';
+import { AboutComponent } from './components/about/about.component';
+import { CarownerComponent } from './components/carowner/carowner.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,14 @@ const routes: Routes = [
       {
         path: 'history',
         component: HistoryComponent,
+      },
+      {
+        path: 'about',
+        component: AboutComponent,
+      },
+      {
+        path: 'carowner',
+        component: CarownerComponent,
       },
     ],
   },

@@ -1,0 +1,113 @@
+#carowner_container {
+    height: 100%;
+
+    #title {
+        height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h4 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+    }
+
+    #main {
+        height: 90%;
+        display: flex;
+        justify-content: center;
+
+        #container {
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            padding: 0 10rem;
+
+            .palte_container {
+                display: flex;
+                justify-content: space-between;
+
+                .palte {
+                    width: 45%;
+                    overflow: auto;
+
+                    .palte_box {
+                        display: block;
+                        width: 100%;
+                    }
+                }
+            }
+
+
+            .info {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+
+                .info1 {
+                    width: 45%;
+                    overflow: auto;
+
+                    .info_box {
+                        width: 100%;
+                        overflow: auto;
+
+                    }
+                }
+
+            }
+
+            ::ng-deep .mdc-text-field--filled {
+                background-color: #fff;
+            }
+
+            ::ng-deep .ng-tns-c11-0,
+            .ng-tns-c11-5 {
+                color: black;
+            }
+
+            ::ng-deep .ng-tns-c11-1,
+            .ng-tns-c11-6 {
+                color: black;
+            }
+
+            ::ng-deep .mat-mdc-select-value-text {
+                color: black;
+            }
+
+            ::ng-deep .mat-mdc-select-arrow svg {
+                color: black;
+            }
+
+            ::ng-deep .mdc-menu-surface {
+                background-color: #fff;
+            }
+
+            .dangki_btn {
+                display: flex;
+                flex-direction: row-reverse;
+
+                button {
+                    border-radius: 0.5rem;
+                    border: none;
+                    padding: 0.5rem;
+                    height: 2.5rem;
+                    width: 10rem;
+                    background-color: #4B60EE;
+                    color: white;
+                    font-size: 15px;
+                    cursor: pointer;
+                }
+            }
+
+            .dangki_btn:hover {
+                button {
+                    background-color: #3c4ec7;
+                }
+            }
+
+        }
+    }
+}

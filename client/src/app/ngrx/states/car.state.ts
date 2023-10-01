@@ -5,4 +5,8 @@ export interface CarState {
   isGetSuccess: boolean;
   getErrMess: string;
   carList: Car[];
+  isAddLoading: boolean;
+  isAddSuccess: boolean;
+  addErrMess: string;
+  car: Car;
 }

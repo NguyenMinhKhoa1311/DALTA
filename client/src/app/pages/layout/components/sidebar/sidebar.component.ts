@@ -31,6 +31,18 @@ export class SidebarComponent {
       link: 'base/history',
       icon: 'fa-solid fa-clock-rotate-left',
     },
+    {
+      id: 2,
+      name: 'Car Owner',
+      link: 'base/carowner',
+      icon: 'fa-regular fa-address-card',
+    },
+    {
+      id: 3,
+      name: 'About',
+      link: 'base/about',
+      icon: 'fa-regular fa-address-card',
+    },
   ];
   route$ = this.router.events;
 
@@ -42,7 +54,8 @@ export class SidebarComponent {
         this.url = this.router.url;
         this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
         this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
-        // this.router.url === '/base/profile' ? (this.pageSelected = 2) : null;
+        this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
+        this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
         // this.router.url === '/base/cart' ? (this.pageSelected = 3) : null;
         // this.router.url === '/base/settings' ? (this.pageSelected = 4) : null;
       }

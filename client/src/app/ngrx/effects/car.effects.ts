@@ -31,4 +31,29 @@ export class CarEffects {
       )
     )
   );
+
+  create$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(CarActions.add),
+      exhaustMap(() =>
+        this.carService.createCar().pipe(
+          map((item) => {
+            if (item != undefined || item != null) {
+              if (item.message) {
+                return CarActions.addFailure({ addErrMess: item.message });
+              }
+              return CarActions.addSuccess({ car: item });
+            } else {
+              return CarActions.addFailure({
+                addErrMess: 'Car is undefined or null',
+              });
+            }
+          }),
+          catchError((error) =>
+            of(CarActions.addFailure({ addErrMess: error }))
+          )
+        )
+      )
+    )
+  );
 }
