@@ -20,7 +20,7 @@
             <div class="cart_box" *ngFor="let car of carList">
                 <div class="cart">
                     <div class="cart_img">
-                        <img src="../../../../../assets/images/pexels-adrian-dorobantu-2127733.jpg" alt="">
+                        <img src="{{car.image}}" alt="">
                     </div>
                     <div class="cart_name">
                         <h2>{{car.name}}</h2>
@@ -31,19 +31,19 @@
                             <div class="range_img">
                                 <img src="../../../../../assets/images/car-icon.png" alt="">
                             </div>
-                            <span>SUV</span>
+                            <span>{{car.model}}</span>
                         </div>
                         <div class="range">
                             <div class="range_img">
                                 <img src="../../../../../assets/images/car-door.png" alt="">
                             </div>
-                            <span>4</span>
+                            <span>{{car.door}}</span>
                         </div>
                         <div class="range">
                             <div class="range_img">
                                 <img src="../../../../../assets/images/seat.png" alt="">
                             </div>
-                            <span>6</span>
+                            <span>{{car.seat}}</span>
                         </div>
                     </div>
                     <div class="cart_price">
@@ -51,7 +51,7 @@
                             <button>Rent Now</button>
                         </div>
                         <div class="price_value">
-                            <h3>$250</h3>
+                            <h3>${{car.price}}</h3>
                             <span>/DAY</span>
                         </div>
 

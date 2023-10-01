@@ -8,31 +8,14 @@ export const initialState: CarState = {
   isGetSuccess: false,
   getErrMess: '',
   carList: [],
+  isAddLoading: false,
+  isAddSuccess: false,
+  addErrMess: '',
+  car: <Car>{},
 };
 
 export const carReducer = createReducer(
   initialState,
-  // on(CarActions.get, (state) => ({
-  //   ...state,
-  //   isGetLoading: true,
-  //   isGetSuccess: false,
-  //   getErrMess: '',
-  // })),
-
-  // on(CarActions.getSuccess, (state, { cars }) => ({
-  //   ...state,
-  //   isGetLoading: false,
-  //   isGetSuccess: true,
-  //   cars: cars,
-  // })),
-
-  // on(CarActions.getFailure, (state, { getErrMess }) => ({
-  //   ...state,
-  //   isGetLoading: false,
-  //   isGetSuccess: false,
-  //   getErrMess: getErrMess,
-  // })),
-
   on(CarActions.get, (state, action) => {
     let newState: CarState = {
       ...state,
@@ -60,6 +43,36 @@ export const carReducer = createReducer(
       isGetLoading: false,
       isGetSuccess: false,
       getErrMess: action.getErrMess,
+    };
+    return newState;
+  }),
+
+  on(CarActions.add, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isAddLoading: true,
+      isAddSuccess: false,
+      addErrMess: '',
+    };
+    return newState;
+  }),
+
+  on(CarActions.addSuccess, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isAddLoading: false,
+      isAddSuccess: true,
+      carList: [...state.carList, action.car],
+    };
+    return newState;
+  }),
+
+  on(CarActions.addFailure, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isAddLoading: false,
+      isAddSuccess: false,
+      addErrMess: action.addErrMess,
     };
     return newState;
   })
