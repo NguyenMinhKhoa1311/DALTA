@@ -9,6 +9,12 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { carReducer } from './ngrx/reducers/car.reducer';
 import { CarEffects } from './ngrx/effects/car.effects';
+import { storageReducer } from './ngrx/reducers/storage.reducer';
+import { StorageEffects } from './ngrx/effects/storage.effects';
+import { manufacturerReducer } from './ngrx/reducers/manufacturker.reducer';
+import { ManufacturerEffects } from './ngrx/effects/manufacturer.effects';
+import { categoryReducer } from './ngrx/reducers/category.reducer';
+import { CategoryEffects } from './ngrx/effects/category.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,8 +25,11 @@ import { CarEffects } from './ngrx/effects/car.effects';
     HttpClientModule,
     StoreModule.forRoot({
       car: carReducer,
+      storage: storageReducer,
+      manufacturer: manufacturerReducer,
+      category: categoryReducer,
     }),
-    EffectsModule.forRoot([CarEffects]),
+    EffectsModule.forRoot([CarEffects, StorageEffects, ManufacturerEffects, CategoryEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -27,6 +27,12 @@ export class Review {
     @Prop({required: true})
     rating: number;
     
+    @Prop()
+    comment: string;
+
+    @Prop({required: true})
+    dayReview: string;
+    
 
     
 

@@ -16,11 +16,14 @@ export class Payment {
     })
     reservationId: string;
 
+    @Prop({required: true, type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    })
+    customerId: string;
+
     @Prop({required: true})
     dayPayment: string;
 
-    @Prop({required: true})
-    total: number;
 
 }
 

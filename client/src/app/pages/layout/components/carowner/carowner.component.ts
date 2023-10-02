@@ -12,6 +12,10 @@ import { Store } from '@ngrx/store';
 import { Car } from 'src/app/models/car.model';
 import { CarState } from 'src/app/ngrx/states/car.state';
 import * as CarAction from '../../../../ngrx/actions/car.actions';
+import { ManufacturerState } from 'src/app/ngrx/states/munufacturer.state';
+import * as ManufacturerAction from '../../../../ngrx/actions/manufacturer.actions';
+import { categoryState } from 'src/app/ngrx/states/category.state';
+import * as CategoryAction from '../../../../ngrx/actions/category.actions';
 
 @Component({
   selector: 'app-carowner',
@@ -64,8 +68,24 @@ export class CarownerComponent implements OnInit, OnDestroy {
     private router: Router,
     private store: Store<{
       car: CarState;
+      manufacturer: ManufacturerState;
+      category: categoryState;
     }>
-  ) {}
+  ) {
+    this.store.dispatch(ManufacturerAction.get());
+    this.store.dispatch(CategoryAction.get());
+    this.store.select('manufacturer', 'manufacturers').subscribe((val) => {
+      if (val != null && val != undefined) {
+        console.log(val);
+      }
+    })
+    this.store.select('category', 'categories').subscribe((val) => {
+      if (val != null && val != undefined) {
+        console.log(val);
+      }
+    })
+
+  }
   ngOnDestroy(): void {
     //this.store.dispatch(CarAction.reset());
   }
@@ -126,7 +146,7 @@ export class CarownerComponent implements OnInit, OnDestroy {
       deleveryService: false,
     };
 
-    this.store.dispatch(CarAction.add({ car: addCarData }));
+    // this.store.dispatch(CarAction.add({ car: addCarData }));
     console.log(addCarData);
   }
 }

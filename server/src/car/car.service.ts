@@ -58,7 +58,11 @@ export class CarService {
 
   async findById(id: string){
     try{
-      const car = await this.carModel.findById(id).exec();
+      const car = await this.carModel.findById(id)
+      .populate('manufacturerId','name', this.manufacturerModel)
+      .populate('categoryId','name', this.categoryModel)
+      .populate('ownerId','name', this.userModel)
+      .exec();
       return car;
     }
     catch(err){

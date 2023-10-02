@@ -29,6 +29,7 @@ export class ReservationsService {
     try{
       const reservations = await this.reservationModel.find()
       .populate('carId','name', this.carModel)
+      .populate('customerId','name', this.userModel)    
       .exec();
       return reservations;
     }
@@ -41,6 +42,7 @@ export class ReservationsService {
     try{
       const reservation = await this.reservationModel.findOne({reservationId: id})
       .populate('carId','name', this.carModel)
+      .populate('customerId','name', this.userModel)      
       .exec();
       return reservation;
     }
