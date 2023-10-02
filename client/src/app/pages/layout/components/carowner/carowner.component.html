@@ -69,18 +69,30 @@
             </div>
 
             <div class="info">
-                <div class=info1>
-                    <h4>Số ghế</h4>
-                    <mat-form-field class="info_box">
-                        <mat-select [formControl]="chair">
-                            <mat-option *ngFor="let chairOption of chairOptions" [value]="chairOption">
-                                {{chairOption}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <div class="info_left">
+                    <div class=info1>
+                        <h4>Số ghế</h4>
+                        <mat-form-field class="info_box">
+                            <mat-select [formControl]="chair">
+                                <mat-option *ngFor="let chairOption of chairOptions" [value]="chairOption">
+                                    {{chairOption}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class=info1>
+                        <h4>Số cửa</h4>
+                        <mat-form-field class="info_box">
+                            <mat-select [formControl]="door">
+                                <mat-option *ngFor="let doorOption of doorOptions" [value]="doorOption">
+                                    {{doorOption}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
                 <div class=info1>
-                    <h4>Số cửa</h4>
+                    <h4>Địa chỉ</h4>
                     <mat-form-field class="info_box">
                         <mat-select [formControl]="door">
                             <mat-option *ngFor="let doorOption of doorOptions" [value]="doorOption">
