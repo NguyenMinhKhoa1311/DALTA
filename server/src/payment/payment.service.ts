@@ -5,6 +5,7 @@ import { Reservation } from 'src/reservations/entities/reservation.entity';
 import { Model } from 'mongoose';
 import { Payment } from './entities/payment.entity';
 import { InjectModel } from '@nestjs/mongoose';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class PaymentService {
@@ -12,6 +13,7 @@ export class PaymentService {
   constructor(
     @InjectModel(Payment.name) private readonly paymentModel: Model<Payment>,
     @InjectModel(Reservation.name) private readonly reservationModel: Model<Reservation>,
+    @InjectModel(User.name) private readonly userModel: Model<User>
   ){}
   async create(createPaymentDto: CreatePaymentDto) {
     try{
@@ -25,7 +27,10 @@ export class PaymentService {
 
   async findAll() {
     try{
-      const payments = await this.paymentModel.find().exec();
+      const payments = await this.paymentModel.find()
+      .populate('reservationId','total', this.reservationModel)
+      .populate('customerId','name', this.userModel)
+      .exec();
       return payments;
     }
     catch(err){
@@ -36,6 +41,8 @@ export class PaymentService {
   async findOne(id: string) {
     try{
       const payment = await this.paymentModel.findOne({paymentId: id})
+      .populate('reservationId','total', this.reservationModel)
+      .populate('customerId','name', this.userModel)
       .exec();
       return payment;
     }

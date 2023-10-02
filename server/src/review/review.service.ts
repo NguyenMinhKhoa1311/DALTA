@@ -30,6 +30,7 @@ export class ReviewService {
     try{
       const reviews = await this.reviewModel.find()
       .populate('carId','name', this.carModel)
+      .populate('userId','name email', this.userModel)
       .exec();
       return reviews;
     }
@@ -40,7 +41,10 @@ export class ReviewService {
 
   async findOne(id: string) {
     try{
-      const review = await this.reviewModel.findOne({reviewId: id}).exec();
+      const review = await this.reviewModel.findOne({reviewId: id})
+      .populate('carId','name', this.carModel)
+      .populate('userId','name email', this.userModel)
+      .exec();
       return review;
     }
     catch(err){

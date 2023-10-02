@@ -18,18 +18,21 @@ export class Car {
     @Prop({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
+        required: true
       })
       categoryId: string;
 
     @Prop({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Manufacturer',
+        required: true
       })
       manufacturerId: string;
 
     @Prop({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        required: true
         })
         ownerId: string;
 
