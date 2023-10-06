@@ -12,6 +12,13 @@ export const initialState: CarState = {
   isAddSuccess: false,
   addErrMess: '',
   car: <Car>{},
+  isRemoveLoading: false,
+  isRemoveSuccess: false,
+  removeErrMess: '',
+  isUpdateLoading: false,
+  isUpdateSuccess: false,
+  updateErrMess: '',
+
 };
 
 export const carReducer = createReducer(
@@ -62,7 +69,7 @@ export const carReducer = createReducer(
       ...state,
       isAddLoading: false,
       isAddSuccess: true,
-      carList: [...state.carList, action.car],
+      addErrMess: '',
     };
     return newState;
   }),
@@ -75,5 +82,61 @@ export const carReducer = createReducer(
       addErrMess: action.addErrMess,
     };
     return newState;
+  }),
+  on(CarActions.remove, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isRemoveLoading: true,
+      isRemoveSuccess: false,
+      removeErrMess: '',
+    };
+    return newState;
+  }),
+  on(CarActions.removeSuccess, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isRemoveLoading: false,
+      isRemoveSuccess: true,
+      removeErrMess: '',
+    };
+    return newState;
+  }),
+  on(CarActions.removeFailure, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isRemoveLoading: false,
+      isRemoveSuccess: false,
+      removeErrMess: action.removeErrMess,
+    };
+    return newState;
+  }),
+  on(CarActions.update, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isUpdateLoading: true,
+      isUpdateSuccess: false,
+      updateErrMess: '',
+    };
+    return newState;
+  }
+  ),
+  on(CarActions.updateSuccess, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isUpdateLoading: false,
+      isUpdateSuccess: true,
+      updateErrMess: '',
+    };
+    return newState;
+  }),
+  on(CarActions.updateFailure, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isUpdateLoading: false,
+      isUpdateSuccess: false,
+      updateErrMess: action.updateErrMess,
+    };
+    return newState;
   })
+
 );

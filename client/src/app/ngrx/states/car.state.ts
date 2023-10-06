@@ -9,4 +9,11 @@ export interface CarState {
   isAddSuccess: boolean;
   addErrMess: string;
   car: Car;
+  isRemoveLoading: boolean;
+  isRemoveSuccess: boolean;
+  removeErrMess: string;
+  isUpdateLoading: boolean;
+  isUpdateSuccess: boolean;
+  updateErrMess: string;
+
 }
