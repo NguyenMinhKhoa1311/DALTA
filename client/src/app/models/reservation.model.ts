@@ -3,7 +3,6 @@ import { User } from "./user.model";
 
 export interface Reservation {
     reservationId: string;
-    _id: string;
     carId: Car;
     customerID: User;
     startDate: string;

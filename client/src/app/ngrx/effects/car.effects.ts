@@ -35,8 +35,8 @@ export class CarEffects {
   create$ = createEffect(() =>
     this.action$.pipe(
       ofType(CarActions.add),
-      exhaustMap(() =>
-        this.carService.createCar().pipe(
+      exhaustMap((action) =>
+        this.carService.createCar(action.car).pipe(
           map((item) => {
             if (item != undefined || item != null) {
               if (item.message) {
@@ -51,6 +51,53 @@ export class CarEffects {
           }),
           catchError((error) =>
             of(CarActions.addFailure({ addErrMess: error }))
+          )
+        )
+      )
+    )
+  );
+
+  remote$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(CarActions.remove),
+      exhaustMap((action) =>
+        this.carService.removeCar(action.carId).pipe(
+          map((item) => {
+            if (item != undefined || item != null) {
+              return CarActions.removeSuccess();
+            } else {
+              return CarActions.removeFailure({
+                removeErrMess: 'Car is undefined or null',
+              });
+            }
+          }),
+          catchError((error) =>
+            of(CarActions.removeFailure({ removeErrMess: error }))
+          )
+        )
+      )
+    )
+  );
+
+  update$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(CarActions.update),
+      exhaustMap((action) =>
+        this.carService.updateCar(action.car).pipe(
+          map((item) => {
+            if (item != undefined || item != null) {
+              if (item.message) {
+                return CarActions.updateFailure({ updateErrMess: item.message });
+              }
+              return CarActions.updateSuccess({ car: item });
+            } else {
+              return CarActions.updateFailure({
+                updateErrMess: 'Car is undefined or null',
+              });
+            }
+          }),
+          catchError((error) =>
+            of(CarActions.updateFailure({ updateErrMess: error }))
           )
         )
       )
