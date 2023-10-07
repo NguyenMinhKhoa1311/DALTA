@@ -15,7 +15,6 @@
         </div>
     </div>
     <div id="main_home">
-
         <div class="cart_container">
             <div class="cart_box" *ngFor="let car of carList">
                 <div class="cart">
@@ -31,7 +30,7 @@
                             <div class="range_img">
                                 <img src="../../../../../assets/images/car-icon.png" alt="">
                             </div>
-                            <span>{{car.model}}</span>
+                            <span>{{car.categoryId.name}}</span>
                         </div>
                         <div class="range">
                             <div class="range_img">
