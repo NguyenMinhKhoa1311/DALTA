@@ -78,13 +78,12 @@ export class CarownerComponent implements OnInit, OnDestroy {
       if (val != null && val != undefined) {
         console.log(val);
       }
-    })
+    });
     this.store.select('category', 'categories').subscribe((val) => {
       if (val != null && val != undefined) {
         console.log(val);
       }
-    })
-
+    });
   }
   ngOnDestroy(): void {
     //this.store.dispatch(CarAction.reset());
@@ -129,7 +128,7 @@ export class CarownerComponent implements OnInit, OnDestroy {
   }
 
   addCar() {
-    let addCarData: Car = {
+    let addCarData: any = {
       name: this.addCarForm.value.name ?? '',
       model: this.addCarForm.value.model ?? '',
       price: parseInt(this.addCarForm.value.price ?? '0'),

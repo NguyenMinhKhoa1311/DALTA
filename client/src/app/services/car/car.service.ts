@@ -15,7 +15,7 @@ export class CarService {
     return this.httpClient.get<Car[] | any>('http://localhost:3000/car/all');
   }
 
-  createCar(car: Car) {
+  createCar(car: any) {
     return this.httpClient.post<Car[] | any>(
       'http://localhost:3000/car/create',
       car
@@ -23,12 +23,10 @@ export class CarService {
   }
 
   removeCar(carId: string) {
-    return this.httpClient.delete(
-      `http://localhost:3000/car/delete/${carId}`
-    );
+    return this.httpClient.delete(`http://localhost:3000/car/delete/${carId}`);
   }
 
-  updateCar(car: Car) {
+  updateCar(car: any) {
     return this.httpClient.put<Car[] | any>(
       `http://localhost:3000/car/update/${car.carId}`,
       car

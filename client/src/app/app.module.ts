@@ -15,6 +15,13 @@ import { manufacturerReducer } from './ngrx/reducers/manufacturker.reducer';
 import { ManufacturerEffects } from './ngrx/effects/manufacturer.effects';
 import { categoryReducer } from './ngrx/reducers/category.reducer';
 import { CategoryEffects } from './ngrx/effects/category.effects';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environments';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { authReducer } from './ngrx/reducers/auth.reducer';
+import { AuthEffects } from './ngrx/effects/auth.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,8 +35,19 @@ import { CategoryEffects } from './ngrx/effects/category.effects';
       storage: storageReducer,
       manufacturer: manufacturerReducer,
       category: categoryReducer,
+      auth: authReducer,
     }),
-    EffectsModule.forRoot([CarEffects, StorageEffects, ManufacturerEffects, CategoryEffects]),
+    EffectsModule.forRoot([
+      CarEffects,
+      StorageEffects,
+      ManufacturerEffects,
+      CategoryEffects,
+      AuthEffects,
+    ]),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -16,12 +16,9 @@ export const getFailure = createAction(
   props<{ getErrMess: any }>()
 );
 
-export const add = createAction('[Car] add', props<{ car: Car }>());
+export const add = createAction('[Car] add', props<{ car: any }>());
 
-export const addSuccess = createAction(
-  '[car] add success',
-  props<{ car: Car }>()
-);
+export const addSuccess = createAction('[car] add success');
 
 export const addFailure = createAction(
   '[car] add failure',
@@ -29,23 +26,15 @@ export const addFailure = createAction(
 );
 export const remove = createAction('[Car] delete', props<{ carId: string }>());
 
-export const removeSuccess = createAction(
-  '[car] delete success',
-);
+export const removeSuccess = createAction('[car] delete success');
 
 export const removeFailure = createAction(
   '[car] delete failure',
   props<{ removeErrMess: string }>()
 );
 
-export const update = createAction(
-  '[Car] update',
-  props<{ car: Car }>()
-);
-export const updateSuccess = createAction(
-  '[car] update success',
-  props<{ car: Car }>()
-);
+export const update = createAction('[Car] update', props<{ car: any }>());
+export const updateSuccess = createAction('[car] update success');
 export const updateFailure = createAction(
   '[car] update failure',
   props<{ updateErrMess: string }>()
