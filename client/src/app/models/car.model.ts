@@ -1,9 +1,12 @@
+import { Category } from './category.model';
+import { Manufacturer } from './manufacturer.model';
+
 export interface Car {
   carId: string;
   name: string;
   model: string;
-  categoryId: string;
-  manufacturerId: string;
+  categoryId: Category;
+  manufacturerId: Manufacturer;
   ownerId: string;
   price: number;
   description: string;

@@ -12,12 +12,14 @@ import { from } from 'rxjs';
 })
 export class AuthService {
   constructor(private auth: Auth) {}
+
   async loginWithGoogle() {
     console.log('loginWithGoogle');
     
     let provider = new GoogleAuthProvider();
     try {
       let credential = await signInWithPopup(this.auth, provider);
+      console.log(credential);
       return credential;
     } catch (error) {
       console.log(error);

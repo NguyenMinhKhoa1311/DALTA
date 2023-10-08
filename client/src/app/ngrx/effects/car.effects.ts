@@ -42,7 +42,7 @@ export class CarEffects {
               if (item.message) {
                 return CarActions.addFailure({ addErrMess: item.message });
               }
-              return CarActions.addSuccess({ car: item });
+              return CarActions.addSuccess();
             } else {
               return CarActions.addFailure({
                 addErrMess: 'Car is undefined or null',
@@ -87,9 +87,11 @@ export class CarEffects {
           map((item) => {
             if (item != undefined || item != null) {
               if (item.message) {
-                return CarActions.updateFailure({ updateErrMess: item.message });
+                return CarActions.updateFailure({
+                  updateErrMess: item.message,
+                });
               }
-              return CarActions.updateSuccess({ car: item });
+              return CarActions.updateSuccess();
             } else {
               return CarActions.updateFailure({
                 updateErrMess: 'Car is undefined or null',

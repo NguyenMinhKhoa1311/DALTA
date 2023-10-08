@@ -14,7 +14,13 @@ export class LoginComponent {
   constructor(
     private store: Store<{ auth: AuthState }>,
     private router: Router
-  ) {}
+  ) {
+    this.store.select('auth').subscribe((state) => {
+      if (state.isSuccessful) {
+        this.router.navigate(['/base/home']);
+      }
+    });
+  }
 
   accountForm = new FormGroup({
     email: new FormControl(''),
@@ -36,12 +42,6 @@ export class LoginComponent {
   
 
   loginWithGoogle() {
-    let loginResult = this.store.dispatch(AuthAcitons.login());
-    if (loginResult == null) {
-      console.log('Login failed');
-    } else {
-      console.log('Login success');
-      this.router.navigate(['/home']);
-    }
+    this.store.dispatch(AuthAcitons.login());
   }
 }
