@@ -15,6 +15,8 @@ import { manufacturerReducer } from './ngrx/reducers/manufacturker.reducer';
 import { ManufacturerEffects } from './ngrx/effects/manufacturer.effects';
 import { categoryReducer } from './ngrx/reducers/category.reducer';
 import { CategoryEffects } from './ngrx/effects/category.effects';
+import { userReducer } from './ngrx/reducers/user.reducer';
+import { UserEffects } from './ngrx/effects/user.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,8 +30,9 @@ import { CategoryEffects } from './ngrx/effects/category.effects';
       storage: storageReducer,
       manufacturer: manufacturerReducer,
       category: categoryReducer,
+      user: userReducer,
     }),
-    EffectsModule.forRoot([CarEffects, StorageEffects, ManufacturerEffects, CategoryEffects]),
+    EffectsModule.forRoot([CarEffects, StorageEffects, ManufacturerEffects, CategoryEffects, UserEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

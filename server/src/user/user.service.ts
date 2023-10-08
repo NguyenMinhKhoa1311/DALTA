@@ -32,6 +32,16 @@ export class UserService {
     }
   }
 
+  async findByEmail(email: string) {
+    try{
+      const user = await this.userModel.findOne({email: email}).exec();
+      return user;
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status)
+    }
+  }
+
   async findOne(id: string) {
     try{
       const user = await this.userModel.findOne({uid: id}).exec();

@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { query } from 'express';
+import { log } from 'console';
 
 @Controller('user')
 export class UserController {
@@ -42,6 +43,17 @@ export class UserController {
       throw err;
     }
  
+  }
+
+  @Get(':email')
+  async findByEmail(@Param('email') email: string) {
+    try{
+      const user = await this.userService.findByEmail(email);
+      return user;
+    }
+    catch(err){
+      throw err;
+    }
   }
 
   @Put('update')
