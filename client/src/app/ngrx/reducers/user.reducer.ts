@@ -13,6 +13,7 @@ export const initialState: UserState = {
 export const userReducer = createReducer(
     initialState,
     on(UserActions.getByEmail, (state, action) => {
+        console.log(action.type);
         let newState: UserState = {
             ...state,
             isGetLoading: true,
@@ -23,6 +24,7 @@ export const userReducer = createReducer(
         return newState;
     }),
     on(UserActions.getByEmailSuccess, (state, action) => {
+        console.log(action.type);
         let newState: UserState = {
             ...state,
             isGetLoading: false,
@@ -32,6 +34,7 @@ export const userReducer = createReducer(
         return newState;
     }),
     on(UserActions.getByEmailFailure, (state, action) => {
+        console.log(action.type);
         let newState: UserState = {
             ...state,
             isGetLoading: false,
