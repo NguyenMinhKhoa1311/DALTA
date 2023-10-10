@@ -88,7 +88,7 @@
                 height: 48%;
                 background-color: #FFFFFF;
                 margin: 0 0 1rem 2rem;
-                border-radius: 2rem;
+                border-radius: 1rem;
 
                 .cart {
                     width: 92%;
@@ -99,11 +99,17 @@
                     .cart_img {
                         width: 100%;
                         height: 205px;
+                        display: flex;
+                        justify-content: center;
+
 
                         img {
-                            width: 100%;
+                            //width: 100%;
                             height: 100%;
-                            border-radius: 1rem;
+                            max-width: 350px;
+                            max-height: 200px;
+                            border-radius: 0.5rem;
+                            object-fit: contain;
                         }
                     }
 
