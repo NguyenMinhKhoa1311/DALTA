@@ -1,8 +1,10 @@
+import { UserFirebase } from 'src/app/models/userFirebase.model';
 import * as LoginActions from '../actions/auth.actions';
 import { AuthState } from '../states/auth.state';
 import { createReducer, on } from '@ngrx/store';
 
 export const initialState: AuthState = {
+  userFirebase: <UserFirebase>{},
   isLoading: false,
   isSuccessful: false,
   errorMessage: '',
@@ -69,5 +71,12 @@ export const authReducer = createReducer(
       errorMessage: action.errorMessage,
     };
     return newState;
+  }),
+  on(LoginActions.storedUserFirebase, (state, {userFirebase, type}) => {
+    console.log(type);
+    return {
+      ...state,
+      userFirebase,
+    };
   })
 );

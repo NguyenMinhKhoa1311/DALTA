@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { UserFirebase } from 'src/app/models/userFirebase.model';
 
 export const login = createAction('[Auth] login');
 
@@ -17,3 +18,8 @@ export const logoutFailure = createAction(
   '[Auth] logout failure',
   props<{ errorMessage: any }>()
 );
+
+export const storedUserFirebase = createAction(
+  '[Auth] stored user firebase',
+ (userFirebase: UserFirebase) => ({ userFirebase })
+ );
