@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
+import * as AuthActions from 'src/app/ngrx/actions/auth.actions';
+import { Store } from '@ngrx/store';
+import { AuthState } from 'src/app/ngrx/states/auth.state';
 
 interface Page {
   id: number;
@@ -46,7 +49,10 @@ export class SidebarComponent {
   ];
   route$ = this.router.events;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private store: Store<{ auth: AuthState }>
+  ) {
     combineLatest({
       route: this.route$,
     }).subscribe((res) => {
@@ -62,5 +68,9 @@ export class SidebarComponent {
 
   selected(index: number) {
     this.router.navigate([this.pages[index].link]);
+  }
+
+  logout() {
+    this.store.dispatch(AuthActions.logout());
   }
 }
