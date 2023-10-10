@@ -56,8 +56,6 @@ export class SidebarComponent {
         this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
         this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
         this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
-        // this.router.url === '/base/cart' ? (this.pageSelected = 3) : null;
-        // this.router.url === '/base/settings' ? (this.pageSelected = 4) : null;
       }
     });
   }
