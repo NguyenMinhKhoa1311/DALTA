@@ -72,7 +72,7 @@ export const authReducer = createReducer(
     };
     return newState;
   }),
-  on(LoginActions.storedUserFirebase, (state, {userFirebase, type}) => {
+  on(LoginActions.storedUserFirebase, (state, { userFirebase, type }) => {
     console.log(type);
     return {
       ...state,

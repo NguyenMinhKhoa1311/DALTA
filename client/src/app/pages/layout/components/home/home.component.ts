@@ -17,9 +17,10 @@ export class HomeComponent implements OnInit {
   carList: Car[] = [];
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
+
   constructor(
-    private store: Store<{ car: CarState, auth: AuthState,user: UserState }>,
-    ) {}
+    private store: Store<{ car: CarState; auth: AuthState; user: UserState }>
+  ) {}
 
   ngOnInit(): void {
     this.userFirebase$.subscribe((userFirebase) => {
