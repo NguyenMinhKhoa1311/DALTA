@@ -14,8 +14,6 @@ export class AuthService {
   constructor(private auth: Auth) {}
 
   async loginWithGoogle() {
-    // console.log('loginWithGoogle');
-    
     let provider = new GoogleAuthProvider();
     try {
       let credential = await signInWithPopup(this.auth, provider);
@@ -27,7 +25,8 @@ export class AuthService {
     return null;
   }
 
-  async logout() {
-    await signOut(this.auth);
+  logout() {
+    console.log('logout');
+    return from(this.auth.signOut());
   }
 }

@@ -4,6 +4,8 @@ import { combineLatest } from 'rxjs';
 import * as AuthActions from 'src/app/ngrx/actions/auth.actions';
 import { Store } from '@ngrx/store';
 import { AuthState } from 'src/app/ngrx/states/auth.state';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserState } from 'src/app/ngrx/states/user.state';
 
 interface Page {
   id: number;
@@ -49,10 +51,26 @@ export class SidebarComponent {
   ];
   route$ = this.router.events;
 
+  userForm = new FormGroup({
+    email: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
+    uid: new FormControl('', Validators.required),
+    avatar: new FormControl('', Validators.required),
+  });
+
   constructor(
     private router: Router,
-    private store: Store<{ auth: AuthState }>
+    private store: Store<{ auth: AuthState; user: UserState }>
   ) {
+    this.store.select('user').subscribe((user) => {
+      if (user != null && user != undefined) {
+        this.userForm.controls.avatar.setValue(user.user.avatar);
+        this.userForm.controls.email.setValue(user.user.email);
+        this.userForm.controls.name.setValue(user.user.name);
+        this.userForm.controls.uid.setValue(user.user.uid);
+      }
+    });
+
     combineLatest({
       route: this.route$,
     }).subscribe((res) => {
