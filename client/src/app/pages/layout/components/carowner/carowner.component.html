@@ -3,13 +3,13 @@
         <h4>Đăng kí xe</h4>
     </div>
     <div id="main">
-        <div id="container">
-            <div class="palte_container" [formGroup]="addCarForm">
+        <div id="container" [formGroup]="addCarForm">
+            <div class="palte_container" >
                 <div class="palte">
                     <h2>Biển số xe</h2>
                     <mat-form-field class="palte_box">
                         <mat-label>Nhập biển số xe</mat-label>
-                        <input matInput #input formControlName="name">
+                        <input matInput #input formControlName="carId">
                     </mat-form-field>
                 </div>
                 <div class="palte">
@@ -29,9 +29,9 @@
                 <div class=info1>
                     <h4>Hãng xe</h4>
                     <mat-form-field class="info_box">
-                        <mat-select [formControl]="position">
-                            <mat-option *ngFor="let positionOption of positionOptions" [value]="positionOption">
-                                {{positionOption}}
+                        <mat-select formControlName="manufacturerId" >
+                            <mat-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer._id">
+                                {{manufacturer.name}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -39,9 +39,9 @@
                 <div class=info1>
                     <h4>Mẫu xe</h4>
                     <mat-form-field class="info_box">
-                        <mat-select [formControl]="mauxe">
-                            <mat-option *ngFor="let mauxeOption of mauxeOptions" [value]="mauxeOption">
-                                {{mauxeOption}}
+                        <mat-select formControlName="categoryId" >
+                            <mat-option *ngFor="let category of categories" [value]="category._id">
+                                {{category.name}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -53,17 +53,33 @@
                     <h4>Tên xe</h4>
                     <mat-form-field class="info_box">
                         <mat-label>Nhập tên xe</mat-label>
-                        <input matInput #input>
+                        <input matInput #input formControlName="name">
                     </mat-form-field>
                 </div>
                 <div class=info1>
                     <h4>Năm sản xuất</h4>
                     <mat-form-field class="info_box">
-                        <mat-select [formControl]="nam">
+                        <mat-select formControlName="model">
                             <mat-option *ngFor="let namOption of namOptions" [value]="namOption">
                                 {{namOption}}
                             </mat-option>
                         </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="info">
+                <div class=info1>
+                    <h4>Mô tả về xe</h4>
+                    <mat-form-field class="info_box">
+                        <mat-label>Nhập mô tả</mat-label>
+                        <input matInput #input formControlName="description">
+                    </mat-form-field>
+                </div>
+                <div class=info1>
+                    <h4>Giá thuê</h4>
+                    <mat-form-field class="info_box">
+                        <mat-label>Nhập giá thuê</mat-label>
+                        <input matInput #input formControlName="price">
                     </mat-form-field>
                 </div>
             </div>
@@ -73,7 +89,7 @@
                     <div class=info1>
                         <h4>Số ghế</h4>
                         <mat-form-field class="info_box">
-                            <mat-select [formControl]="chair">
+                            <mat-select formControlName="seat">
                                 <mat-option *ngFor="let chairOption of chairOptions" [value]="chairOption">
                                     {{chairOption}}
                                 </mat-option>
@@ -83,9 +99,19 @@
                     <div class=info1>
                         <h4>Số cửa</h4>
                         <mat-form-field class="info_box">
-                            <mat-select [formControl]="door">
+                            <mat-select formControlName="door">
                                 <mat-option *ngFor="let doorOption of doorOptions" [value]="doorOption">
                                     {{doorOption}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class=info1>
+                        <h4>Giao xe</h4>
+                        <mat-form-field class="info_box">
+                            <mat-select formControlName="deleveryService">
+                                <mat-option *ngFor="let deleveryServiceOption of deleveryServiceOptions" [value]="deleveryServiceOption.value">
+                                    {{deleveryServiceOption.content}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -94,11 +120,8 @@
                 <div class=info1>
                     <h4>Địa chỉ</h4>
                     <mat-form-field class="info_box">
-                        <mat-select [formControl]="door">
-                            <mat-option *ngFor="let doorOption of doorOptions" [value]="doorOption">
-                                {{doorOption}}
-                            </mat-option>
-                        </mat-select>
+                        <mat-label>Nhập địa chỉ</mat-label>
+                        <input matInput #input formControlName="location">
                     </mat-form-field>
                 </div>
             </div>

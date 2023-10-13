@@ -16,6 +16,12 @@ import { ManufacturerState } from 'src/app/ngrx/states/munufacturer.state';
 import * as ManufacturerAction from '../../../../ngrx/actions/manufacturer.actions';
 import { categoryState } from 'src/app/ngrx/states/category.state';
 import * as CategoryAction from '../../../../ngrx/actions/category.actions';
+import { Category } from 'src/app/models/category.model';
+import { Manufacturer } from 'src/app/models/manufacturer.model';
+import { UserState } from 'src/app/ngrx/states/user.state';
+import { User } from 'src/app/models/user.model';
+import { StorageState } from 'src/app/ngrx/states/storage.state';
+import * as StorageAction from '../../../../ngrx/actions/storage.actions';
 
 @Component({
   selector: 'app-carowner',
@@ -23,19 +29,16 @@ import * as CategoryAction from '../../../../ngrx/actions/category.actions';
   styleUrls: ['./carowner.component.scss'],
 })
 export class CarownerComponent implements OnInit, OnDestroy {
-  readonly positionOptions = ['Chọn hãng xe', 'HYUNDAI'];
-  readonly position = new FormControl(this.positionOptions[0]);
+  
+  user$ = this.store.select('user', 'user');
+  user:User=<User>{};
 
-  mauxeOptions = [
-    'Chọn mẫu xe',
-    'MICRO',
-    'SEDAN',
-    'SUV',
-    'CUV',
-    'MPV',
-    'HATCHBACK',
-  ];
-  mauxe = new FormControl(this.mauxeOptions[0]);
+
+
+  fileName: string = '';
+  createImageSuccess$ = this.store.select('storages', 'isCreateSuccess');
+
+  
 
   namOptions = ['2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016'];
   nam = new FormControl(this.namOptions[0]);
@@ -43,8 +46,23 @@ export class CarownerComponent implements OnInit, OnDestroy {
   chairOptions = ['2', '4', '5', '7', '8', '9', '10', '11', '12'];
   chair = new FormControl(this.chairOptions[0]);
 
+  deleveryServiceOptions = [
+    {
+    content:'Yes',
+    value: true
+    }, 
+    {
+      content:'No',
+      value: false
+    }
+  ];
+
+  categories = <Category[]>[];
+  manufacturers = <Manufacturer[]>[];
+
   doorOptions = ['2', '3', '4', '5'];
   door = new FormControl(this.doorOptions[0]);
+
 
   selectedImage: string | ArrayBuffer | null = null;
 
@@ -62,7 +80,25 @@ export class CarownerComponent implements OnInit, OnDestroy {
     door: new FormControl('', Validators.required),
     status: new FormControl('', Validators.required),
     image: new FormControl('', Validators.required),
+    deleveryService: new FormControl('', Validators.required),
   });
+
+   addCarData: any = {
+    carId: '',
+    categoryId: '',
+    manufacturerId: '',
+    ownerId: '',
+    name: '',
+    model: '',
+    price: 0,
+    description: '',
+    location: '',
+    seat: 0,
+    door: 0,
+    status: true,
+    image: '',
+    deleveryService: false,
+  };
 
   constructor(
     private router: Router,
@@ -70,44 +106,49 @@ export class CarownerComponent implements OnInit, OnDestroy {
       car: CarState;
       manufacturer: ManufacturerState;
       category: categoryState;
+      user: UserState;
+      storages: StorageState;
     }>
   ) {
     this.store.dispatch(ManufacturerAction.get());
     this.store.dispatch(CategoryAction.get());
     this.store.select('manufacturer', 'manufacturers').subscribe((val) => {
       if (val != null && val != undefined) {
-        console.log(val);
+        this.manufacturers = val;
       }
     });
     this.store.select('category', 'categories').subscribe((val) => {
       if (val != null && val != undefined) {
-        console.log(val);
+        this.categories = val;
+      }
+    });
+    this.user$.subscribe((user) => {
+      if (user != <User>{} && user != undefined && user != null) {
+        this.user = user;
+        console.log(this.user);
+        
+      }
+    });
+    this.createImageSuccess$.subscribe((val) => {
+      if (val) {
+        this.addCarData.image = this.fileName;
+        this.store.dispatch(StorageAction.get({
+          fileName: this.fileName
+        }));
+        this.router.navigate(['/carowner']);
+      }
+    });
+    this.store.select('storages').subscribe((val) => {
+      if (val.isGetSuccess) {
+        console.log(val.storage);
+        
       }
     });
   }
   ngOnDestroy(): void {
-    //this.store.dispatch(CarAction.reset());
   }
 
   ngOnInit(): void {
-    this.store.select('car', 'car').subscribe((val) => {
-      if (val.carId) {
-        this.addCarForm.controls.name.setValue(val.name);
-        this.addCarForm.controls.model.setValue(val.model);
-        this.addCarForm.controls.price.setValue(String(val.price));
-        this.addCarForm.controls.description.setValue(val.description);
-        this.addCarForm.controls.location.setValue(val.location);
-        this.addCarForm.controls.seat.setValue(String(val.seat));
-        this.addCarForm.controls.door.setValue(String(val.door));
-        // this.addCarForm.controls.status.setValue(val.status);
-        this.addCarForm.controls.image.setValue(val.image);
-      }
-    }),
-      this.store.select('car', 'isAddSuccess').subscribe((val) => {
-        if (val) {
-          console.log('add success');
-        }
-      });
   }
 
   formData: FormData = new FormData();
@@ -128,24 +169,27 @@ export class CarownerComponent implements OnInit, OnDestroy {
   }
 
   addCar() {
-    let addCarData: any = {
-      name: this.addCarForm.value.name ?? '',
-      model: this.addCarForm.value.model ?? '',
-      price: parseInt(this.addCarForm.value.price ?? '0'),
-      description: this.addCarForm.value.description ?? '',
-      location: this.addCarForm.value.location ?? '',
-      seat: parseInt(this.addCarForm.value.seat ?? '0'),
-      door: parseInt(this.addCarForm.value.door ?? '0'),
-      status: false,
-      image: this.addCarForm.value.image ?? '',
-      carId: '',
-      categoryId: '',
-      manufacturerId: '',
-      ownerId: '',
-      deleveryService: false,
+    this.addCarData = {
+      carId: this.addCarForm.value.carId,
+      categoryId: this.addCarForm.value.categoryId,
+      manufacturerId: this.addCarForm.value.manufacturerId,
+      ownerId: this.user._id,
+      name: this.addCarForm.value.name,
+      model: this.addCarForm.value.model,
+      price: parseInt(this.addCarForm.value.price||'0'),
+      description: this.addCarForm.value.description,
+      location: this.addCarForm.value.location,
+      seat: parseInt(this.addCarForm.value.seat||'0'),
+      door: parseInt(this.addCarForm.value.door||'0'),
+      status: true,
+      deleveryService: this.addCarForm.value.deleveryService,
     };
+    this.fileName = this.addCarForm.value.carId + '_' + this.addCarForm.value.name;
+    this.store.dispatch(StorageAction.create({ file: this.file, fileName: this.fileName }));
 
-    // this.store.dispatch(CarAction.add({ car: addCarData }));
-    console.log(addCarData);
+  
+
+    }
+
   }
-}
+
