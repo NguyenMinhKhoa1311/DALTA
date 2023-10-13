@@ -2,6 +2,7 @@ import { Category } from './category.model';
 import { Manufacturer } from './manufacturer.model';
 
 export interface Car {
+  _id: string;
   carId: string;
   name: string;
   model: string;
