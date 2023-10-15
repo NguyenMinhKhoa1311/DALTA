@@ -19,7 +19,7 @@
             <div class="cart_box" *ngFor="let car of carList">
                 <div class="cart">
                     <div class="cart_img">
-                        <img src="{{car.image}}" alt="">
+                        <img *ngFor="let img of car.image.urls" [src]="img" alt="" />
                     </div>
                     <div class="cart_name">
                         <h2>{{car.name}}</h2>

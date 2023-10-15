@@ -48,7 +48,10 @@ export class Car {
     @Prop({required: true})
     description: string;
 
-    @Prop({required: true})
+    @Prop({
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Storage',
+      required: true})
     image: string;
 
     @Prop({required: true})

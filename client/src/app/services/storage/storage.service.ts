@@ -20,7 +20,7 @@ export class StorageService {
 
   getStorage(fileName: string) {
     return this.httpClient.get<Storage>(
-      `http://localhost:3000/storage/upload?folderName=${fileName}`,
+      `http://localhost:3000/storage/image?folderName=${fileName}`,
     );
   }
 }

@@ -9,6 +9,7 @@ import { ManufacturerSchema } from 'src/manufacturer/entities/manufacturer.entit
 import { CategorySchema } from 'src/category/entities/category.entity';
 import { CategoryModule } from 'src/category/category.module';
 import { UserSchema } from 'src/user/entities/user.entity';
+import { StorageSchema } from 'src/storage/entities/storage.entity';
 
 @Module({
   imports: [
@@ -24,6 +25,9 @@ import { UserSchema } from 'src/user/entities/user.entity';
       },
       {
         name: 'User', schema: UserSchema
+      },
+      {
+        name: 'Storage', schema: StorageSchema
       }
     ]),
       forwardRef(() => ManufacturerModule),
