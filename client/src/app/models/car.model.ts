@@ -1,5 +1,6 @@
 import { Category } from './category.model';
 import { Manufacturer } from './manufacturer.model';
+import { Storage } from './storage.model';
 
 export interface Car {
   _id: string;
@@ -11,7 +12,7 @@ export interface Car {
   ownerId: string;
   price: number;
   description: string;
-  image: string;
+  image: Storage;
   location: string;
   deleveryService: boolean;
   status: boolean;

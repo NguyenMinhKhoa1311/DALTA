@@ -36,7 +36,7 @@ export class CarownerComponent implements OnInit, OnDestroy {
 
 
   fileName: string = '';
-  createImageSuccess$ = this.store.select('storages', 'isCreateSuccess');
+  createImageSuccess$ = this.store.select('storage', 'isCreateSuccess');
 
   
 
@@ -107,7 +107,7 @@ export class CarownerComponent implements OnInit, OnDestroy {
       manufacturer: ManufacturerState;
       category: categoryState;
       user: UserState;
-      storages: StorageState;
+      storage: StorageState;
     }>
   ) {
     this.store.dispatch(ManufacturerAction.get());
@@ -130,20 +130,26 @@ export class CarownerComponent implements OnInit, OnDestroy {
       }
     });
     this.createImageSuccess$.subscribe((val) => {
+      console.log(val);
+      
       if (val) {
-        this.addCarData.image = this.fileName;
+        console.log(val);
+        
         this.store.dispatch(StorageAction.get({
           fileName: this.fileName
         }));
-        this.router.navigate(['/carowner']);
       }
     });
-    this.store.select('storages').subscribe((val) => {
-      if (val.isGetSuccess) {
-        console.log(val.storage);
+    this.store.select('storage').subscribe((val) => {
+      if (val.isGetSuccess) { 
+        this.addCarData.image = val.storage._id;
+this.store.dispatch(CarAction.add({ car: this.addCarData }));
+        
         
       }
     });
+
+
   }
   ngOnDestroy(): void {
   }

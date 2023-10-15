@@ -47,7 +47,7 @@ export class StorageController {
     }
   }
 
-  @Get()
+  @Get('image')
   async getFiles(@Query('folderName') folderName: string): Promise<Storage> {
     try {
       const files = await this.storageService.getFilesByFolderName(folderName);
