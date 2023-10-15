@@ -12,7 +12,20 @@ export class UserService {
     return this.httpClient.get<User>(`http://localhost:3000/user/${email}`);
   }
 
-  createUser(user: any) {
-    return this.httpClient.post<User>('http://localhost:3000/user', user);
+  createUser(newUser: any) {
+    newUser = {
+      uid: newUser.uid,
+      name: newUser.name,
+      email: newUser.email,
+      phone: newUser.phone,
+      avatar: newUser.avatar,
+      address: newUser.address,
+      role: 'user',
+      password: newUser.password,
+    };
+    return this.httpClient.post<User>(
+      'http://localhost:3000/user/create',
+      newUser
+    );
   }
 }

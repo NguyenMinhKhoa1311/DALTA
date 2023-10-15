@@ -27,6 +27,7 @@ export class LoginComponent {
   ) {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
+        this.isLoginWithGoogle = true;
         this.userFirebase = {
           uid: user.uid,
           email: user.email || '',
@@ -97,5 +98,11 @@ export class LoginComponent {
   loginWithGoogle() {
     this.isLoginWithGoogle = true;
     this.store.dispatch(AuthAcitons.login());
+  }
+
+  register() {
+    this.isLoginWithGoogle = false;
+    this.router.navigate(['/register']);
+    console.log(this.isLoginWithGoogle);
   }
 }
