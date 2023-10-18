@@ -14,6 +14,7 @@ export class CreateCarDto {
         public status: boolean,
         public seat: number,
         public door: number,
+        public isConfirmed: boolean,
     ){}
 }
 

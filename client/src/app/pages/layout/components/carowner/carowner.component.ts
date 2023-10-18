@@ -91,6 +91,7 @@ export class CarownerComponent implements OnInit, OnDestroy {
     door: 0,
     status: true,
     image: '',
+    isConfirmed: false,
     deleveryService: false,
   };
 
@@ -177,6 +178,7 @@ export class CarownerComponent implements OnInit, OnDestroy {
       seat: parseInt(this.addCarForm.value.seat || '0'),
       door: parseInt(this.addCarForm.value.door || '0'),
       status: true,
+      isConfirmed: false,
       deleveryService: this.addCarForm.value.deleveryService,
     };
     this.fileName =
