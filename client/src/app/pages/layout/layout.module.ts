@@ -16,6 +16,8 @@ import { NgFor } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AdminComponent } from './components/admin/admin.component';
+import { DetailComponent } from './components/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { MatInputModule } from '@angular/material/input';
     SidebarComponent,
     AboutComponent,
     CarownerComponent,
+    AdminComponent,
+    DetailComponent,
   ],
   imports: [
     CommonModule,
