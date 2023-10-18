@@ -61,6 +61,9 @@ export class Car {
     status: boolean;
 
     @Prop({required: true})
+    isConfirmed: boolean;
+
+    @Prop({required: true})
     deleveryService: boolean;
     
 }
