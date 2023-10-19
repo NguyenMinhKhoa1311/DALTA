@@ -6,7 +6,7 @@ import { HistoryComponent } from './components/history/history.component';
 import { AboutComponent } from './components/about/about.component';
 import { CarownerComponent } from './components/carowner/carowner.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { DetailComponent } from './components/detail/detail.component';
+
 
 const routes: Routes = [
   {
@@ -37,10 +37,6 @@ const routes: Routes = [
       {
         path: 'admin',
         component: AdminComponent,
-      },
-      {
-        path: 'home/:uid',
-        component: DetailComponent,
       },
     ],
   },

@@ -45,6 +45,22 @@ export class CarService {
     }
   }
 
+  async findByIsConfirmed(isConfirmed: boolean){
+    try{
+      const cars = await this.carModel.find({isConfirmed: isConfirmed})
+      .populate('image','urls', this.storageModel)
+      .populate('manufacturerId','name', this.manufacturerModel)
+      .populate('categoryId','name', this.categoryModel)
+      .populate('ownerId','name', this.userModel)
+      .exec();
+      return cars;
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status);
+    }
+  }
+
+
   async findOne(id: string) {
     try{
       const car = await this.carModel.findOne({carId: id})
