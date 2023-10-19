@@ -92,4 +92,8 @@ export class RegisterComponent {
       console.log(regisData);
     }
   }
+
+  back() {
+    this.router.navigate(['/login']);
+  }
 }

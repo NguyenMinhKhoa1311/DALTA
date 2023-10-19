@@ -1,0 +1,64 @@
+<div id="admin_container">
+    <div id="navbar_admin">
+        <div class="search">
+            <div class="search_box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search car name, model">
+            </div>
+
+        </div>
+        <div class="filter">
+            <div class="filter_box">
+                <img src="../../../../../assets/images/sort.png" alt="">
+                <span>Filter</span>
+            </div>
+        </div>
+    </div>
+    <div id="main_admin">
+        <div class="cart_container">
+            <div class="cart_box" *ngFor="let car of carList">
+                <div class="cart">
+                    <div class="cart_img">
+                        <img *ngFor="let img of car.image.urls" [src]="img" alt="" />
+                    </div>
+                    <div class="cart_name">
+                        <h2>{{car.name}}</h2>
+                    </div>
+                    <div class="cart_decription">
+
+                        <div class="range">
+                            <div class="range_img">
+                                <img src="../../../../../assets/images/car-icon.png" alt="">
+                            </div>
+                            <span>{{car.categoryId.name}}</span>
+                        </div>
+                        <div class="range">
+                            <div class="range_img">
+                                <img src="../../../../../assets/images/car-door.png" alt="">
+                            </div>
+                            <span>{{car.door}}</span>
+                        </div>
+                        <div class="range">
+                            <div class="range_img">
+                                <img src="../../../../../assets/images/seat.png" alt="">
+                            </div>
+                            <span>{{car.seat}}</span>
+                        </div>
+                    </div>
+                    <div class="cart_price">
+                        <div class="price_btn">
+                            <button>Rent Now</button>
+                        </div>
+                        <div class="price_value">
+                            <h3>${{car.price}}</h3>
+                            <span>/DAY</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

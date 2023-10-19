@@ -1,8 +1,8 @@
-#home_container {
+#admin_container {
     background-color: #F5F6FA;
     height: 100%;
 
-    #navbar_home {
+    #navbar_admin {
         height: 10%;
         display: flex;
         flex-direction: row;
@@ -68,7 +68,7 @@
         }
     }
 
-    #main_home {
+    #main_admin {
         height: 90%;
         width: 100%;
         background: #F5F5F5;
