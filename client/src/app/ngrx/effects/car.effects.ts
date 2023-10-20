@@ -10,8 +10,8 @@ export class CarEffects {
   getCar$ = createEffect(() =>
     this.action$.pipe(
       ofType(CarActions.get),
-      exhaustMap(() =>
-        this.carService.getCars().pipe(
+      exhaustMap((action) =>
+        this.carService.getCars(action.isConfirmed).pipe(
           map((items) => {
             if (items != undefined || items != null) {
               if (items.message) {

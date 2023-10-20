@@ -7,7 +7,6 @@ import { AboutComponent } from './components/about/about.component';
 import { CarownerComponent } from './components/carowner/carowner.component';
 import { AdminComponent } from './components/admin/admin.component';
 
-
 const routes: Routes = [
   {
     path: '',
