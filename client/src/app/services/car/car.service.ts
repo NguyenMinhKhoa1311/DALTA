@@ -10,9 +10,10 @@ import { CarState } from 'src/app/ngrx/states/car.state';
 export class CarService {
   constructor(private httpClient: HttpClient) {}
 
-
-  getCars() {
-    return this.httpClient.get<Car[] | any>('http://localhost:3000/car/all');
+  getCars(isConfirmed: boolean) {
+    return this.httpClient.get<Car[] | any>(
+      ` http://localhost:3000/car?isConfirmed=${isConfirmed}`
+    );
   }
 
   createCar(car: any) {

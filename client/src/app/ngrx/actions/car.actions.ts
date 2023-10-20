@@ -2,8 +2,8 @@ import { Car } from 'src/app/models/car.model';
 import { createAction, props } from '@ngrx/store';
 
 export const get = createAction(
-  '[car] get all'
-  // props<{ carId: string }>()
+  '[car] get all',
+  props<{ isConfirmed: boolean }>()
 );
 
 export const getSuccess = createAction(

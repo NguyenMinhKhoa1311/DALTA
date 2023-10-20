@@ -38,6 +38,6 @@ export class HomeComponent implements OnInit {
         this.carList = val.carList;
       }
     });
-    this.store.dispatch(CarAction.get());
+    this.store.dispatch(CarAction.get({ isConfirmed: true }));
   }
 }
