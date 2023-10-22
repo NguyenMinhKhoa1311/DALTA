@@ -50,6 +50,7 @@ export class LoginComponent {
 
       if (user != <User>{} && user != undefined && user != null) {
         console.log('vo dc');
+        
 
         if (
           this.accountData.password != '' &&

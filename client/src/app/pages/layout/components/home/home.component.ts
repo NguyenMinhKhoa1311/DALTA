@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Car } from 'src/app/models/car.model';
 import * as CarAction from 'src/app/ngrx/actions/car.actions';
+import * as UserActions from 'src/app/ngrx/actions/user.actions';
 import { AuthState } from 'src/app/ngrx/states/auth.state';
 import { CarState } from 'src/app/ngrx/states/car.state';
 import { UserState } from 'src/app/ngrx/states/user.state';
@@ -31,6 +32,7 @@ export class HomeComponent implements OnInit {
     this.user$.subscribe((user) => {
       if (user != null && user != undefined) {
         console.log(user);
+        this.store.dispatch(UserActions.storedUser(user));
       }
     });
     this.store.select('car').subscribe((val) => {

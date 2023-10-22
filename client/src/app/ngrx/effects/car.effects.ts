@@ -57,7 +57,7 @@ export class CarEffects {
     )
   );
 
-  remote$ = createEffect(() =>
+  remove$ = createEffect(() =>
     this.action$.pipe(
       ofType(CarActions.remove),
       exhaustMap((action) =>
@@ -100,6 +100,33 @@ export class CarEffects {
           }),
           catchError((error) =>
             of(CarActions.updateFailure({ updateErrMess: error }))
+          )
+        )
+      )
+    )
+  );
+
+  confirm$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(CarActions.confirm),
+      exhaustMap((action) =>
+        this.carService.confirmCar(action.carId).pipe(
+          map((item) => {
+            if (item != undefined || item != null) {
+              if (item.message) {
+                return CarActions.confirmFailure({
+                  confirmErrMess: item.message,
+                });
+              }
+              return CarActions.confirmSuccess();
+            } else {
+              return CarActions.confirmFailure({
+                confirmErrMess: 'Car is undefined or null',
+              });
+            }
+          }),
+          catchError((error) =>
+            of(CarActions.confirmFailure({ confirmErrMess: error }))
           )
         )
       )

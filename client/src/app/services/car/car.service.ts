@@ -24,13 +24,19 @@ export class CarService {
   }
 
   removeCar(carId: string) {
-    return this.httpClient.delete(`http://localhost:3000/car/delete/${carId}`);
+    return this.httpClient.delete(`http://localhost:3000/car/delete?id=${carId}`);
   }
 
   updateCar(car: any) {
     return this.httpClient.put<Car[] | any>(
       `http://localhost:3000/car/update/${car.carId}`,
       car
+    );
+  }
+  confirmCar(carId: string) {
+    return this.httpClient.put<Car[] | any>(
+      `http://localhost:3000/car/isConfirmed?id=${carId}`,
+      {status: true}
     );
   }
 }

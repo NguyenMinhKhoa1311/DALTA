@@ -15,5 +15,8 @@ export interface CarState {
   isUpdateLoading: boolean;
   isUpdateSuccess: boolean;
   updateErrMess: string;
+  isConfirmLoading: boolean;
+  isConfirmSuccess: boolean;
+  confirmErrMess: string;
 
 }

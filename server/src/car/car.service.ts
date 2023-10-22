@@ -105,7 +105,34 @@ export class CarService {
     }
   }
 
+  async updateStatus(id: string, status: boolean){
+    try{
+      const updatedCar = await this.carModel.findOneAndUpdate(
+        {carId: id},
+        {status: status},
+        {new: true}
+        );
+        return updatedCar;
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status);
+    }
+  }
 
+  async updateIsConfirmed(id: string, isConfirmed: boolean){
+    try{
+      const updatedCar = await this.carModel.findOneAndUpdate(
+        {carId: id},
+        {isConfirmed: isConfirmed},
+        {new: true}
+        );
+        return updatedCar;
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status);
+    }
+  }
+  
   async remove(id: string) {
     try{
       const deletedCar = await this.carModel.findOneAndDelete({carId: id});

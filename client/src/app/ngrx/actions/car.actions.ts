@@ -39,3 +39,10 @@ export const updateFailure = createAction(
   '[car] update failure',
   props<{ updateErrMess: string }>()
 );
+
+export const confirm = createAction('[Car] confirm', props<{ carId: string }>());
+export const confirmSuccess = createAction('[car] confirm success');
+export const confirmFailure = createAction(
+  '[car] confirm failure',
+  props<{ confirmErrMess: string }>()
+);

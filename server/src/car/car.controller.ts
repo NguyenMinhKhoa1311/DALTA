@@ -18,8 +18,8 @@ export class CarController {
   async create(@Body() createCarDto: CreateCarDto) {
     try{
       const newCar = await this.carService.create(createCarDto);
-      await this.manufacturerSrevice.increase(newCar.manufacturerId);
-      await this.categoryService.increase(newCar.categoryId);
+      // await this.manufacturerSrevice.increase(newCar.manufacturerId);
+      // await this.categoryService.increase(newCar.categoryId);
       return newCar;
     }
     catch(err){
@@ -72,14 +72,49 @@ export class CarController {
       throw err;
     }
   }
+  @Put('status')
+  async updateStatus(@Query('id') id: string, @Body() status: any) {
+    try{
+      const updatedCar = await this.carService.updateStatus(id, status.status);
+      return updatedCar;
+    }
+    catch(err){
+      throw err;
+    }
+  }
+  @Put('isConfirmed')
+  async updateIsConfirmed(@Query('id') id: string, @Body() isConfirmed: any) {
+    try{
+      const updatedCar = await this.carService.updateIsConfirmed(id, isConfirmed.status);
+      await this.manufacturerSrevice.increase(updatedCar.manufacturerId);
+      await this.categoryService.increase(updatedCar.categoryId);
+      return updatedCar;
+    }
+    catch(err){
+      throw err;
+    }
+  }
 
   @Delete('delete')
   async remove(@Query('id') id: string) {
     try{
-      const car = await this.carService.findOne(id);
+      // const car = await this.carService.findOne(id);
       const deletedCar = await this.carService.remove(id);
-      await this.manufacturerSrevice.decrease(car.manufacturerId);
-      await this.categoryService.decrease(car.categoryId);
+      // await this.manufacturerSrevice.decrease(car.manufacturerId);
+      // await this.categoryService.decrease(car.categoryId);
+      return deletedCar;
+    }
+    catch(err){
+      throw err;
+    }
+  }
+
+  @Delete('deleteConfirmed')
+  async removeConfirmed(@Query('id') id: string) {
+    try{
+      const deletedCar = await this.carService.remove(id);
+      await this.manufacturerSrevice.decrease(deletedCar.manufacturerId);
+      await this.categoryService.decrease(deletedCar.categoryId);
       return deletedCar;
     }
     catch(err){

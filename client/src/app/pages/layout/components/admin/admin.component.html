@@ -45,8 +45,8 @@
           </div>
           <div class="cart_price">
             <div class="price_btn">
-              <button>Accept</button>
-              <button>Reject</button>
+              <button (click)="confirmCar(car.carId)">Accept</button>
+              <button (click)="removeCar(car.carId)">Reject</button>
             </div>
             <div class="price_value">
               <h3>${{ car.price }}</h3>

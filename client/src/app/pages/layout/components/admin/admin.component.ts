@@ -20,6 +20,15 @@ export class AdminComponent implements OnInit {
     private store: Store<{ car: CarState; auth: AuthState; user: UserState }>
   ) {}
 
+  confirmCar(carId: string) {
+    this.store.dispatch(CarAction.confirm({ carId }));
+    this.store.dispatch(CarAction.get({ isConfirmed: false }));
+  }
+  removeCar(carId: string) {
+    this.store.dispatch(CarAction.remove({ carId }));
+    this.store.dispatch(CarAction.get({ isConfirmed: false }));
+  }
+
   ngOnInit(): void {
     this.userFirebase$.subscribe((userFirebase) => {
       if (userFirebase != null && userFirebase != undefined) {
@@ -37,5 +46,6 @@ export class AdminComponent implements OnInit {
       }
     });
     this.store.dispatch(CarAction.get({ isConfirmed: false }));
+
   }
 }
