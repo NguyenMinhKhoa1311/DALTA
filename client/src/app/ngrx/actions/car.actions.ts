@@ -2,8 +2,8 @@ import { Car } from 'src/app/models/car.model';
 import { createAction, props } from '@ngrx/store';
 
 export const get = createAction(
-  '[car] get all'
-  // props<{ carId: string }>()
+  '[car] get all',
+  props<{ isConfirmed: boolean }>()
 );
 
 export const getSuccess = createAction(
@@ -38,4 +38,11 @@ export const updateSuccess = createAction('[car] update success');
 export const updateFailure = createAction(
   '[car] update failure',
   props<{ updateErrMess: string }>()
+);
+
+export const confirm = createAction('[Car] confirm', props<{ carId: string }>());
+export const confirmSuccess = createAction('[car] confirm success');
+export const confirmFailure = createAction(
+  '[car] confirm failure',
+  props<{ confirmErrMess: string }>()
 );

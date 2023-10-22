@@ -30,3 +30,9 @@ export const createUserFailure = createAction(
   '[User] Create User Failure',
   props<{ error: any }>()
 );
+
+export const storedUser = createAction(
+  '[User] Stored User',
+  (user: User) => ({ user })
+)
+

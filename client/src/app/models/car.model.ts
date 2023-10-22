@@ -18,4 +18,5 @@ export interface Car {
   status: boolean;
   seat: number;
   door: number;
+  isConfirmed: boolean;
 }

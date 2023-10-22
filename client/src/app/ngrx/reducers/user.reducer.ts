@@ -26,6 +26,7 @@ export const userReducer = createReducer(
     };
     return newState;
   }),
+
   on(UserActions.getByEmailSuccess, (state, action) => {
     console.log(action.type);
     let newState: UserState = {
@@ -36,6 +37,7 @@ export const userReducer = createReducer(
     };
     return newState;
   }),
+
   on(UserActions.getByEmailFailure, (state, action) => {
     console.log(action.type);
     let newState: UserState = {
@@ -46,6 +48,7 @@ export const userReducer = createReducer(
     };
     return newState;
   }),
+
   on(UserActions.createUser, (state, action) => {
     console.log(action.type);
     let newState: UserState = {
@@ -56,6 +59,7 @@ export const userReducer = createReducer(
     };
     return newState;
   }),
+  
   on(UserActions.createUserSuccess, (state, action) => {
     console.log(action.type);
     let newState: UserState = {
@@ -66,6 +70,7 @@ export const userReducer = createReducer(
     };
     return newState;
   }),
+
   on(UserActions.createUserFailure, (state, action) => {
     console.log(action.type);
     let newState: UserState = {
@@ -75,5 +80,14 @@ export const userReducer = createReducer(
       createErrMess: action.error,
     };
     return newState;
+  }),
+  
+  on(UserActions.storedUser, (state, {user, type}) =>{
+    console.log(type);
+    
+    return {
+      ...state,
+      user: user
+    }
   })
 );
