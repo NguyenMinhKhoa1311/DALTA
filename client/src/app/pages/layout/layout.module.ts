@@ -18,6 +18,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AdminComponent } from './components/admin/admin.component';
 
+import { MatDialogModule } from '@angular/material/dialog';
+
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -40,6 +42,7 @@ import { AdminComponent } from './components/admin/admin.component';
     MatButtonModule,
     MatTooltipModule,
     MatInputModule,
+    MatDialogModule,
   ],
 })
 export class LayoutModule {}
