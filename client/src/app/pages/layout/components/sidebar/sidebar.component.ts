@@ -82,38 +82,38 @@ export class SidebarComponent {
       route: this.route$,
       user: this.user$,
     }).subscribe((res) => {
-      if (res.user.role != 'Admin') {
-        console.log(res.user.role);
-        console.log(this.pages.length);
-        if (this.pages.length == 5) {
-          this.pages.splice(4, 1);
-          this.pages[this.pages.length - 1].id = this.pages.length - 1;
-        }
-        if (this.router.url != this.url) {
-          this.url = this.router.url;
-          this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
-          this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
-          this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
-          this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
-        }
-      } else {
-        if (this.router.url != this.url) {
-          this.url = this.router.url;
-          this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
-          this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
-          this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
-          this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
-          this.router.url === '/base/admin' ? (this.pageSelected = 4) : null;
-        }
-      }
-      // if (this.router.url != this.url) {
-      //   this.url = this.router.url;
-      //   this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
-      //   this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
-      //   this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
-      //   this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
-      //   this.router.url === '/base/admin' ? (this.pageSelected = 4) : null;
+      // if (res.user.role != 'Admin') {
+      //   console.log(res.user.role);
+      //   console.log(this.pages.length);
+      //   if (this.pages.length == 5) {
+      //     this.pages.splice(4, 1);
+      //     this.pages[this.pages.length - 1].id = this.pages.length - 1;
+      //   }
+      //   if (this.router.url != this.url) {
+      //     this.url = this.router.url;
+      //     this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
+      //     this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
+      //     this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
+      //     this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
+      //   }
+      // } else {
+      //   if (this.router.url != this.url) {
+      //     this.url = this.router.url;
+      //     this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
+      //     this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
+      //     this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
+      //     this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
+      //     this.router.url === '/base/admin' ? (this.pageSelected = 4) : null;
+      //   }
       // }
+      if (this.router.url != this.url) {
+        this.url = this.router.url;
+        this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
+        this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
+        this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
+        this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
+        this.router.url === '/base/admin' ? (this.pageSelected = 4) : null;
+      }
     });
   }
 

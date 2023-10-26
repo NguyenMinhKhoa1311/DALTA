@@ -77,6 +77,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     dateCheckin.valueAsDate = today;
     dateCheckout.valueAsDate = tomorrow;
 
+    // Không cho phép chọn ngày trước ngày hiện tại
+    dateCheckin.min = today.toISOString().split('T')[0];
+    const minDateCheckout = new Date(today);
+    minDateCheckout.setDate(today.getDate() + 1);
+    dateCheckout.min = minDateCheckout.toISOString().split('T')[0];
+
     dateCheckin.addEventListener('input', () => {
       const checkinDate = new Date(dateCheckin.value);
       const checkoutDate = new Date(dateCheckout.value);
