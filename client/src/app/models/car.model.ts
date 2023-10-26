@@ -1,6 +1,7 @@
 import { Category } from './category.model';
 import { Manufacturer } from './manufacturer.model';
 import { Storage } from './storage.model';
+import { User } from './user.model';
 
 export interface Car {
   _id: string;
@@ -9,7 +10,7 @@ export interface Car {
   model: string;
   categoryId: Category;
   manufacturerId: Manufacturer;
-  ownerId: string;
+  ownerId: User;
   price: number;
   description: string;
   image: Storage;

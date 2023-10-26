@@ -15,36 +15,40 @@ export class AdminComponent implements OnInit {
   carList: Car[] = [];
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
+  confirmedCar$ = this.store.select('car', 'isConfirmSuccess');
+  removeCar$ = this.store.select('car', 'isRemoveSuccess');
 
   constructor(
     private store: Store<{ car: CarState; auth: AuthState; user: UserState }>
-  ) {}
-
-  confirmCar(carId: string) {
-    this.store.dispatch(CarAction.confirm({ carId }));
-    this.store.dispatch(CarAction.get({ isConfirmed: false }));
-  }
-  removeCar(carId: string) {
-    this.store.dispatch(CarAction.remove({ carId }));
-    this.store.dispatch(CarAction.get({ isConfirmed: false }));
-  }
-
-  ngOnInit(): void {
-    this.userFirebase$.subscribe((userFirebase) => {
-      if (userFirebase != null && userFirebase != undefined) {
-        console.log(userFirebase);
-      }
-    });
-    this.user$.subscribe((user) => {
-      if (user != null && user != undefined) {
-        console.log(user);
-      }
-    });
+  ) {
     this.store.select('car').subscribe((val) => {
       if (val != null && val != undefined) {
         this.carList = val.carList;
       }
     });
+    this.confirmedCar$.subscribe((val) => {
+      if(val) {
+        this.store.dispatch(CarAction.get({ isConfirmed: false }));
+      }
+    });
+    this.removeCar$.subscribe((val) => {
+      if(val) {
+        this.store.dispatch(CarAction.get({ isConfirmed: false }));
+      }
+    });
+    
+  }
+
+  confirmCar(carId: string) {
+    this.store.dispatch(CarAction.confirm({ carId }));
+
+  }
+  removeCar(carId: string) {
+    this.store.dispatch(CarAction.remove({ carId }));
+
+  }
+
+  ngOnInit(): void {
     this.store.dispatch(CarAction.get({ isConfirmed: false }));
 
   }

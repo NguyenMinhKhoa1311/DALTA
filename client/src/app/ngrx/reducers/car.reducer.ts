@@ -27,6 +27,8 @@ export const initialState: CarState = {
 export const carReducer = createReducer(
   initialState,
   on(CarActions.get, (state, action) => {
+    console.log(action.type);
+    
     let newState: CarState = {
       ...state,
       isGetLoading: true,
@@ -38,6 +40,7 @@ export const carReducer = createReducer(
   }),
 
   on(CarActions.getSuccess, (state, action) => {
+    console.log(action.type);
     let newState: CarState = {
       ...state,
       isGetLoading: false,
@@ -48,6 +51,7 @@ export const carReducer = createReducer(
   }),
 
   on(CarActions.getFailure, (state, action) => {
+    console.log(action.type);
     let newState: CarState = {
       ...state,
       isGetLoading: false,
