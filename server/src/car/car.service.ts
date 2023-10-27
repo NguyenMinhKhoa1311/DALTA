@@ -51,7 +51,7 @@ export class CarService {
       .populate('image','urls', this.storageModel)
       .populate('manufacturerId','name', this.manufacturerModel)
       .populate('categoryId','name', this.categoryModel)
-      .populate('ownerId','name', this.userModel)
+      .populate('ownerId','name email phone address', this.userModel)
       .exec();
       return cars;
     }

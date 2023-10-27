@@ -15,7 +15,7 @@
         </div>
     </div>
     <div id="main_home">
-        <div class="cart_container">
+        <div class="cart_container" >
             <div class="cart_box" *ngFor="let car of carList">
                 <div class="cart">
                     <div class="cart_img">
@@ -67,14 +67,14 @@
             <i class="fa-regular fa-circle-xmark large-icon"></i>
         </div>
     </div>
-    <div id="main_dialog">
+    <div id="main_dialog" *ngIf="selectCar.name">
         <div class="characteristic_dialog">
             <div class="img_dialog">
-                <img src="../../../../../assets/images/bg_login.jpg" alt="">
+                <img *ngFor="let img of selectCar.image.urls" [src]="img" alt="" />
             </div>
             <div class="right_dialog">
                 <div class="name_car">
-                    <h3>Lamborghini Revulto</h3>
+                    <h3>{{selectCar.name}}</h3>
                 </div>
 
                 <h6>Đặc điểm</h6>
@@ -85,7 +85,7 @@
                         </div>
                         <div class="seat_content">
                             <p style="font-size: 16px; color: #767676;">Số ghế</p>
-                            <p style="margin: 0; font-size: 18px;font-weight: 600;">2 chỗ</p>
+                            <p style="margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.seat}}</p>
                         </div>
                     </div>
 
@@ -95,7 +95,7 @@
                         </div>
                         <div class="seat_content">
                             <p style="font-size: 16px; color: #767676;">Số cửa</p>
-                            <p style="margin: 0; font-size: 18px;font-weight: 600;">2 cửa</p>
+                            <p style="margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.door}}</p>
                         </div>
                     </div>
 
@@ -105,7 +105,7 @@
                         </div>
                         <div class="seat_content">
                             <p style="font-size: 16px; color: #767676;">Mẫu xe</p>
-                            <p style="margin: 0; font-size: 18px;font-weight: 600;">Super</p>
+                            <p style="margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.categoryId.name}}</p>
                         </div>
                     </div>
 

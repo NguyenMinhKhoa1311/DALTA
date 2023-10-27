@@ -108,9 +108,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('appDialog2', { static: true })
   dialog2!: ElementRef<HTMLDialogElement>;
   cdr2 = inject(ChangeDetectorRef);
-  selectCar: any;
+  selectCar: Car = <Car>{};
 
-  openRentcarDialog(car: any) {
+  openRentcarDialog(car: Car) {
     this.selectCar = car;
     this.dialog2.nativeElement.showModal();
     this.cdr2.detectChanges();
