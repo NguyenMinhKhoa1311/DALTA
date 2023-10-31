@@ -15,7 +15,7 @@
         </div>
     </div>
     <div id="main_home">
-        <div class="cart_container" >
+        <div class="cart_container">
             <div class="cart_box" *ngFor="let car of carList">
                 <div class="cart">
                     <div class="cart_img">
@@ -67,7 +67,7 @@
             <i class="fa-regular fa-circle-xmark large-icon"></i>
         </div>
     </div>
-    <div id="main_dialog" *ngIf="selectCar.name">
+    <div id="main_dialog">
         <div class="characteristic_dialog">
             <div class="img_dialog">
                 <img *ngFor="let img of selectCar.image.urls" [src]="img" alt="" />
@@ -129,19 +129,25 @@
                         <div class="static">
                             <div class="input-container">
                                 <label for="date-checkin">Nhận xe</label>
-                                <input type="date" id="date-checkin" class="date-field" name="date-from">
+                                <!-- <input type="date" id="date-checkin" class="date-field" name="date-from"> -->
+                                <input #dateCheckin type="date" id="date-checkin" class="date-field" name="date-from">
+
                             </div>
                         </div>
                         <div class="flex">
                             <div class="input-container">
                                 <label for="date-checkout">Trả xe</label>
-                                <input type="date" id="date-checkout" class="date-field" name="">
+                                <!-- <input type="date" id="date-checkout" class="date-field" name=""> -->
+                                <input #dateCheckout type="date" id="date-checkout" class="date-field" name="">
+
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- date-picker -->
-
+                <button (click)="submit()">
+                    ok
+                </button>
             </div>
         </div>
     </div>
