@@ -30,7 +30,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   user$ = this.store.select('user', 'user');
 
   constructor(
-    private store: Store<{ car: CarState; auth: AuthState; user: UserState }>,
+    private store: Store<{
+      car: CarState;
+      auth: AuthState;
+      user: UserState;
+    }>,
     public dialog: MatDialog
   ) {}
 
@@ -108,7 +112,48 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('appDialog2', { static: true })
   dialog2!: ElementRef<HTMLDialogElement>;
   cdr2 = inject(ChangeDetectorRef);
-  selectCar: Car = <Car>{};
+  selectCar: any = {
+    _id: 'a',
+    carId: 'a',
+    name: 'a',
+    model: 'a',
+    categoryId: {
+      _id: 'a',
+      name: 'a',
+      quantity: 0,
+      categoryId: 'a',
+    },
+    manufacturerId: {
+      _id: 'a',
+      name: 'a',
+      manufacturerId: 'a',
+      quantity: 0,
+    },
+    ownerId: {
+      _id: 'a',
+      uid: 'a',
+      name: 'a',
+      email: 'a',
+      phone: 'a',
+      avatar: 'a',
+      address: 'a',
+      role: 'a',
+      password: 'a',
+    },
+    price: 0,
+    description: 'a',
+    image: {
+      _id: 'a',
+      folderName: 'a',
+      urls: ['a'],
+    },
+    location: 'a',
+    deleveryService: false,
+    status: false,
+    seat: 0,
+    door: 0,
+    isConfirmed: false,
+  };
 
   openRentcarDialog(car: Car) {
     this.selectCar = car;
@@ -137,5 +182,31 @@ export class HomeComponent implements OnInit, AfterViewInit {
       dateCheckin.valueAsDate = today;
       dateCheckout.valueAsDate = tomorrow;
     });
+  }
+
+  submit() {
+    const dateCheckin = document.getElementById(
+      'date-checkin'
+    ) as HTMLInputElement;
+    const dateCheckout = document.getElementById(
+      'date-checkout'
+    ) as HTMLInputElement;
+
+    const checkinDate = dateCheckin.valueAsDate;
+    const checkoutDate = dateCheckout.valueAsDate;
+
+    // Kiểm tra nếu giá trị hợp lệ
+    if (checkinDate && checkoutDate) {
+      console.log('Ngày check-in:', checkinDate);
+      console.log('Ngày check-out:', checkoutDate);
+
+      // Tính số ngày thuê
+      const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+      const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // 1000 milliseconds, 3600 seconds, 24 hours
+
+      console.log('Tổng số ngày thuê:', daysDiff);
+    } else {
+      console.log('Ngày không hợp lệ');
+    }
   }
 }
