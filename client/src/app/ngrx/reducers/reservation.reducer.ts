@@ -4,7 +4,7 @@ import * as ReservationActions from '../actions/reservation.actions';
 import { createReducer, on } from "@ngrx/store";
 
 
-export const initialState: ReservationState ={
+export const initialState: ReservationState = {
     isGetLoading: false,
     isGetSuccess: false,
     getErrMess: '',
@@ -24,23 +24,40 @@ export const initialState: ReservationState ={
 
 export const reservationReducer = createReducer(
     initialState,
-    on(ReservationActions.create, (state) => ({
-        ...state,
-        isCreateLoading: true,
-        isRemoveSuccess: false,
-        createErrMess: '',
-    })),
-    on(ReservationActions.createSuccess, (state, action) => ({
-        ...state,
-        isCreateLoading: false,
-        isCreateSuccess: true,
-        getErrMess: '',
+    on(ReservationActions.create, (state,action) => {
+        console.log(action.type);
+        
+        let newState = {
+            ...state,
+            isCreateLoading: true,
+            isCreateSuccess: false,
+            createErrMess: '',
+        };
+        return newState;
 
-    })),
-    on(ReservationActions.createFailure, (state, action) => ({
-        ...state,
-        isCreateLoading: false,
-        isCreateSuccess: false,
-        createErrMess: action.errorMessage,
-    })),
+    }),
+    on(ReservationActions.createSuccess, (state, action) => {
+        console.log(action.type);
+        
+        let newState = {
+            ...state,
+            isCreateLoading: false,
+            isCreateSuccess: true,
+            createErrMess: '',
+        };
+        return newState;
+
+    
+    }),
+    on(ReservationActions.createFailure, (state, action) => {
+        console.log(action.errorMessage);
+        
+        let newState = {
+            ...state,
+            isCreateLoading: false,
+            isCreateSuccess: false,
+            createErrMess: action.errorMessage,
+        };
+        return newState;
+    }),
 )

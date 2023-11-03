@@ -145,10 +145,22 @@
                     </div>
                 </div>
                 <!-- date-picker -->
-                <button (click)="submit()">
-                    ok
+                <button (click)="submit(selectCar)">
+                    Rent
                 </button>
             </div>
         </div>
+    </div>
+</dialog>
+
+<dialog id="payment_dialog" style="color: #1f1a1c" #appDialog3>
+    <div id="top_dialog">
+        <div class="btnClose" (click)="closePaymentDialog()">
+            <i class="fa-regular fa-circle-xmark large-icon"></i>
+        </div>
+    </div>
+    <div id="main_dialog">
+        <h1>This is my other dialog!</h1>
+        <button (click)="closePaymentDialog()">Close</button>
     </div>
 </dialog>

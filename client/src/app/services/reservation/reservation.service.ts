@@ -9,7 +9,9 @@ export class ReservationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  create(reservation:Reservation){
+  create(reservation:any){
+    console.log(reservation);
+    
     return this.httpClient.post<Reservation>('http://localhost:3000/reservation/create', reservation);
   }
 }

@@ -14,10 +14,14 @@ import { Store } from '@ngrx/store';
 import { Car } from 'src/app/models/car.model';
 import * as CarAction from 'src/app/ngrx/actions/car.actions';
 import * as UserActions from 'src/app/ngrx/actions/user.actions';
+import * as ReservationActions from 'src/app/ngrx/actions/reservation.actions';
 import { AuthState } from 'src/app/ngrx/states/auth.state';
 import { CarState } from 'src/app/ngrx/states/car.state';
 import { UserState } from 'src/app/ngrx/states/user.state';
 import { MatDialog } from '@angular/material/dialog';
+import { User } from 'src/app/models/user.model';
+import { ReservationState } from 'src/app/ngrx/states/reservation.state';
+
 
 @Component({
   selector: 'app-home',
@@ -26,6 +30,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   carList: Car[] = [];
+  user: User = <User>{}
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
 
@@ -34,9 +39,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
       car: CarState;
       auth: AuthState;
       user: UserState;
+      reservation: ReservationState
     }>,
     public dialog: MatDialog
-  ) {}
+  ) {
+
+    this.store.select("reservation").subscribe((val) => {
+      if (val != null && val != undefined) {
+        if(val.isCreateSuccess)
+        {
+          alert("Đặt xe thành công");
+          this.closeRentcarDialog();
+          this.openPaymentDialog();
+        }
+      }
+    })  
+  }
 
   ngOnInit(): void {
     this.userFirebase$.subscribe((userFirebase) => {
@@ -48,6 +66,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       if (user != null && user != undefined) {
         console.log(user);
         this.store.dispatch(UserActions.storedUser(user));
+        this.user = user;
       }
     });
     this.store.select('car').subscribe((val) => {
@@ -109,6 +128,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //date-pikcer
   }
 
+
+
+
+  @ViewChild('appDialog3', { static: true })
+  dialog3!: ElementRef<HTMLDialogElement>;
+  cdr3 = inject(ChangeDetectorRef);
+
+  openPaymentDialog() {
+    this.dialog3.nativeElement.showModal();
+    this.cdr3.detectChanges();
+  }
+  closePaymentDialog() {
+    this.dialog3.nativeElement.close();
+    this.cdr3.detectChanges();
+  }
+
+
+
+
+
   @ViewChild('appDialog2', { static: true })
   dialog2!: ElementRef<HTMLDialogElement>;
   cdr2 = inject(ChangeDetectorRef);
@@ -165,6 +204,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.cdr2.detectChanges();
   }
 
+
+
   //reset date-picker
   ngAfterViewInit(): void {
     this.dialog2.nativeElement.addEventListener('close', () => {
@@ -183,8 +224,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
       dateCheckout.valueAsDate = tomorrow;
     });
   }
+  
+  reservationData = {
+    reservationId: '',
+    carId: '',
+    customerId: '',
+    startDate: '',
+    endDate: '',
+    status: false,
+    total: 0,
 
-  submit() {
+  }
+
+  submit(car: Car) {
     const dateCheckin = document.getElementById(
       'date-checkin'
     ) as HTMLInputElement;
@@ -203,8 +255,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
       // Tính số ngày thuê
       const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
       const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // 1000 milliseconds, 3600 seconds, 24 hours
-
-      console.log('Tổng số ngày thuê:', daysDiff);
+      this.reservationData = {
+        reservationId: car.carId +"-" +this.user.uid,
+        carId: car._id,
+        customerId: this.user._id,
+        startDate: checkinDate.toUTCString(),
+        endDate: checkinDate.toUTCString(),
+        status: false,
+        total: car.price * daysDiff,
+      }
+      console.log(this.reservationData);
+      this.store.dispatch(ReservationActions.create({reservation: this.reservationData}));
     } else {
       console.log('Ngày không hợp lệ');
     }

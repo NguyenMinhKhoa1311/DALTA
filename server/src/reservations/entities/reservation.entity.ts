@@ -5,7 +5,7 @@ export type ReservationDocument = HydratedDocument<Reservation>;
 
 @Schema({timestamps: true})
 export class Reservation {
-    @Prop({required: true, unique: true})
+    @Prop({required: true})
     reservationId: string;
 
     @Prop({required: true,

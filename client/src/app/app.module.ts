@@ -24,6 +24,8 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { authReducer } from './ngrx/reducers/auth.reducer';
 import { AuthEffects } from './ngrx/effects/auth.effects';
+import { reservationReducer } from './ngrx/reducers/reservation.reducer';
+import { ReservationEffects } from './ngrx/effects/reservation.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +41,7 @@ import { AuthEffects } from './ngrx/effects/auth.effects';
       category: categoryReducer,
       auth: authReducer,
       user: userReducer,
+      reservation: reservationReducer,
     }),
     EffectsModule.forRoot([
       CarEffects,
@@ -46,7 +49,8 @@ import { AuthEffects } from './ngrx/effects/auth.effects';
       ManufacturerEffects,
       CategoryEffects,
       AuthEffects,
-      UserEffects
+      UserEffects,
+      ReservationEffects,
     ]),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

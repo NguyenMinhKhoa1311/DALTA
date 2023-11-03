@@ -4,7 +4,7 @@ import { Reservation } from "src/app/models/reservation.model";
 
 export const create = createAction(
     '[reservation] Create',
-    props<{ reservation: Reservation }>()
+    props<{ reservation: any }>()
 );
 
 export const createSuccess = createAction(
