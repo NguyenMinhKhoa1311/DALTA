@@ -25,6 +25,21 @@ export class ReservationEffects{
                 }),
                 catchError((error) => of(ReservationActions.createFailure({errorMessage: error})))
             )
-        )))
+        )));
+        get$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ReservationActions.get),
+            exhaustMap((action) =>
+                this.reservationService.get(action.customerId).pipe(
+                    map((item) => {
+                        if(item != undefined || item != null){
+                            return ReservationActions.getSuccess({reservations: item});
+                        }else{
+                            return ReservationActions.getFailure({errorMessage: 'Reservation is undefined or null'});
+                        }
+                    }),
+                    catchError((error) => of(ReservationActions.getFailure({errorMessage: error})))
+                )
+            )));
 
 }

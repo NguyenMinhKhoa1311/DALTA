@@ -30,6 +30,17 @@ export class ReservationsController {
   }
 
   @Get('')
+  async findReservationsByCustomerId(@Query('customerId') customerId: string) {
+    try {
+      const reservations = await this.reservationsService.findReservationsByCustomerId(customerId);
+      return reservations;
+    }
+    catch(err) {
+      throw err;
+    }
+  }
+
+  @Get('')
   async findOne(@Query('id') id: string) {
     try {
       const reservation = await this.reservationsService.findOne(id);

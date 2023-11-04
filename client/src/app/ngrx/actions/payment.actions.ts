@@ -1,32 +1,26 @@
 import { createAction, props } from "@ngrx/store";
-
-import { Reservation } from "src/app/models/reservation.model";
+import { Payment } from "src/app/models/payment.model";
 
 export const create = createAction(
-    '[reservation] Create',
-    props<{ reservation: any }>()
+    '[payment] Create',
+    props<{ payment: any }>()
 );
-
 export const createSuccess = createAction(
-    '[reservation] Create Success',
+    '[payment] Create Success',
 );
-
 export const createFailure = createAction(
-    '[reservation] Create Failure',
+    '[payment] Create Failure',
     props<{ errorMessage: string }>()
 );
-
 export const get = createAction(
-    '[reservation] Get',
-    props<{ customerId: string }>()
+    '[payment] Get',
+    props<{ paymentId: string }>()
 );
-
 export const getSuccess = createAction(
-    '[reservation] Get Success',
-    props<{ reservations: Reservation[] }>()
+    '[payment] Get Success',
+    props<{ payment: Payment }>()
 );
-
 export const getFailure = createAction(
-    '[reservation] Get Failure',
+    '[payment] Get Failure',
     props<{ errorMessage: string }>()
 );

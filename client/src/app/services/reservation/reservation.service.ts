@@ -14,4 +14,7 @@ export class ReservationService {
     
     return this.httpClient.post<Reservation>('http://localhost:3000/reservation/create', reservation);
   }
+  get(customerId: string){
+    return this.httpClient.get<Reservation[]>(`http://localhost:3000/reservation?customerId=${customerId}`);
+  }
 }
