@@ -276,7 +276,7 @@
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
-
+                    margin-bottom: 1rem;
 
                     .seat {
                         display: flex;
@@ -308,243 +308,327 @@
 
     }
 
-    //date-picker
-    .reservation-box {
+    .rent_box_bill {
+        height: 30%;
+        width: 100%;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 525px;
-        height: 20%;
-        //  background: #DEE0E1;
-        font-family: "Ubuntu", Roboto, "Helvetica Neue", Arial, sans-serif;
-        font-size: 16px;
+        flex-direction: column;
+        margin-top: 1.5rem;
 
-
-        .top {
-            display: flex;
-            flex-direction: row;
-            width: 90%;
-            justify-content: space-between;
-        }
-
-        *,
-        *::before,
-        *::after {
-            padding: 0;
-            margin: 0;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            outline: none;
-            user-select: none;
-            -webkit-user-drag: none;
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            box-sizing: border-box;
-            transition: all 0.3s ease-in-out, margin 0.3s ease;
-            -webkit-transition: all 0.3s ease-in-out, margin 0.3s ease;
-        }
-
-        .input-container input[type="date"],
-        .input-container input[type="text"] {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background: transparent;
-            border: none;
-            outline: none;
-            box-shadow: none;
-        }
-
-        /* INPUT CONTAINER */
-        .input-container {
-            display: flex;
-            flex-direction: column;
-            width: auto;
-            height: auto;
-            min-width: 217px;
-            height: 60px;
-            padding: 5px 10px 10px 10px;
-            background: #fff;
-            border-radius: 8px;
-            filter: drop-shadow(0px 0px 3px #000);
-            -webkit-filter: drop-shadow(0px 0px 3px #000);
-            overflow: hidden;
-            cursor: pointer;
-            gap: 10px // &:hover,
-            // &:focus,
-            // &:active {
-            //     transform: scale(1.1);
-            //     -webkit-transform: scale(1.1);
-            // }
-
-            label {
-                position: relative;
-                width: 100%;
-                font-family: "Segoe UI";
-                font-weight: 600;
-                font-size: 11px;
-                letter-spacing: 0.1em;
-                line-height: 20px;
-                color: #09f;
-                margin-left: 2px;
-                text-transform: uppercase;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            input {
-                position: relative;
-                align-items: center;
-                width: auto;
-                height: auto;
-                font-family: "Lekton", Arial, sans-serif;
-                font-weight: 600;
-                font-size: 22px;
-                letter-spacing: 0.05em;
-                line-height: 21px;
-                text-transform: uppercase;
-                margin-left: 0px;
-            }
-        }
-
-        /* BUTTON CONTAINER */
-        .button-container {
+        //date-picker
+        .reservation-box {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: auto;
-            min-width: 197px;
-            height: 65px;
-            padding: 1px;
-            padding-bottom: 2px;
-            background: #09f;
-            border-radius: 8px;
-            filter: drop-shadow(0px 0px 3px #000);
-            -webkit-filter: drop-shadow(0px 0px 3px #000);
-            overflow: hidden;
-            cursor: pointer;
+            width: 100%;
+            //height: 20%;
+            //  background: #DEE0E1;
+            font-family: "Ubuntu", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
 
-            &:hover,
-            &:focus {
-                background: #09f;
-                filter: drop-shadow(0px 0px 3px #09f);
-                -webkit-filter: drop-shadow(0px 0px 3px #09f);
+
+            .top {
+                display: flex;
+                flex-direction: row;
+                width: 80%;
+                justify-content: space-between;
             }
 
-            .button {
-                position: relative;
-                width: 100%;
-                min-height: 63px;
+            *,
+            *::before,
+            *::after {
+                padding: 0;
+                margin: 0;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                outline: none;
+                user-select: none;
+                -webkit-user-drag: none;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+                box-sizing: border-box;
+                transition: all 0.3s ease-in-out, margin 0.3s ease;
+                -webkit-transition: all 0.3s ease-in-out, margin 0.3s ease;
+            }
+
+            .input-container input[type="date"],
+            .input-container input[type="text"] {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background: transparent;
+                border: none;
+                outline: none;
+                box-shadow: none;
+            }
+
+            /* INPUT CONTAINER */
+            .input-container {
+                display: flex;
+                flex-direction: column;
+                width: auto;
                 height: auto;
+                min-width: 217px;
+                height: 60px;
+                padding: 5px 10px 10px 10px;
+                background: #fff;
+                border-radius: 8px;
+                filter: drop-shadow(0px 0px 3px #000);
+                -webkit-filter: drop-shadow(0px 0px 3px #000);
+                overflow: hidden;
+                cursor: pointer;
+                gap: 10px // &:hover,
+                // &:focus,
+                // &:active {
+                //     transform: scale(1.1);
+                //     -webkit-transform: scale(1.1);
+                // }
+
+                label {
+                    position: relative;
+                    width: 100%;
+                    font-family: "Segoe UI";
+                    font-weight: 600;
+                    font-size: 11px;
+                    letter-spacing: 0.1em;
+                    line-height: 20px;
+                    color: #09f;
+                    margin-left: 2px;
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                input {
+                    position: relative;
+                    align-items: center;
+                    width: auto;
+                    height: auto;
+                    font-family: "Lekton", Arial, sans-serif;
+                    font-weight: 600;
+                    font-size: 22px;
+                    letter-spacing: 0.05em;
+                    line-height: 21px;
+                    text-transform: uppercase;
+                    margin-left: 0px;
+                }
+            }
+
+            /* BUTTON CONTAINER */
+            .button-container {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border-radius: 7px;
-                background: #fff;
-                color: #000;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                font-weight: 700;
+                width: auto;
+                min-width: 197px;
+                height: 65px;
+                padding: 1px;
+                padding-bottom: 2px;
+                background: #09f;
+                border-radius: 8px;
+                filter: drop-shadow(0px 0px 3px #000);
+                -webkit-filter: drop-shadow(0px 0px 3px #000);
+                overflow: hidden;
+                cursor: pointer;
 
-                &:hover {
-                    background: #000;
-                    color: #fff;
-                }
-
-                &:active {
-                    background: #000;
-                    color: #fff;
+                &:hover,
+                &:focus {
                     background: #09f;
                     filter: drop-shadow(0px 0px 3px #09f);
                     -webkit-filter: drop-shadow(0px 0px 3px #09f);
                 }
 
-                &.ok {
-                    background: #131313;
-                    color: #fff;
+                .button {
+                    position: relative;
+                    width: 100%;
+                    min-height: 63px;
+                    height: auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 7px;
+                    background: #fff;
+                    color: #000;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    font-weight: 700;
 
                     &:hover {
-                        background: #131313;
-                        color: #09f;
-                        text-shadow: 0px 0px 10px #09f;
-                        -webkit-text-shadow: 0px 0px 10px #09f;
+                        background: #000;
+                        color: #fff;
                     }
 
                     &:active {
+                        background: #000;
                         color: #fff;
                         background: #09f;
-                        filter: drop-shadow(0px 0px 3px #000);
-                        -webkit-filter: drop-shadow(0px 0px 3px #000);
+                        filter: drop-shadow(0px 0px 3px #09f);
+                        -webkit-filter: drop-shadow(0px 0px 3px #09f);
+                    }
+
+                    &.ok {
+                        background: #131313;
+                        color: #fff;
+
+                        &:hover {
+                            background: #131313;
+                            color: #09f;
+                            text-shadow: 0px 0px 10px #09f;
+                            -webkit-text-shadow: 0px 0px 10px #09f;
+                        }
+
+                        &:active {
+                            color: #fff;
+                            background: #09f;
+                            filter: drop-shadow(0px 0px 3px #000);
+                            -webkit-filter: drop-shadow(0px 0px 3px #000);
+                        }
+                    }
+                }
+            }
+
+            /* RESERVATION BOX */
+            .reservation-box {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+                height: auto;
+                padding: 20px;
+                border-radius: 7px;
+                background-color: rgba(255, 255, 255, 1);
+
+                .static {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    float: left;
+                    width: auto;
+                    margin-right: 20px;
+                }
+
+                .flex {
+                    position: relative;
+                    display: flex;
+                    float: left;
+                    flex-direction: table;
+                    align-items: center;
+                    gap: 20px;
+                    width: auto;
+                }
+
+                .top {
+                    display: flex;
+                    flex-direction: row;
+                }
+
+                .bottom {
+                    position: relative;
+                    width: 100%;
+                    text-align: right;
+                }
+
+                .info {
+                    width: auto;
+                    color: #000;
+                    font-weight: 500;
+                    text-decoration: none;
+                    text-align: right;
+                    cursor: pointer;
+                    border-bottom: 2px solid transparent;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        color: #000;
+                        border-bottom: 2px solid #09f;
                     }
                 }
             }
         }
 
-        /* RESERVATION BOX */
-        .reservation-box {
+        .line_page {
+            width: 80%;
+            border-bottom: 1px solid #e0e0e0;
+            margin: 1rem auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .bill_form {
+            width: 80%;
+            height: auto;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            gap: 20px;
-            height: auto;
-            padding: 20px;
-            border-radius: 7px;
-            background-color: rgba(255, 255, 255, 1);
+            margin: 0 auto;
 
-            .static {
-                position: relative;
+            .price_car,
+            .service_fee,
+            .insurance_fee,
+            .total_car_fee,
+            .total_bill {
                 display: flex;
+                justify-content: space-between;
                 align-items: center;
-                float: left;
-                width: auto;
-                margin-right: 20px;
+                font-size: 1rem;
+
             }
 
-            .flex {
-                position: relative;
-                display: flex;
-                float: left;
-                flex-direction: table;
-                align-items: center;
-                gap: 20px;
-                width: auto;
+            .price_car_value,
+            .service_fee_value,
+            .insurance_fee_value,
+            .total_car_fee_value,
+            .total_bill_value {
+                font-weight: bold;
             }
 
-            .top {
-                display: flex;
-                flex-direction: row;
-            }
-
-            .bottom {
-                position: relative;
-                width: 100%;
-                text-align: right;
-            }
-
-            .info {
-                width: auto;
-                color: #000;
-                font-weight: 500;
-                text-decoration: none;
-                text-align: right;
-                cursor: pointer;
-                border-bottom: 2px solid transparent;
-
-                &:hover,
-                &:focus,
-                &:active {
-                    color: #000;
-                    border-bottom: 2px solid #09f;
+            .total_bill,
+            .total_car_fee {
+                p {
+                    margin: 0;
                 }
+            }
+
+            .line_page {
+                width: 100%;
+                border-bottom: 1px solid #e0e0e0;
+                margin: 1rem auto;
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        .btn_submit {
+            width: 80%;
+            height: 5rem;
+            margin: 0 auto;
+            border-radius: 1.5px;
+
+            button {
+                width: 100%;
+                height: 100%;
             }
         }
     }
 
+
+
+
     //date-picker
 
     #main_dialog::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .detail_description {
+        height: 20%;
+        overflow-y: auto;
+    }
+
+    .detail_description::-webkit-scrollbar {
         display: none;
     }
 

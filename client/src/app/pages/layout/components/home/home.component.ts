@@ -22,7 +22,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/models/user.model';
 import { ReservationState } from 'src/app/ngrx/states/reservation.state';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -30,7 +29,7 @@ import { ReservationState } from 'src/app/ngrx/states/reservation.state';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   carList: Car[] = [];
-  user: User = <User>{}
+  user: User = <User>{};
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
 
@@ -39,21 +38,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
       car: CarState;
       auth: AuthState;
       user: UserState;
-      reservation: ReservationState
+      reservation: ReservationState;
     }>,
     public dialog: MatDialog
   ) {
-
-    this.store.select("reservation").subscribe((val) => {
+    this.store.select('reservation').subscribe((val) => {
       if (val != null && val != undefined) {
-        if(val.isCreateSuccess)
-        {
-          alert("Đặt xe thành công");
+        if (val.isCreateSuccess) {
+          alert('Đặt xe thành công');
           this.closeRentcarDialog();
           this.openPaymentDialog();
         }
       }
-    })  
+    });
   }
 
   ngOnInit(): void {
@@ -128,9 +125,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //date-pikcer
   }
 
-
-
-
   @ViewChild('appDialog3', { static: true })
   dialog3!: ElementRef<HTMLDialogElement>;
   cdr3 = inject(ChangeDetectorRef);
@@ -143,10 +137,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.dialog3.nativeElement.close();
     this.cdr3.detectChanges();
   }
-
-
-
-
 
   @ViewChild('appDialog2', { static: true })
   dialog2!: ElementRef<HTMLDialogElement>;
@@ -204,8 +194,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.cdr2.detectChanges();
   }
 
-
-
   //reset date-picker
   ngAfterViewInit(): void {
     this.dialog2.nativeElement.addEventListener('close', () => {
@@ -224,7 +212,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       dateCheckout.valueAsDate = tomorrow;
     });
   }
-  
+
   reservationData = {
     reservationId: '',
     carId: '',
@@ -233,7 +221,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
     endDate: '',
     status: false,
     total: 0,
+  };
 
+  selectedDays: number = 0;
+
+  updateTotalDays() {
+    const dateCheckin = document.getElementById(
+      'date-checkin'
+    ) as HTMLInputElement;
+    const dateCheckout = document.getElementById(
+      'date-checkout'
+    ) as HTMLInputElement;
+
+    const checkinDate = new Date(dateCheckin.value);
+    const checkoutDate = new Date(dateCheckout.value);
+
+    if (checkinDate && checkoutDate) {
+      const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+      const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      this.selectedDays = daysDiff; // Cập nhật giá trị tổng ngày
+    }
   }
 
   submit(car: Car) {
@@ -255,17 +262,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
       // Tính số ngày thuê
       const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
       const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // 1000 milliseconds, 3600 seconds, 24 hours
+      this.selectedDays = daysDiff;
+      this.updateTotalDays();
+
       this.reservationData = {
-        reservationId: car.carId +"-" +this.user.uid,
+        reservationId: car.carId + '-' + this.user.uid,
         carId: car._id,
         customerId: this.user._id,
         startDate: checkinDate.toUTCString(),
         endDate: checkinDate.toUTCString(),
         status: false,
         total: car.price * daysDiff,
-      }
+      };
       console.log(this.reservationData);
-      this.store.dispatch(ReservationActions.create({reservation: this.reservationData}));
+      this.store.dispatch(
+        ReservationActions.create({ reservation: this.reservationData })
+      );
     } else {
       console.log('Ngày không hợp lệ');
     }
