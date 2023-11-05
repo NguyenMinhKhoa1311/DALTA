@@ -37,6 +37,18 @@ export class ReservationsService {
       throw new HttpException(err.message, err.status);
     }
   }
+  findReservationsByCustomerId(customerId: string){
+    try{
+      const reservations = this.reservationModel.find({customerId: customerId})
+      .populate('carId','name', this.carModel)
+      .populate('customerId','name', this.userModel)    
+      .exec();
+      return reservations;
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status);
+    }
+  }
 
   async findOne(id: string) {
     try{

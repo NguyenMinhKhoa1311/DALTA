@@ -60,4 +60,41 @@ export const reservationReducer = createReducer(
         };
         return newState;
     }),
+    on(ReservationActions.get, (state, action) => {
+        console.log(action.type);
+        
+        let newState = {
+            ...state,
+            isGetLoading: true,
+            isGetSuccess: false,
+            getErrMess: '',
+        };
+        return newState;
+
+    }),
+    on(ReservationActions.getSuccess, (state, action) => {
+        console.log(action.type);
+        
+        let newState = {
+            ...state,
+            isGetLoading: false,
+            isGetSuccess: true,
+            getErrMess: '',
+            reservationList: action.reservations,
+        };
+        return newState;
+
+    
+    }),
+    on(ReservationActions.getFailure, (state, action) => {
+        console.log(action.errorMessage);
+        
+        let newState = {
+            ...state,
+            isGetLoading: false,
+            isGetSuccess: false,
+            getErrMess: action.errorMessage,
+        };
+        return newState;
+    }),
 )
