@@ -1,0 +1,635 @@
+#home_container {
+    background-color: #F5F6FA;
+    height: 100%;
+
+    #navbar_home {
+        height: 10%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 2rem 0 2rem;
+
+        .search {
+            .search_box {
+                width: 30rem;
+                height: 2.3rem;
+                border: 1px solid #cac8c8;
+                border-radius: 1.5rem;
+                display: flex;
+                align-items: center;
+                background-color: #FFFFFF;
+
+                i {
+                    margin-left: 1rem;
+                    color: #9e9b9b;
+                }
+
+                input {
+                    border: none;
+                    outline: none;
+                    margin-left: 0.5rem;
+                }
+
+                input::placeholder {
+                    color: #9e9b9b;
+                }
+            }
+
+        }
+
+        .filter {
+            .filter_box {
+                width: 6rem;
+                height: 2.3rem;
+                border: 1px solid #cac8c8;
+                border-radius: 1.5rem;
+                display: flex;
+                align-items: center;
+                background-color: #FFFFFF;
+                margin-left: 1rem;
+                align-items: center;
+                cursor: pointer;
+
+                img {
+                    width: 1.2rem;
+                    height: auto;
+                    margin-left: 1rem;
+                    margin-right: 0.5rem;
+                }
+
+                span {
+                    font-size: 0.8rem;
+                    font-weight: bold;
+                    color: #9e9b9b;
+                }
+
+            }
+        }
+    }
+
+    #main_home {
+        height: 90%;
+        width: 100%;
+        background: #F5F5F5;
+
+        .cart_container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            overflow-y: auto;
+
+            .cart_box {
+                display: inline-block;
+                position: relative;
+                width: 30%;
+                height: 48%;
+                background-color: #FFFFFF;
+                margin: 0 0 1rem 2rem;
+                border-radius: 1rem;
+
+                .cart {
+                    width: 92%;
+                    padding: 1rem;
+                    display: flex;
+                    flex-direction: column;
+
+                    .cart_img {
+                        width: 100%;
+                        height: 205px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        img {
+                            height: 205px;
+                            width: 355px;
+                            border-radius: 0.5rem;
+                            object-fit: cover;
+                        }
+                    }
+
+                    .cart_name {
+                        h2 {
+                            margin: 0;
+                            font-size: 18px;
+                            font-weight: bold;
+                            font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+                        }
+                    }
+
+                    .cart_decription {
+                        display: flex;
+                        flex-direction: row;
+                        margin-bottom: 10px;
+
+                        .range {
+                            //border: 1px solid red;
+                            border-radius: 2rem;
+                            background-color: #F5F6FA;
+                            display: flex;
+                            flex-direction: row;
+                            padding: 5px 10px;
+                            align-items: center;
+                            margin-right: 10px;
+
+                            .range_img {
+                                display: flex;
+
+                                img {
+                                    width: 15px;
+                                    margin-right: 10px;
+                                }
+                            }
+
+                            span {
+                                font-size: 0.8rem;
+                            }
+                        }
+                    }
+
+                    .cart_price {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+
+                        .price_btn {
+                            button {
+                                border-radius: 2rem;
+                                border: none;
+                                padding: 0.5rem;
+                                height: 2rem;
+                                width: 5rem;
+                                background-color: #4B60EE;
+                                color: white;
+                                font-size: 11px;
+                                cursor: pointer;
+                            }
+                        }
+
+                        .price_btn:hover {
+                            button {
+                                background-color: #3c4ec7;
+                            }
+                        }
+
+                        .price_value {
+                            display: flex;
+                            flex-direction: row;
+
+                            h3 {
+                                margin: 0 0.3rem 0 0;
+                                font-weight: bold;
+                                font-size: 20px;
+                                display: flex;
+                                align-items: flex-end;
+                            }
+
+                            span {
+                                display: flex;
+                                align-items: flex-end;
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .cart_container::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+#rentcar_dialog {
+    height: 100vh;
+    width: 100vw;
+    border: none;
+    border-radius: 0.5rem;
+
+    #top_dialog {
+        height: 5%;
+        width: 100%;
+        border-bottom: 1px solid #cac8c8;
+
+        .btnClose {
+            display: flex;
+            flex-direction: row-reverse;
+            cursor: pointer;
+
+            .large-icon {
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+    #main_dialog {
+
+        height: calc(94% - 1rem);
+        width: 100%;
+        overflow-y: auto;
+        padding: 1rem 0 0 0;
+
+        .characteristic_dialog {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .img_dialog {
+                height: 30rem;
+                width: 60%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 0.5rem;
+                    object-fit: cover;
+                }
+            }
+
+            .right_dialog {
+                height: 30rem;
+                width: 38%;
+                display: flex;
+                flex-direction: column;
+                //border: 1px solid #cac8c8;
+
+                .name_car {
+                    h3 {
+                        //margin: 0 0 1rem 0;
+                        font-size: 2.5rem;
+                        font-weight: 700;
+                        font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+                    }
+                }
+
+                h6 {
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                }
+
+                .characteristic_car {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    margin-bottom: 1rem;
+
+                    .seat {
+                        display: flex;
+                        flex-direction: row;
+
+                        .seat_img {
+                            margin: auto;
+
+                            img {
+                                width: 32px;
+                                height: 32px;
+                            }
+                        }
+
+                        .seat_content {
+                            display: flex;
+                            flex-direction: column;
+                            margin-left: 1rem;
+                        }
+
+                        p {
+                            font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+                        }
+
+                    }
+                }
+            }
+        }
+
+    }
+
+    .rent_box_bill {
+        height: 30%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.5rem;
+
+        //date-picker
+        .reservation-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            //height: 20%;
+            //  background: #DEE0E1;
+            font-family: "Ubuntu", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+
+
+            .top {
+                display: flex;
+                flex-direction: row;
+                width: 80%;
+                justify-content: space-between;
+            }
+
+            *,
+            *::before,
+            *::after {
+                padding: 0;
+                margin: 0;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                outline: none;
+                user-select: none;
+                -webkit-user-drag: none;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+                box-sizing: border-box;
+                transition: all 0.3s ease-in-out, margin 0.3s ease;
+                -webkit-transition: all 0.3s ease-in-out, margin 0.3s ease;
+            }
+
+            .input-container input[type="date"],
+            .input-container input[type="text"] {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background: transparent;
+                border: none;
+                outline: none;
+                box-shadow: none;
+            }
+
+            /* INPUT CONTAINER */
+            .input-container {
+                display: flex;
+                flex-direction: column;
+                width: auto;
+                height: auto;
+                min-width: 217px;
+                height: 60px;
+                padding: 5px 10px 10px 10px;
+                background: #fff;
+                border-radius: 8px;
+                filter: drop-shadow(0px 0px 3px #000);
+                -webkit-filter: drop-shadow(0px 0px 3px #000);
+                overflow: hidden;
+                cursor: pointer;
+                gap: 10px // &:hover,
+                // &:focus,
+                // &:active {
+                //     transform: scale(1.1);
+                //     -webkit-transform: scale(1.1);
+                // }
+
+                label {
+                    position: relative;
+                    width: 100%;
+                    font-family: "Segoe UI";
+                    font-weight: 600;
+                    font-size: 11px;
+                    letter-spacing: 0.1em;
+                    line-height: 20px;
+                    color: #09f;
+                    margin-left: 2px;
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                input {
+                    position: relative;
+                    align-items: center;
+                    width: auto;
+                    height: auto;
+                    font-family: "Lekton", Arial, sans-serif;
+                    font-weight: 600;
+                    font-size: 22px;
+                    letter-spacing: 0.05em;
+                    line-height: 21px;
+                    text-transform: uppercase;
+                    margin-left: 0px;
+                }
+            }
+
+            /* BUTTON CONTAINER */
+            .button-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: auto;
+                min-width: 197px;
+                height: 65px;
+                padding: 1px;
+                padding-bottom: 2px;
+                background: #09f;
+                border-radius: 8px;
+                filter: drop-shadow(0px 0px 3px #000);
+                -webkit-filter: drop-shadow(0px 0px 3px #000);
+                overflow: hidden;
+                cursor: pointer;
+
+                &:hover,
+                &:focus {
+                    background: #09f;
+                    filter: drop-shadow(0px 0px 3px #09f);
+                    -webkit-filter: drop-shadow(0px 0px 3px #09f);
+                }
+
+                .button {
+                    position: relative;
+                    width: 100%;
+                    min-height: 63px;
+                    height: auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 7px;
+                    background: #fff;
+                    color: #000;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    font-weight: 700;
+
+                    &:hover {
+                        background: #000;
+                        color: #fff;
+                    }
+
+                    &:active {
+                        background: #000;
+                        color: #fff;
+                        background: #09f;
+                        filter: drop-shadow(0px 0px 3px #09f);
+                        -webkit-filter: drop-shadow(0px 0px 3px #09f);
+                    }
+
+                    &.ok {
+                        background: #131313;
+                        color: #fff;
+
+                        &:hover {
+                            background: #131313;
+                            color: #09f;
+                            text-shadow: 0px 0px 10px #09f;
+                            -webkit-text-shadow: 0px 0px 10px #09f;
+                        }
+
+                        &:active {
+                            color: #fff;
+                            background: #09f;
+                            filter: drop-shadow(0px 0px 3px #000);
+                            -webkit-filter: drop-shadow(0px 0px 3px #000);
+                        }
+                    }
+                }
+            }
+
+            /* RESERVATION BOX */
+            .reservation-box {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+                height: auto;
+                padding: 20px;
+                border-radius: 7px;
+                background-color: rgba(255, 255, 255, 1);
+
+                .static {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    float: left;
+                    width: auto;
+                    margin-right: 20px;
+                }
+
+                .flex {
+                    position: relative;
+                    display: flex;
+                    float: left;
+                    flex-direction: table;
+                    align-items: center;
+                    gap: 20px;
+                    width: auto;
+                }
+
+                .top {
+                    display: flex;
+                    flex-direction: row;
+                }
+
+                .bottom {
+                    position: relative;
+                    width: 100%;
+                    text-align: right;
+                }
+
+                .info {
+                    width: auto;
+                    color: #000;
+                    font-weight: 500;
+                    text-decoration: none;
+                    text-align: right;
+                    cursor: pointer;
+                    border-bottom: 2px solid transparent;
+
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        color: #000;
+                        border-bottom: 2px solid #09f;
+                    }
+                }
+            }
+        }
+
+        .line_page {
+            width: 80%;
+            border-bottom: 1px solid #e0e0e0;
+            margin: 1rem auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .bill_form {
+            width: 80%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+
+            .price_car,
+            .service_fee,
+            .insurance_fee,
+            .total_car_fee,
+            .total_bill {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 1rem;
+
+            }
+
+            .price_car_value,
+            .service_fee_value,
+            .insurance_fee_value,
+            .total_car_fee_value,
+            .total_bill_value {
+                font-weight: bold;
+            }
+
+            .total_bill,
+            .total_car_fee {
+                p {
+                    margin: 0;
+                }
+            }
+
+            .line_page {
+                width: 100%;
+                border-bottom: 1px solid #e0e0e0;
+                margin: 1rem auto;
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        .btn_submit {
+            width: 80%;
+            height: 5rem;
+            margin: 0 auto;
+            border-radius: 1.5px;
+
+            button {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+
+
+
+    //date-picker
+
+    #main_dialog::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .detail_description {
+        height: 20%;
+        overflow-y: auto;
+    }
+
+    .detail_description::-webkit-scrollbar {
+        display: none;
+    }
+
+}
