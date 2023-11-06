@@ -45,7 +45,7 @@
           </div>
           <div class="cart_price">
             <div class="price_btn">
-              <button (click)="openRentcarDialog(car)">Detail</button>
+              <button style="margin-right: 5px;" (click)="openRentcarDialog(car)">Detail</button>
               <button (click)="removeCar(car.carId)">Reject</button>
             </div>
             <div class="price_value">
@@ -61,87 +61,87 @@
 
 <dialog id="rentcar_dialog" style="color: #1f1a1c" #appDialog2>
   <div id="top_dialog">
-      <div class="btnClose" (click)="closeRentcarDialog()">
-          <i class="fa-regular fa-circle-xmark large-icon"></i>
-      </div>
+    <div class="btnClose" (click)="closeRentcarDialog()">
+      <i class="fa-regular fa-circle-xmark large-icon"></i>
+    </div>
   </div>
   <div id="main_dialog" *ngIf="selectCar.name">
-      <div class="characteristic_dialog">
-          <div class="img_dialog">
-            <img *ngFor="let img of selectCar.image.urls" [src]="img" alt="" />
-          </div>
-          <div class="right_dialog">
-              <div class="name_car">
-                  <h3>{{selectCar.name}}</h3>
-              </div>
-
-              <h6>Đặc điểm</h6>
-              <div class="characteristic_car">
-                  <div class="seat">
-                      <div class="seat_img">
-                          <img src="../../../../../assets/images/characteristic-car-seat.png" alt="">
-                      </div>
-                      <div class="seat_content">
-                          <p style="font-size: 16px; color: #767676;">Số ghế</p>
-                          <p style="margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.seat}} ghế</p>
-                      </div>
-                  </div>
-
-                  <div class="seat">
-                      <div class="seat_img">
-                          <img src="../../../../../assets/images/characteristic-car-door.png" alt="">
-                      </div>
-                      <div class="seat_content">
-                          <p style="font-size: 16px; color: #767676;">Số cửa</p>
-                          <p style="margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.door}}cửa</p>
-                      </div>
-                  </div>
-
-                  <div class="seat">
-                      <div class="seat_img">
-                          <img src="../../../../../assets/images/characteristic-car.png" alt="">
-                      </div>
-                      <div class="seat_content">
-                          <p style="font-size: 16px; color: #767676;">Mẫu xe</p>
-                          <p style="margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.categoryId.name}}</p>
-                      </div>
-                  </div>
-
-                  <div class="seat">
-                      <div class="seat_img">
-                          <img src="../../../../../assets/images/characteristic-car-oil.png" alt="">
-                      </div>
-                      <div class="seat_content">
-                          <p style="font-size: 16px; color: #767676;">Nhiên liệu</p>
-                          <p style="margin: 0; font-size: 18px;font-weight: 600;">Xăng</p>
-                      </div>
-                  </div>
-              </div>
-              <div class="user">
-                  <div class="user_img">
-                      <img src="../../../../../assets/images/user.png" alt="">
-                  </div>
-                  <div class="user_content">
-                      <p style="font-size: 16px; color: #767676;">Người đăng</p>
-                      <p style="margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.ownerId.name}}</p>
-                      <p>{{selectCar.ownerId.email}}</p>
-                      <p>{{selectCar.ownerId.phone}}</p>
-                      <p>{{selectCar.ownerId.address}}</p>
-                  </div>
-              </div>
-              <h6>Mô tả</h6>
-              <div class="">
-                {{selectCar.description}}
-              </div>
-              <div class="price_btn">
-                <button (click)="confirmCar(selectCar.carId)">Detail</button>
-                <button (click)="removeCar(selectCar.carId)">Reject</button>
-              </div>
-
-
-
-
-          </div>
+    <div class="characteristic_dialog">
+      <div class="img_dialog">
+        <img *ngFor="let img of selectCar.image.urls" [src]="img" alt="" />
       </div>
+      <div class="right_dialog">
+        <div class="name_car">
+          <h3>{{selectCar.name}}</h3>
+        </div>
+
+        <h6>Đặc điểm</h6>
+        <div class="characteristic_car">
+          <div class="seat">
+            <div class="seat_img">
+              <img src="../../../../../assets/images/characteristic-car-seat.png" alt="">
+            </div>
+            <div class="seat_content">
+              <p style="font-size: 16px; color: #767676;">Số ghế</p>
+              <p style="margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.seat}} ghế</p>
+            </div>
+          </div>
+
+          <div class="seat">
+            <div class="seat_img">
+              <img src="../../../../../assets/images/characteristic-car-door.png" alt="">
+            </div>
+            <div class="seat_content">
+              <p style="font-size: 16px; color: #767676;">Số cửa</p>
+              <p style="margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.door}}</p>
+            </div>
+          </div>
+
+          <div class="seat">
+            <div class="seat_img">
+              <img src="../../../../../assets/images/characteristic-car.png" alt="">
+            </div>
+            <div class="seat_content">
+              <p style="font-size: 16px; color: #767676;">Mẫu xe</p>
+              <p style="margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.categoryId.name}}</p>
+            </div>
+          </div>
+
+          <div class="seat">
+            <div class="seat_img">
+              <img src="../../../../../assets/images/characteristic-car-oil.png" alt="">
+            </div>
+            <div class="seat_content">
+              <p style="font-size: 16px; color: #767676;">Nhiên liệu</p>
+              <p style="margin: 0; font-size: 18px;font-weight: 600;">Xăng</p>
+            </div>
+          </div>
+        </div>
+        <div class="user">
+          <div class="user_img">
+            <img src="../../../../../assets/images/user.png" alt="">
+          </div>
+          <div class="user_content">
+            <p style="font-size: 16px;">Chủ xe</p>
+            <p style=" margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.ownerId.name}}</p>
+            <p>{{selectCar.ownerId.email}}</p>
+            <p>{{selectCar.ownerId.phone}}</p>
+            <p>{{selectCar.ownerId.address}}</p>
+          </div>
+        </div>
+        <h6>Mô tả</h6>
+        <div class="detail_description">
+          <p>{{selectCar.description}}</p>
+        </div>
+        <div class="price_btn">
+          <button style="margin-right: 5px;" (click)="confirmCar(selectCar.carId)">Submit</button>
+          <button (click)="removeCar(selectCar.carId)">Reject</button>
+        </div>
+
+
+
+
+      </div>
+    </div>
   </div>
 </dialog>

@@ -120,34 +120,89 @@
                     </div>
                 </div>
                 <h6>Mô tả</h6>
-                <div class=""></div>
+                <div class="detail_description">
+                    <p>{{selectCar.description}}</p>
+                </div>
 
 
                 <!-- date-picker -->
-                <div class="reservation-box">
-                    <div class="top">
-                        <div class="static">
-                            <div class="input-container">
-                                <label for="date-checkin">Nhận xe</label>
-                                <!-- <input type="date" id="date-checkin" class="date-field" name="date-from"> -->
-                                <input #dateCheckin type="date" id="date-checkin" class="date-field" name="date-from">
+                <div class="rent_box_bill">
+                    <div class="reservation-box">
+                        <div class="top">
+                            <div class="static">
+                                <div class="input-container">
+                                    <label for="date-checkin">Nhận xe</label>
+                                    <!-- <input type="date" id="date-checkin" class="date-field" name="date-from"> -->
+                                    <input #dateCheckin type="date" id="date-checkin" class="date-field"
+                                        name="date-from">
 
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex">
-                            <div class="input-container">
-                                <label for="date-checkout">Trả xe</label>
-                                <!-- <input type="date" id="date-checkout" class="date-field" name=""> -->
-                                <input #dateCheckout type="date" id="date-checkout" class="date-field" name="">
+                            <div class="flex">
+                                <div class="input-container">
+                                    <label for="date-checkout">Trả xe</label>
+                                    <!-- <input type="date" id="date-checkout" class="date-field" name=""> -->
+                                    <input #dateCheckout type="date" id="date-checkout" class="date-field" name="">
 
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="line_page"></div>
+                    <div class="bill_form">
+                        <div class="price_car">
+                            <div class="price_car_title">
+                                <p>Đơn giá thuê</p>
+                            </div>
+                            <div class="price_car_value">
+                                <p>{{selectCar.price}}$/Day</p>
+                            </div>
+                        </div>
+                        <div class="service_fee">
+                            <div class="service_fee_title">
+                                <p>Phí dịch vụ</p>
+                            </div>
+                            <div class="service_fee_value">
+                                <p>79000$/Day</p>
+                            </div>
+                        </div>
+                        <div class="insurance_fee">
+                            <div class="insurance_fee_title">
+                                <p>Phi bảo hiểm</p>
+                            </div>
+                            <div class="insurance_fee_value">
+                                <p>79000$/Day</p>
+                            </div>
+                        </div>
+                        <div class="line_page"></div>
+                        <div class="total_car_fee">
+                            <div class="total_car_fee_title">
+                                <p>Tổng phí thuê xe</p>
+                            </div>
+                            <div class="total_car_fee_value">
+                                <p>{{selectedDays}}</p>
+                            </div>
+                        </div>
+                        <div class="line_page"></div>
+                        <div class="total_bill">
+                            <div class="total_bill_title">
+                                <p>Tổng cộng</p>
+                            </div>
+                            <div class="total_bill_value">
+                                <p>{{selectedDays}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn_submit">
+                        <button (click)="submit(selectCar)">
+                            Rent
+                        </button>
+                    </div>
+
                 </div>
                 <!-- date-picker -->
-                <button (click)="submit(selectCar)">
-                    Rent
-                </button>
+
             </div>
         </div>
     </div>
