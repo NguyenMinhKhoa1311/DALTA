@@ -43,6 +43,16 @@ export class HistoryComponent {
         this.reservations = reservationList;
       }
     });
+    this.payment$.subscribe((payment) => {
+      if (payment != null && payment != undefined) {
+        console.log(payment);
+      }
+    });
+   }
+
+   payment(reservationId: string){
+      this.store.dispatch(PaymentActions.get({paymentId: reservationId}));
+
    }
 
 
