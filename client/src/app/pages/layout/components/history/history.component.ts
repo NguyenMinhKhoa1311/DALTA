@@ -13,24 +13,22 @@ import { Reservation } from 'src/app/models/reservation.model';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss']
+  styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent {
-
-  user: User = <User>{}
+  user: User = <User>{};
   user$ = this.store.select('user', 'user');
   reservation$ = this.store.select('reservation', 'reservationList');
   payment$ = this.store.select('payment', 'payment');
-  reservations:Reservation[] = [];
+  reservations: Reservation[] = [];
 
   constructor(
     private store: Store<{
-      user: UserState,
-      reservation: ReservationState,
-      payment: PaymentState
+      user: UserState;
+      reservation: ReservationState;
+      payment: PaymentState;
     }>
   ) {
-
     this.user$.subscribe((user) => {
       if (user != null && user != undefined) {
         console.log(user);
@@ -48,12 +46,9 @@ export class HistoryComponent {
         console.log(payment);
       }
     });
-   }
+  }
 
-   payment(reservationId: string){
-      // this.store.dispatch(PaymentActions.get({paymentId: reservationId}));
-
-   }
-
-
+  payment(reservationId: string) {
+    // this.store.dispatch(PaymentActions.get({paymentId: reservationId}));
+  }
 }

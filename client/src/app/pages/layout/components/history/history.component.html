@@ -6,8 +6,8 @@
                     <img *ngFor="let img of reservation.carId.img" [src]="img" alt="" />
                   </div> -->
                 <h2>Tên xe: {{reservation.carId.name}}</h2>
-                <h2>Ngày bắt đầu thuê: {{reservation.startDate}}</h2>
-                <h2>Ngày kết thúc thuê: {{reservation.endDate}}</h2>
+                <h2>Ngày bắt đầu thuê: {{ reservation.startDate | date: 'dd/MM/yyyy' }}</h2>
+                <h2>Ngày kết thúc thuê: {{reservation.endDate | date: 'dd/MM/yyyy'}}</h2>
                 <h2 *ngIf="reservation.status == false">Trạng thái: Chưa thanh toán</h2>
                 <h2 *ngIf="reservation.status == true">Trạng thái: Đã thanh toán</h2>
                 <h2>Tổng tiền: {{reservation.total}}</h2>
