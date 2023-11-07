@@ -1,47 +1,35 @@
-<div id="main_home">
-    <div class="cart_container">
-        <div class="cart_box" *ngFor="let reservation of reservations">
-            <div class="cart">
-                <div class="cart_img">
-                    <!-- <img *ngFor="let img of reservation.image.urls" [src]="img" alt="" /> -->
-                </div>
-                <div class="cart_name">
-                    <h2>{{reservation.startDate}}</h2>
-                    <h2>{{reservation.endDate}}</h2>
-                    <h2>{{reservation.status}}</h2>
-                    <h2>{{reservation.total}}</h2>
-                </div>
-                <div class="cart_decription">
+<div id="history_container">
+    <div class="history_main">
+        <div class="history_box" *ngFor="let reservation of reservations">
+            <div class="history_content">
+                <!-- <div class="img_dialog">
+                    <img *ngFor="let img of reservation.carId.img" [src]="img" alt="" />
+                  </div> -->
+                <h2>Tên xe: {{reservation.carId.name}}</h2>
+                <h2>Ngày bắt đầu thuê: {{ reservation.startDate | date: 'dd/MM/yyyy' }}</h2>
+                <h2>Ngày kết thúc thuê: {{reservation.endDate | date: 'dd/MM/yyyy'}}</h2>
+                <h2 *ngIf="reservation.status == false">Trạng thái: Chưa thanh toán</h2>
+                <h2 *ngIf="reservation.status == true">Trạng thái: Đã thanh toán</h2>
+                <h2>Tổng tiền: {{reservation.total}}</h2>
+                <div class="price_btn">
+                    <button style="margin-right: 5px;">Submit</button>
 
-                    <div class="range">
-                        <div class="range_img">
-                            <img src="../../../../../assets/images/car-icon.png" alt="">
-                        </div>
-                        <!-- <span>{{reservation.categoryId.name}}</span> -->
-                    </div>
-                    <div class="range">
-                        <div class="range_img">
-                            <img src="../../../../../assets/images/car-door.png" alt="">
-                        </div>
-                        <!-- <span>{{car.door}}</span> -->
-                    </div>
-                    <div class="range">
-                        <div class="range_img">
-                            <img src="../../../../../assets/images/seat.png" alt="">
-                        </div>
-                        <!-- <span>{{car.seat}}</span> -->
-                    </div> <!-- <h3>${{car.price}}</h3>
-                    </div>
-                    <div class="cart_price">
-                        <div class="price_btn">
-                            <button>Rent Now</button>
-                        </div>
-                        <div class="price_value">
-                            -->
-                    <span>/DAY</span>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- 
+<div class="cart_box" *ngFor="let reservation of reservations">
+    <div class="cart">
+        <div class="cart_name">
+            <h2>{{reservation.carId.name}}</h2>
+            <h2>{{reservation.startDate}}</h2>
+            <h2>{{reservation.endDate}}</h2>
+            <h2>{{reservation.status}}</h2>
+            <h2>{{reservation.total}}</h2>
+        </div>
+    </div>
+</div> -->
