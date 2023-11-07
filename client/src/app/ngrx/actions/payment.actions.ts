@@ -24,3 +24,7 @@ export const getFailure = createAction(
     '[payment] Get Failure',
     props<{ errorMessage: string }>()
 );
+
+export const reset = createAction(
+    '[payment] Reset',
+);

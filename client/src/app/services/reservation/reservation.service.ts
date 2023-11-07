@@ -19,6 +19,8 @@ export class ReservationService {
   }
 
   getOne(reservationId: string){
+    console.log(reservationId);
+    
     return this.httpClient.get<Reservation>(`http://localhost:3000/reservation/byReservationId?id=${reservationId}`);
   }
 }

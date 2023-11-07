@@ -12,13 +12,29 @@
                 <h2 *ngIf="reservation.status == true">Trạng thái: Đã thanh toán</h2>
                 <h2>Tổng tiền: {{reservation.total}}</h2>
                 <div class="price_btn">
-                    <button style="margin-right: 5px;">Submit</button>
+                    <button style="margin-right: 5px;" (click)="openPaymentDialog(reservation)">Submit</button>
 
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<dialog id="payment_dialog" style="color: #1f1a1c" #appDialog3>
+    <div id="top_dialog">
+        <p>Thanh toán</p>
+    </div>
+    <div id="main_dialog" *ngIf="isSelectedReservation">
+        <div>
+            <p>Reservation ID: {{paymentData.reservationId}}</p>
+            <p>Customer ID: {{paymentData.customerId}}</p>
+            <p>Total: {{selectedReservation.total}}</p>
+        </div>
+        <button (click)="payForReservation()">Thanh toán</button>
+        <button (click)="closePaymentDialog()">Close</button>
+    </div>
+</dialog>
 
 
 <!-- 

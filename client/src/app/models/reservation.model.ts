@@ -5,7 +5,7 @@ export interface Reservation {
     _id: string;
     reservationId: string;
     carId: Car;
-    customerID: User;
+    customerId: User;
     startDate: string;
     endDate: string;
     status: boolean;

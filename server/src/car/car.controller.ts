@@ -54,8 +54,6 @@ export class CarController {
   @Get("byCarId")
   async findOne(@Query('id') id: string) {
     try{
-      console.log(id);
-      id="59G-13112"
       const car = await this.carService.findOne(id);
       return car;
     }

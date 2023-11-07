@@ -45,3 +45,6 @@ export const getOneFailure = createAction(
     '[reservation] Get One Failure',
     props<{ errorMessage: string }>()
 );
+export const reset = createAction(
+    '[reservation] Reset',
+);

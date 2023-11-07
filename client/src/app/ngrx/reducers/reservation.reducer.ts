@@ -137,4 +137,31 @@ export const reservationReducer = createReducer(
         };
         return newState;
     }),
+    on(ReservationActions.reset, (state, action) => {
+        console.log(action.type);
+        
+        let newState = {
+            ...state,
+            isGetLoading: false,
+            isGetSuccess: false,
+            getErrMess: '',
+            reservationList: [],
+            isCreateLoading: false,
+            isCreateSuccess: false,
+            createErrMess: '',
+            reservation: <Reservation>{},
+            isRemoveLoading: false,
+            isRemoveSuccess: false,
+            removeErrMess: '',
+            isUpdateLoading: false,
+            isUpdateSuccess: false,
+            updateErrMess: '',
+            isGetOneLoading: false,
+            isGetOneSuccess: false,
+            getOneErrMess: '',
+        };
+        return newState;
+
+    }),
+
 )

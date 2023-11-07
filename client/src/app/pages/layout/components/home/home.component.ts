@@ -29,13 +29,12 @@ import { PaymentState } from 'src/app/ngrx/states/payment.state';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   carList: Car[] = [];
   user: User = <User>{};
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
   isCreateReservationSuccess$ = this.store.select('reservation', 'isCreateSuccess');
-  isGetReservationSuccess$ = this.store.select('reservation', 'isGetOneSuccess');
   reservation_id: string = '';
 
   constructor(
@@ -50,26 +49,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ) {
     this.isCreateReservationSuccess$.subscribe((val) => {
       if (val ) {
-          console.log(this.reservationData.reservationId);
-          this.store.dispatch(ReservationActions.getOne({reservationId: this.reservationData.reservationId}));
+        this.openPaymentDialog();
       }
     });
-    this.store.select('reservation').subscribe((val) => {
-      if (val != null && val != undefined) {
-        if (val.isGetOneSuccess) {
-          this.reservation_id = val.reservation._id;
-          alert('Đặt xe thành công. Vui lòng thanh toán để hoàn tất đặt xe');
-          this.paymentData = {
-            paymentId: '1',
-            dayPayment: '1',
-            reservationId: val.reservation._id,
-            customerId: this.user._id,
-          };
-          this.closeRentcarDialog();
-          this.openPaymentDialog();
-        }
-      }
-    });
+  }
+  ngOnDestroy(): void {
+    this.store.dispatch(ReservationActions.reset());
   }
    generateRandomId(length: number): string {
     const chars = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -166,6 +151,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   closePaymentDialog() {
     this.dialog3.nativeElement.close();
     this.cdr3.detectChanges();
+    this.dialog2.nativeElement.close();
+    this.cdr2.detectChanges();
   }
 
   @ViewChild('appDialog2', { static: true })
@@ -218,6 +205,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.selectCar = car;
     this.dialog2.nativeElement.showModal();
     this.cdr2.detectChanges();
+    const randomId = this.generateRandomId(10);
+    this.reservationData = {
+      reservationId: car._id + this.user._id + randomId,
+      carId: car._id,
+      customerId: this.user._id,
+      startDate: "",
+      endDate: "",
+      status: false,
+      total: 0,
+    };
   }
   closeRentcarDialog() {
     this.dialog2.nativeElement.close();
@@ -254,25 +251,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   };
 
 
-  paymentData: any = {
-    paymentId: '1',
-    dayPayment: '1',
-    reservationId: '1',
-    customerId: '1',
-  };
 
-  payForReservation() {
-    const date = new Date();
-    const dateString = date.toISOString();
-
-    this.paymentData = {
-      paymentId: this.reservationData.reservationId + '-' + dateString,
-      dayPayment: dateString,
-      reservationId: this.reservation_id,
-      customerId: this.user._id,
-    };
-    this.store.dispatch(PaymentActions.create({ payment: this.paymentData }));
-  }
 
 
   selectedDays: number = 0;
@@ -327,7 +306,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         status: false,
         total: car.price * daysDiff,
       };
-      console.log(this.reservationData);
       this.store.dispatch(
         ReservationActions.create({ reservation: this.reservationData })
       );

@@ -26,21 +26,21 @@ export class ReservationsService {
   }
 
   async findAll() {
-    try{
+    try {
       const reservations = await this.reservationModel.find()
-      .populate('carId','name', this.carModel)
-      .populate('customerId','name', this.userModel)    
-      .exec();
+        .populate('carId', 'name', this.carModel)
+        .populate('customerId', 'name ', this.userModel)
+        .select('carId.image.urls')
+        .exec();
       return reservations;
-    }
-    catch(err){
+    } catch (err) {
       throw new HttpException(err.message, err.status);
     }
   }
   findReservationsByCustomerId(customerId: string){
     try{
       const reservations = this.reservationModel.find({customerId: customerId})
-      .populate('carId','name', this.carModel)
+      .populate('carId','name image', this.carModel)
       .populate('customerId','name', this.userModel)    
       .exec();
       return reservations;
@@ -53,7 +53,7 @@ export class ReservationsService {
   async findOne(id: string) {
     try{
       const reservation = await this.reservationModel.findOne({reservationId: id})
-      .populate('carId','name', this.carModel)
+      .populate('carId','name image', this.carModel)
       .populate('customerId','name', this.userModel)      
       .exec();
       return reservation;

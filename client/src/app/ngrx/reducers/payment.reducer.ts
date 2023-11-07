@@ -69,4 +69,16 @@ export const paymentReducer = createReducer(
         };
         return newState;
     }),
+    on(PaymentActions.reset, (state, action) => {
+        let newState: PaymentState = {
+            ...state,
+            isgetting: false,
+            isGetSuccess: false,
+            getErrorMessage: '',
+            isLoading: false,
+            isSuccessful: false,
+            createErrorMessage: '',
+        };
+        return newState;
+    }),
 )

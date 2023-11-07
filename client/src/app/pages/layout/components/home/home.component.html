@@ -210,17 +210,12 @@
 
 <dialog id="payment_dialog" style="color: #1f1a1c" #appDialog3>
     <div id="top_dialog">
-        <div class="btnClose" (click)="closePaymentDialog()">
-            <i class="fa-regular fa-circle-xmark large-icon"></i>
-        </div>
+            Thông báo
     </div>
     <div id="main_dialog">
         <div>
-            <p>Reservation ID: {{paymentData.reservationId}}</p>
-            <p>Customer ID: {{paymentData.customerId}}</p>
-            <p>Total: {{reservationData.total}}</p>
+            <p>Vui lòng sang trang history để thanh toán để hoàn tất đặt xe</p>
         </div>
-        <button (click)="payForReservation()">Close</button>
         <button (click)="closePaymentDialog()">Close</button>
     </div>
 </dialog>
