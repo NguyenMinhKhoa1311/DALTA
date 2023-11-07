@@ -19,6 +19,9 @@ export const initialState: ReservationState = {
     isUpdateLoading: false,
     isUpdateSuccess: false,
     updateErrMess: '',
+    isGetOneLoading: false,
+    isGetOneSuccess: false,
+    getOneErrMess: '',
 
 };
 
@@ -94,6 +97,43 @@ export const reservationReducer = createReducer(
             isGetLoading: false,
             isGetSuccess: false,
             getErrMess: action.errorMessage,
+        };
+        return newState;
+    }),
+    on(ReservationActions.getOne, (state, action) => {
+        console.log(action.type);
+        
+        let newState = {
+            ...state,
+            isGetOneLoading: true,
+            isGetOneSuccess: false,
+            getOneErrMess: '',
+        };
+        return newState;
+
+    }),
+    on(ReservationActions.getOneSuccess, (state, action) => {
+        console.log(action.type);
+        
+        let newState = {
+            ...state,
+            isGetOneLoading: false,
+            isGetOneSuccess: true,
+            getOneErrMess: '',
+            reservation: action.reservation,
+        };
+        return newState;
+
+    
+    }),
+    on(ReservationActions.getOneFailure, (state, action) => {
+        console.log(action.errorMessage);
+        
+        let newState = {
+            ...state,
+            isGetOneLoading: false,
+            isGetOneSuccess: false,
+            getOneErrMess: action.errorMessage,
         };
         return newState;
     }),

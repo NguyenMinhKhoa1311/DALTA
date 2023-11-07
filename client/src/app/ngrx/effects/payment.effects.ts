@@ -31,7 +31,7 @@ export class PaymentEffects {
         this.actions$.pipe(
             ofType(PaymentActions.get),
             exhaustMap((action) =>
-                this.paymentService.get(action.paymentId).pipe(
+                this.paymentService.get(action.reservationId).pipe(
                     map((item) => {
                         if (item != undefined || item != null) {
                             return PaymentActions.getSuccess({ payment: item });

@@ -15,12 +15,14 @@ import { Car } from 'src/app/models/car.model';
 import * as CarAction from 'src/app/ngrx/actions/car.actions';
 import * as UserActions from 'src/app/ngrx/actions/user.actions';
 import * as ReservationActions from 'src/app/ngrx/actions/reservation.actions';
+import * as PaymentActions from 'src/app/ngrx/actions/payment.actions';
 import { AuthState } from 'src/app/ngrx/states/auth.state';
 import { CarState } from 'src/app/ngrx/states/car.state';
 import { UserState } from 'src/app/ngrx/states/user.state';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/models/user.model';
 import { ReservationState } from 'src/app/ngrx/states/reservation.state';
+import { PaymentState } from 'src/app/ngrx/states/payment.state';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +34,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   user: User = <User>{};
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
+  isCreateReservationSuccess$ = this.store.select('reservation', 'isCreateSuccess');
+  isGetReservationSuccess$ = this.store.select('reservation', 'isGetOneSuccess');
+  reservation_id: string = '';
 
   constructor(
     private store: Store<{
@@ -39,19 +44,44 @@ export class HomeComponent implements OnInit, AfterViewInit {
       auth: AuthState;
       user: UserState;
       reservation: ReservationState;
+      payment: PaymentState;
     }>,
     public dialog: MatDialog
   ) {
+    this.isCreateReservationSuccess$.subscribe((val) => {
+      if (val ) {
+          console.log(this.reservationData.reservationId);
+          this.store.dispatch(ReservationActions.getOne({reservationId: this.reservationData.reservationId}));
+      }
+    });
     this.store.select('reservation').subscribe((val) => {
       if (val != null && val != undefined) {
-        if (val.isCreateSuccess) {
-          alert('Đặt xe thành công');
+        if (val.isGetOneSuccess) {
+          this.reservation_id = val.reservation._id;
+          alert('Đặt xe thành công. Vui lòng thanh toán để hoàn tất đặt xe');
+          this.paymentData = {
+            paymentId: '1',
+            dayPayment: '1',
+            reservationId: val.reservation._id,
+            customerId: this.user._id,
+          };
           this.closeRentcarDialog();
           this.openPaymentDialog();
         }
       }
     });
   }
+   generateRandomId(length: number): string {
+    const chars = "0123456789abcdefghijklmnopqrstuvwxyz";
+    const result = new Array(length);
+    for (let i = 0; i < length; i++) {
+      result[i] = chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result.join("");
+  }
+  
+
+
 
   ngOnInit(): void {
     this.userFirebase$.subscribe((userFirebase) => {
@@ -223,6 +253,28 @@ export class HomeComponent implements OnInit, AfterViewInit {
     total: 0,
   };
 
+
+  paymentData: any = {
+    paymentId: '1',
+    dayPayment: '1',
+    reservationId: '1',
+    customerId: '1',
+  };
+
+  payForReservation() {
+    const date = new Date();
+    const dateString = date.toISOString();
+
+    this.paymentData = {
+      paymentId: this.reservationData.reservationId + '-' + dateString,
+      dayPayment: dateString,
+      reservationId: this.reservation_id,
+      customerId: this.user._id,
+    };
+    this.store.dispatch(PaymentActions.create({ payment: this.paymentData }));
+  }
+
+
   selectedDays: number = 0;
 
   updateTotalDays() {
@@ -242,6 +294,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.selectedDays = daysDiff; // Cập nhật giá trị tổng ngày
     }
   }
+
 
   submit(car: Car) {
     const dateCheckin = document.getElementById(
@@ -264,9 +317,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // 1000 milliseconds, 3600 seconds, 24 hours
       this.selectedDays = daysDiff;
       this.updateTotalDays();
-
+      const string = this.generateRandomId(10);
       this.reservationData = {
-        reservationId: car.carId + '-' + this.user.uid,
+        reservationId: car._id + this.user._id + string,
         carId: car._id,
         customerId: this.user._id,
         startDate: checkinDate.toUTCString(),

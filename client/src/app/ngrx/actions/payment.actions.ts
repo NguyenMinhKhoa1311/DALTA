@@ -14,7 +14,7 @@ export const createFailure = createAction(
 );
 export const get = createAction(
     '[payment] Get',
-    props<{ paymentId: string }>()
+    props<{ reservationId: string }>()
 );
 export const getSuccess = createAction(
     '[payment] Get Success',

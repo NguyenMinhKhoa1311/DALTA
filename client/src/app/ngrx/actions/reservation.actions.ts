@@ -30,3 +30,18 @@ export const getFailure = createAction(
     '[reservation] Get Failure',
     props<{ errorMessage: string }>()
 );
+
+export const getOne = createAction(
+    '[reservation] Get One',
+    props<{ reservationId: string }>()
+);
+
+export const getOneSuccess = createAction(
+    '[reservation] Get One Success',
+    props<{ reservation: Reservation }>()
+);
+
+export const getOneFailure = createAction(
+    '[reservation] Get One Failure',
+    props<{ errorMessage: string }>()
+);

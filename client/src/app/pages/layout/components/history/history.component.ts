@@ -51,7 +51,7 @@ export class HistoryComponent {
    }
 
    payment(reservationId: string){
-      this.store.dispatch(PaymentActions.get({paymentId: reservationId}));
+      // this.store.dispatch(PaymentActions.get({paymentId: reservationId}));
 
    }
 

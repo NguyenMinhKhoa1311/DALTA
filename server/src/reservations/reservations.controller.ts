@@ -29,7 +29,7 @@ export class ReservationsController {
     }
   }
 
-  @Get('')
+  @Get('byCustomerId')
   async findReservationsByCustomerId(@Query('customerId') customerId: string) {
     try {
       const reservations = await this.reservationsService.findReservationsByCustomerId(customerId);
@@ -40,7 +40,7 @@ export class ReservationsController {
     }
   }
 
-  @Get('')
+  @Get('byReservationId')
   async findOne(@Query('id') id: string) {
     try {
       const reservation = await this.reservationsService.findOne(id);

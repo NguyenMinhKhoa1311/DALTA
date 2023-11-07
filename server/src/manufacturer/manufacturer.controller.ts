@@ -32,6 +32,7 @@ export class ManufacturerController {
   @Get()
   async findOne(@Query('id') id: string) {
     try{
+      console.log(id);
       const manufacturer = await this.manufacturerService.findOne(id);
       return manufacturer;
     }

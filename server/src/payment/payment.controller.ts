@@ -2,15 +2,21 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@
 import { PaymentService } from './payment.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 import { UpdatePaymentDto } from './dto/update-payment.dto';
+import { ReservationsService } from 'src/reservations/reservations.service';
 
 @Controller('payment')
 export class PaymentController {
-  constructor(private readonly paymentService: PaymentService) {}
+  constructor(
+    private readonly paymentService: PaymentService,
+    private readonly reservationService: ReservationsService,
+    
+    ) {}
 
   @Post('create')
   async create(@Body() createPaymentDto: CreatePaymentDto) {
       try{
         const newPayment = await this.paymentService.create(createPaymentDto);
+        await this.reservationService.updateStatus(newPayment.reservationId);
         return newPayment;
       }
       catch(err){

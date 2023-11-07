@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@
 import { CarService } from './car.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
-import { log } from 'console';
 import { ManufacturerService } from 'src/manufacturer/manufacturer.service';
 import { CategoryService } from 'src/category/category.service';
 
@@ -42,6 +41,7 @@ export class CarController {
   @Get()
   async findByIsConfirmed(@Query('isConfirmed') isConfirmed: boolean) {
     try{
+      console.log(isConfirmed);
       const cars = await this.carService.findByIsConfirmed(isConfirmed);
       return cars;
     }
@@ -49,11 +49,13 @@ export class CarController {
       throw err;
     }
   }
-  
 
-  @Get()
+
+  @Get("byCarId")
   async findOne(@Query('id') id: string) {
     try{
+      console.log(id);
+      id="59G-13112"
       const car = await this.carService.findOne(id);
       return car;
     }
@@ -61,6 +63,9 @@ export class CarController {
       throw err;
     }
   }
+  
+
+
 
   @Put('update')
   async update(@Query('id') id: string, @Body() updateCarDto: UpdateCarDto) {

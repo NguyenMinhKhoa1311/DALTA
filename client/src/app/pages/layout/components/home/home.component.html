@@ -215,7 +215,12 @@
         </div>
     </div>
     <div id="main_dialog">
-        <h1>This is my other dialog!</h1>
+        <div>
+            <p>Reservation ID: {{paymentData.reservationId}}</p>
+            <p>Customer ID: {{paymentData.customerId}}</p>
+            <p>Total: {{reservationData.total}}</p>
+        </div>
+        <button (click)="payForReservation()">Close</button>
         <button (click)="closePaymentDialog()">Close</button>
     </div>
 </dialog>

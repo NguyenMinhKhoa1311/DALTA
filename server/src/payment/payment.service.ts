@@ -40,7 +40,7 @@ export class PaymentService {
 
   async findOne(id: string) {
     try{
-      const payment = await this.paymentModel.findOne({paymentId: id})
+      const payment = await this.paymentModel.findOne({reservationId: id})
       .populate('reservationId','total', this.reservationModel)
       .populate('customerId','name', this.userModel)
       .exec();
