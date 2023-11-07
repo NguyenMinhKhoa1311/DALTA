@@ -42,4 +42,20 @@ export class ReservationEffects{
                 )
             )));
 
+            getOne$ = createEffect(() =>
+            this.actions$.pipe(
+                ofType(ReservationActions.getOne),
+                exhaustMap((action) =>
+                    this.reservationService.getOne(action.reservationId).pipe(
+                        map((item) => {
+                            if(item != undefined || item != null){
+                                return ReservationActions.getOneSuccess({reservation: item});
+                            }else{
+                                return ReservationActions.getOneFailure({errorMessage: 'Reservation is undefined or null'});
+                            }
+                        }),
+                        catchError((error) => of(ReservationActions.getOneFailure({errorMessage: error})))
+                    )
+                )));
+
 }

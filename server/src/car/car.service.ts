@@ -63,6 +63,7 @@ export class CarService {
 
   async findOne(id: string) {
     try{
+      console.log(id);
       const car = await this.carModel.findOne({carId: id})
       .populate('image','urls', this.storageModel)
       .populate('manufacturerId','name', this.manufacturerModel)

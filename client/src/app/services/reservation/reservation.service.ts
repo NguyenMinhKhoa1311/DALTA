@@ -15,6 +15,10 @@ export class ReservationService {
     return this.httpClient.post<Reservation>('http://localhost:3000/reservation/create', reservation);
   }
   get(customerId: string){
-    return this.httpClient.get<Reservation[]>(`http://localhost:3000/reservation?customerId=${customerId}`);
+    return this.httpClient.get<Reservation[]>(`http://localhost:3000/reservation/byCustomerId?customerId=${customerId}`);
+  }
+
+  getOne(reservationId: string){
+    return this.httpClient.get<Reservation>(`http://localhost:3000/reservation/byReservationId?id${reservationId}`);
   }
 }

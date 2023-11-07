@@ -15,4 +15,7 @@ export interface ReservationState {
     isUpdateLoading: boolean;
     isUpdateSuccess: boolean;
     updateErrMess: string;
+    isGetOneLoading: boolean;
+    isGetOneSuccess: boolean;
+    getOneErrMess: string;    
     }
