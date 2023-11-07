@@ -21,6 +21,26 @@
 
             .history_content {
                 margin: 1rem;
+
+                .price_btn {
+                    button {
+                        border-radius: 2rem;
+                        border: none;
+                        padding: 0.5rem;
+                        height: 2rem;
+                        width: 5rem;
+                        background-color: #4B60EE;
+                        color: white;
+                        font-size: 11px;
+                        cursor: pointer;
+                    }
+                }
+
+                .price_btn:hover {
+                    button {
+                        background-color: #3c4ec7;
+                    }
+                }
             }
         }
 

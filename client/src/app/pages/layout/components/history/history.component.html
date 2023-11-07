@@ -11,6 +11,10 @@
                 <h2 *ngIf="reservation.status == false">Trạng thái: Chưa thanh toán</h2>
                 <h2 *ngIf="reservation.status == true">Trạng thái: Đã thanh toán</h2>
                 <h2>Tổng tiền: {{reservation.total}}</h2>
+                <div class="price_btn">
+                    <button style="margin-right: 5px;">Submit</button>
+
+                </div>
             </div>
         </div>
     </div>
