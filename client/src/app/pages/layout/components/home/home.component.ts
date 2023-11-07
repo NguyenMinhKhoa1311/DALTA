@@ -323,7 +323,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         carId: car._id,
         customerId: this.user._id,
         startDate: checkinDate.toUTCString(),
-        endDate: checkinDate.toUTCString(),
+        endDate: checkoutDate.toUTCString(),
         status: false,
         total: car.price * daysDiff,
       };
