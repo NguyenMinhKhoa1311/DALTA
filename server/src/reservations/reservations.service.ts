@@ -30,7 +30,6 @@ export class ReservationsService {
       const reservations = await this.reservationModel.find()
         .populate('carId', 'name', this.carModel)
         .populate('customerId', 'name ', this.userModel)
-        .select('carId.image.urls')
         .exec();
       return reservations;
     } catch (err) {

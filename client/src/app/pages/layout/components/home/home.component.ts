@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     public dialog: MatDialog
   ) {
     this.isCreateReservationSuccess$.subscribe((val) => {
-      if (val ) {
+      if (val) {
         this.openPaymentDialog();
       }
     });
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.store.dispatch(ReservationActions.reset());
   }
-   generateRandomId(length: number): string {
+  generateRandomId(length: number): string {
     const chars = "0123456789abcdefghijklmnopqrstuvwxyz";
     const result = new Array(length);
     for (let i = 0; i < length; i++) {
@@ -64,7 +64,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     return result.join("");
   }
-  
+
+
 
 
 
@@ -72,13 +73,31 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.userFirebase$.subscribe((userFirebase) => {
       if (userFirebase != null && userFirebase != undefined) {
         console.log(userFirebase);
+
       }
     });
     this.user$.subscribe((user) => {
-      if (user != null && user != undefined) {
+      if (user._id != null && user._id != undefined) {
         console.log(user);
-        this.store.dispatch(UserActions.storedUser(user));
         this.user = user;
+        const userAsJson = JSON.stringify(user);
+
+        // Lưu đối tượng userAsJson vào sessionStorage
+        sessionStorage.setItem('user', userAsJson);
+        console.log("lưu vào sessionStorage");
+        
+      }
+      else {
+        console.log("lấy từ sessionStorage");
+        
+        // Lấy đối tượng user từ sessionStorage
+        const userAsJson = sessionStorage.getItem('user');
+        console.log(userAsJson);
+        
+
+        // Chuyển đổi chuỗi sang đối tượng user
+         this.user = JSON.parse(userAsJson||"");
+         this.store.dispatch(UserActions.storedUser(this.user));
       }
     });
     this.store.select('car').subscribe((val) => {
