@@ -122,10 +122,9 @@
             <img src="../../../../../assets/images/user.png" alt="">
           </div>
           <div class="user_content">
-            <p style="font-size: 16px;">Chủ xe</p>
-            <p style=" margin: 0; font-size: 18px;font-weight: 600;">{{selectCar.ownerId.name}}</p>
-            <p>{{selectCar.ownerId.email}}</p>
-            <p>{{selectCar.ownerId.phone}}</p>
+            <p>Chủ xe: {{selectCar.ownerId.name}}</p>
+            <p>Gmail: {{selectCar.ownerId.email}}</p>
+            <p>Số điện thoại: {{selectCar.ownerId.phone}}</p>
             <p>{{selectCar.ownerId.address}}</p>
           </div>
         </div>
@@ -137,10 +136,6 @@
           <button style="margin-right: 5px;" (click)="confirmCar(selectCar.carId)">Submit</button>
           <button (click)="removeCar(selectCar.carId)">Reject</button>
         </div>
-
-
-
-
       </div>
     </div>
   </div>
