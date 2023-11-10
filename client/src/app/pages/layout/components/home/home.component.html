@@ -168,7 +168,7 @@
                         </div>
                         <div class="insurance_fee">
                             <div class="insurance_fee_title">
-                                <p>Phi bảo hiểm</p>
+                                <p>Phí bảo hiểm</p>
                             </div>
                             <div class="insurance_fee_value">
                                 <p>7900$/Day</p>
@@ -180,7 +180,7 @@
                                 <p>Tổng phí thuê xe</p>
                             </div>
                             <div class="total_car_fee_value">
-                                <p>{{selectedDays}}</p>
+                                <p>{{selectCar.price}} x {{selectedDays}} ngày</p>
                             </div>
                         </div>
                         <div class="line_page"></div>
@@ -189,16 +189,16 @@
                                 <p>Tổng cộng</p>
                             </div>
                             <div class="total_bill_value">
-                                <p>{{selectedDays}}</p>
+                                <p id="total-cost">$0</p>
                             </div>
+                        </div>
+                        <div class="btn_submit">
+                            <button (click)="submit(selectCar)">
+                                RENT NOW
+                            </button>
                         </div>
                     </div>
 
-                    <div class="btn_submit">
-                        <button (click)="submit(selectCar)">
-                            Rent
-                        </button>
-                    </div>
 
                 </div>
                 <!-- date-picker -->

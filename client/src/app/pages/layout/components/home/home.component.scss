@@ -598,19 +598,42 @@
                 display: flex;
                 justify-content: center;
             }
+
+            .btn_submit {
+
+                margin-top: 1rem;
+
+                button {
+                    border-radius: 0.5rem;
+                    border: none;
+                    padding: 0.5rem;
+                    height: 3.8rem;
+                    width: 100%;
+                    background-color: #4B60EE;
+                    color: white;
+                    font-size: 18px;
+                    cursor: pointer;
+                    font-family: 'roboto';
+                    font-weight: bold;
+                    letter-spacing: 0.2rem;
+                }
+            }
+        }
+
+
+
+        .btn_submit:hover {
+            button {
+                background-color: #3c4ec7;
+            }
         }
     }
-
-
-
-
 
     //date-picker
 
     #main_dialog::-webkit-scrollbar {
         display: none;
     }
-
 
     .detail_description {
         height: 20%;
@@ -620,5 +643,4 @@
     .detail_description::-webkit-scrollbar {
         display: none;
     }
-
 }
