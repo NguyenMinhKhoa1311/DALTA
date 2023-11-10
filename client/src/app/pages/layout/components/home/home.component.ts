@@ -34,8 +34,13 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   user: User = <User>{};
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
-  isCreateReservationSuccess$ = this.store.select('reservation', 'isCreateSuccess');
+  isCreateReservationSuccess$ = this.store.select(
+    'reservation',
+    'isCreateSuccess'
+  );
   reservation_id: string = '';
+  selectedDays: number = 1;
+  totalCost: number = 0;
 
   constructor(
     private store: Store<{
@@ -57,23 +62,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.store.dispatch(ReservationActions.reset());
   }
   generateRandomId(length: number): string {
-    const chars = "0123456789abcdefghijklmnopqrstuvwxyz";
+    const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
     const result = new Array(length);
     for (let i = 0; i < length; i++) {
       result[i] = chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    return result.join("");
+    return result.join('');
   }
-
-
-
-
 
   ngOnInit(): void {
     this.userFirebase$.subscribe((userFirebase) => {
       if (userFirebase != null && userFirebase != undefined) {
         console.log(userFirebase);
-
       }
     });
     this.user$.subscribe((user) => {
@@ -84,20 +84,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
         // Lưu đối tượng userAsJson vào sessionStorage
         sessionStorage.setItem('user', userAsJson);
-        console.log("lưu vào sessionStorage");
-        
-      }
-      else {
-        console.log("lấy từ sessionStorage");
-        
+        console.log('lưu vào sessionStorage');
+      } else {
+        console.log('lấy từ sessionStorage');
+
         // Lấy đối tượng user từ sessionStorage
         const userAsJson = sessionStorage.getItem('user');
         console.log(userAsJson);
-        
 
         // Chuyển đổi chuỗi sang đối tượng user
-         this.user = JSON.parse(userAsJson||"");
-         this.store.dispatch(UserActions.storedUser(this.user));
+        this.user = JSON.parse(userAsJson || '');
+        this.store.dispatch(UserActions.storedUser(this.user));
       }
     });
     this.store.select('car').subscribe((val) => {
@@ -145,6 +142,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         newCheckoutDate.setDate(newCheckoutDate.getDate() + 1);
         dateCheckout.valueAsDate = newCheckoutDate;
       }
+      // Tính toán tổng số ngày
+      const timeDiff = Math.abs(checkoutDate.getTime() - checkinDate.getTime());
+      this.selectedDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      this.totalCost = this.selectedDays * this.selectCar.price;
+      // Hiển thị tổng tiền trên giao diện
+      const totalCostElement = document.getElementById('total-cost');
+      if (totalCostElement) {
+        totalCostElement.textContent = `${this.totalCost}`;
+      }
     });
 
     dateCheckout.addEventListener('input', () => {
@@ -154,6 +160,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         const newCheckinDate = new Date(checkoutDate);
         newCheckinDate.setDate(newCheckinDate.getDate() - 1);
         dateCheckin.valueAsDate = newCheckinDate;
+      }
+      // Tính toán tổng số ngày
+      const timeDiff = Math.abs(checkoutDate.getTime() - checkinDate.getTime());
+      this.selectedDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      this.totalCost = this.selectedDays * this.selectCar.price;
+      // Hiển thị tổng tiền trên giao diện
+      const totalCostElement = document.getElementById('total-cost');
+      if (totalCostElement) {
+        totalCostElement.textContent = `${this.totalCost}`;
       }
     });
     //date-pikcer
@@ -229,8 +244,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       reservationId: car._id + this.user._id + randomId,
       carId: car._id,
       customerId: this.user._id,
-      startDate: "",
-      endDate: "",
+      startDate: '',
+      endDate: '',
       status: false,
       total: 0,
     };
@@ -256,6 +271,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
       dateCheckin.valueAsDate = today;
       dateCheckout.valueAsDate = tomorrow;
+      this.selectedDays = 1;
+      this.totalCost = 0;
     });
   }
 
@@ -268,12 +285,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     status: false,
     total: 0,
   };
-
-
-
-
-
-  selectedDays: number = 0;
 
   updateTotalDays() {
     const dateCheckin = document.getElementById(
@@ -293,7 +304,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-
   submit(car: Car) {
     const dateCheckin = document.getElementById(
       'date-checkin'
@@ -310,11 +320,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       console.log('Ngày check-in:', checkinDate);
       console.log('Ngày check-out:', checkoutDate);
 
-      // Tính số ngày thuê
-      const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
-      const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // 1000 milliseconds, 3600 seconds, 24 hours
-      this.selectedDays = daysDiff;
-      this.updateTotalDays();
       const string = this.generateRandomId(10);
       this.reservationData = {
         reservationId: car._id + this.user._id + string,
@@ -323,7 +328,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         startDate: checkinDate.toUTCString(),
         endDate: checkoutDate.toUTCString(),
         status: false,
-        total: car.price * daysDiff,
+        total: this.totalCost,
       };
       this.store.dispatch(
         ReservationActions.create({ reservation: this.reservationData })
