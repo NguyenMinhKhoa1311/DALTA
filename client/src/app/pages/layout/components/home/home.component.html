@@ -180,7 +180,7 @@
                                 <p>Tổng phí thuê xe</p>
                             </div>
                             <div class="total_car_fee_value">
-                                <p>{{selectCar.price}} x {{selectedDays}} ngày</p>
+                                <p>{{selectCar.price}}$ x {{selectedDays}} ngày</p>
                             </div>
                         </div>
                         <div class="line_page"></div>
@@ -189,7 +189,7 @@
                                 <p>Tổng cộng</p>
                             </div>
                             <div class="total_bill_value">
-                                <p id="total-cost">$0</p>
+                                <p id="total-cost">0$</p>
                             </div>
                         </div>
                         <div class="btn_submit">
@@ -216,6 +216,8 @@
         <div>
             <p>Vui lòng sang trang history để thanh toán để hoàn tất đặt xe</p>
         </div>
-        <button (click)="closePaymentDialog()">Close</button>
+        <div class="btn_close">
+            <button (click)="closePaymentDialog()">Close</button>
+        </div>
     </div>
 </dialog>
