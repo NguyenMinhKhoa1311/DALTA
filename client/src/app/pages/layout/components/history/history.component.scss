@@ -49,6 +49,34 @@
     .history_main::-webkit-scrollbar {
         display: none;
     }
+}
 
+#payment_dialog {
+    border: none;
+    border-radius: 0.5rem;
 
+    #top_dialog {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    #main_dialog {
+        .btn_both {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                border-radius: 0.2rem;
+                border: none;
+                padding: 5px;
+                background-color: #4B60EE;
+                color: white;
+                cursor: pointer;
+            }
+        }
+    }
 }
