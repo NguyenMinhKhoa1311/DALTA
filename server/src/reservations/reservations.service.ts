@@ -28,7 +28,7 @@ export class ReservationsService {
   async findAll() {
     try {
       const reservations = await this.reservationModel.find()
-        .populate('carId', 'name', this.carModel)
+        .populate('carId', 'name carId', this.carModel)
         .populate('customerId', 'name ', this.userModel)
         .exec();
       return reservations;
@@ -36,10 +36,23 @@ export class ReservationsService {
       throw new HttpException(err.message, err.status);
     }
   }
-  findReservationsByCustomerId(customerId: string){
+  async findReservationsByCustomerId(customerId: string){
     try{
-      const reservations = this.reservationModel.find({customerId: customerId})
-      .populate('carId','name image', this.carModel)
+      const reservations = await this.reservationModel.find({customerId: customerId})
+      .populate('carId','name carId', this.carModel)
+      .populate('customerId','name', this.userModel)    
+      .exec();
+      return reservations;
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status);
+    }
+  }
+
+  async findReservationsByObjId(id: string){
+    try{
+      const reservations = await this.reservationModel.findById(id)
+      .populate('carId','name carId', this.carModel)
       .populate('customerId','name', this.userModel)    
       .exec();
       return reservations;
@@ -52,7 +65,7 @@ export class ReservationsService {
   async findOne(id: string) {
     try{
       const reservation = await this.reservationModel.findOne({reservationId: id})
-      .populate('carId','name image', this.carModel)
+      .populate('carId','name carId', this.carModel)
       .populate('customerId','name', this.userModel)      
       .exec();
       return reservation;

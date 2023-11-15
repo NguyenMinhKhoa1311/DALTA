@@ -51,6 +51,19 @@ export class ReservationsController {
     }
   }
 
+
+  
+  @Get('byReservationObjId')
+  async findByObjId(@Query('id') id: string) {
+    try {
+      const reservation = await this.reservationsService.findReservationsByObjId(id);
+      return reservation;
+    }
+    catch(err) {
+      throw err;
+    }
+  }
+
   @Put('update')
   async update(@Query('id') id: string, @Body() updateReservationDto: UpdateReservationDto) {
     try {

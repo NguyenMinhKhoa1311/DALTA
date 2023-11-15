@@ -10,6 +10,7 @@ import { ReviewModule } from './review/review.module';
 import { ReservationsModule } from './reservations/reservations.module';
 import { PaymentModule } from './payment/payment.module';
 import { StorageModule } from './storage/storage.module';
+import { RevenueModule } from './revenue/revenue.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { StorageModule } from './storage/storage.module';
     ReviewModule,
     ReservationsModule,
     PaymentModule,
-    StorageModule,],
+    StorageModule,
+    RevenueModule,],
   controllers: [AppController],
   providers: [AppService],
 })

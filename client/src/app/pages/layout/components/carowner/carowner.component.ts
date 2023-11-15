@@ -21,6 +21,7 @@ import { Manufacturer } from 'src/app/models/manufacturer.model';
 import { UserState } from 'src/app/ngrx/states/user.state';
 import { User } from 'src/app/models/user.model';
 import { StorageState } from 'src/app/ngrx/states/storage.state';
+import * as UserActions from '../../../../ngrx/actions/user.actions';
 import * as StorageAction from '../../../../ngrx/actions/storage.actions';
 
 @Component({
@@ -118,9 +119,19 @@ export class CarownerComponent implements OnInit, OnDestroy {
       }
     });
     this.user$.subscribe((user) => {
-      if (user != <User>{} && user != undefined && user != null) {
+      if (user._id != undefined && user._id != null) {
         this.user = user;
         console.log(this.user);
+      }  else {
+        console.log('lấy từ sessionStorage');
+
+        // Lấy đối tượng user từ sessionStorage
+        const userAsJson = sessionStorage.getItem('user');
+        console.log(userAsJson);
+
+        // Chuyển đổi chuỗi sang đối tượng user
+        this.user = JSON.parse(userAsJson || '');
+        this.store.dispatch(UserActions.storedUser(this.user));
       }
     });
     this.createImageSuccess$.subscribe((val) => {
