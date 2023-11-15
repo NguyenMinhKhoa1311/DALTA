@@ -345,31 +345,6 @@
                 }
             }
         }
-
-        .comment_box {
-            height: 30%;
-            width: 60%;
-            border: 1px solid #cac8c8;
-
-            .owner_car {
-                width: 100%;
-                height: 40%;
-
-                .avatar_onwer {
-                    height: 50%;
-                    width: 50%;
-
-
-                    img {
-                        width: 80%;
-                        height: 80%;
-                        border-radius: 50%;
-                        object-fit: cover;
-                    }
-                }
-            }
-        }
-
     }
 
     //date-picker

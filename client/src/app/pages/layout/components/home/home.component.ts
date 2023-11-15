@@ -145,7 +145,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       // Tính toán tổng số ngày
       const timeDiff = Math.abs(checkoutDate.getTime() - checkinDate.getTime());
       this.selectedDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-      this.totalCost = this.selectedDays * this.selectCar.price;
+      this.totalCost = this.selectedDays * this.selectCar.price + 7900 * 2;
       // Hiển thị tổng tiền trên giao diện
       const totalCostElement = document.getElementById('total-cost');
       if (totalCostElement) {
@@ -164,7 +164,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       // Tính toán tổng số ngày
       const timeDiff = Math.abs(checkoutDate.getTime() - checkinDate.getTime());
       this.selectedDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-      this.totalCost = this.selectedDays * this.selectCar.price;
+      this.totalCost = this.selectedDays * this.selectCar.price + 7900 * 2;
       // Hiển thị tổng tiền trên giao diện
       const totalCostElement = document.getElementById('total-cost');
       if (totalCostElement) {

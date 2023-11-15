@@ -31,21 +31,9 @@
             <p>Customer ID: {{paymentData.customerId}}</p>
             <p>Total: {{selectedReservation.total}}</p>
         </div>
-        <button (click)="payForReservation()">Thanh toán</button>
-        <button (click)="closePaymentDialog()">Close</button>
-    </div>
-</dialog>
-
-
-<!-- 
-<div class="cart_box" *ngFor="let reservation of reservations">
-    <div class="cart">
-        <div class="cart_name">
-            <h2>{{reservation.carId.name}}</h2>
-            <h2>{{reservation.startDate}}</h2>
-            <h2>{{reservation.endDate}}</h2>
-            <h2>{{reservation.status}}</h2>
-            <h2>{{reservation.total}}</h2>
+        <div class="btn_both">
+            <button (click)="payForReservation()">Thanh toán</button>
+            <button (click)="closePaymentDialog()">Close</button>
         </div>
     </div>
-</div> -->
+</dialog>

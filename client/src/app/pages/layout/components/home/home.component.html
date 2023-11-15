@@ -198,11 +198,51 @@
                             </button>
                         </div>
                     </div>
-
-
                 </div>
                 <!-- date-picker -->
+            </div>
+        </div>
+        <div class="comment_box">
+            <h6>Chủ xe</h6>
+            <div class="owner_car">
+                <div class="avatar_owner_box">
+                    <div class="avatar_onwer">
+                        <img src="../../../../../assets/images/avatar.jpg" alt="">
+                    </div>
+                    <div class="owner_name">
+                        <p>{{selectCar.ownerId.name}}</p>
+                    </div>
+                </div>
 
+                <div class="owner_feedback">
+                    <div class="owner_feedback_ratio">
+                        <p class="title">Tỉ lệ phản hồi</p>
+                        <p class="rate">88%</p>
+                    </div>
+                    <div class="owner_feedback_time">
+                        <p class="title">Thời gian phản hồi</p>
+                        <p class="rate">5 phút</p>
+                    </div>
+                    <div class="owner_feedback_agreement">
+                        <p class="title">Tỷ lệ đồng ý</p>
+                        <p class="rate">100%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="list_comment">
+                <div class="list_comment_box">
+                    <div class="avatar_review">
+                        <div class="review_img">
+                            <img src="../../../../../assets/images/avatar.jpg" alt="">
+                        </div>
+                        <div class="review_name">
+                            <p>Nguyễn Văn A</p>
+                        </div>
+                    </div>
+                    <div class="content_comment">
+                        <p>Xe chạy êm</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -214,7 +254,7 @@
     </div>
     <div id="main_dialog">
         <div>
-            <p>Vui lòng sang trang history để thanh toán để hoàn tất đặt xe</p>
+            <p>Vui lòng sang trang history thanh toán để hoàn tất đặt xe</p>
         </div>
         <div class="btn_close">
             <button (click)="closePaymentDialog()">Close</button>
