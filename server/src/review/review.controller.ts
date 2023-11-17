@@ -29,10 +29,20 @@ export class ReviewController {
     }
   }
 
-  @Get()
+  @Get("getByReviewId")
   async findOne(@Query('id') id: string) {
     try {
       const reviews = await this.reviewService.findOne(id);
+      return reviews;
+    }
+    catch (err) {
+      throw err;
+    }
+  }
+  @Get("getByCarId")
+  async findReviewsByCarId(@Query('id') id: string) {
+    try {
+      const reviews = await this.reviewService.findReviewsByCarId(id);
       return reviews;
     }
     catch (err) {

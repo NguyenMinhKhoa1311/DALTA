@@ -16,6 +16,7 @@ import * as CarAction from 'src/app/ngrx/actions/car.actions';
 import * as UserActions from 'src/app/ngrx/actions/user.actions';
 import * as ReservationActions from 'src/app/ngrx/actions/reservation.actions';
 import * as PaymentActions from 'src/app/ngrx/actions/payment.actions';
+import * as ReviewActions from 'src/app/ngrx/actions/review.actions';
 import { AuthState } from 'src/app/ngrx/states/auth.state';
 import { CarState } from 'src/app/ngrx/states/car.state';
 import { UserState } from 'src/app/ngrx/states/user.state';
@@ -23,6 +24,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { User } from 'src/app/models/user.model';
 import { ReservationState } from 'src/app/ngrx/states/reservation.state';
 import { PaymentState } from 'src/app/ngrx/states/payment.state';
+import { ReviewState } from 'src/app/ngrx/states/review.state';
+import { Review } from 'src/app/models/review.model';
 
 @Component({
   selector: 'app-home',
@@ -34,6 +37,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   user: User = <User>{};
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
+  reviews$ = this.store.select("review", "reviewList");
+  reviews:Review[] = [];
+  isGetReviewSuccess = false;
   isCreateReservationSuccess$ = this.store.select(
     'reservation',
     'isCreateSuccess'
@@ -49,6 +55,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       user: UserState;
       reservation: ReservationState;
       payment: PaymentState;
+      review: ReviewState;
     }>,
     public dialog: MatDialog
   ) {
@@ -57,6 +64,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.openPaymentDialog();
       }
     });
+    this.reviews$.subscribe((val) => {
+
+      if (val.length > 0) {
+  
+        
+        this.reviews = val;
+        this.isGetReviewSuccess = true;
+        console.log(this.reviews);
+
+      }
+    })
   }
   ngOnDestroy(): void {
     this.store.dispatch(ReservationActions.reset());
@@ -249,6 +267,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       status: false,
       total: 0,
     };
+    this.store.dispatch(ReviewActions.get({ carId: car._id }));
   }
   closeRentcarDialog() {
     this.dialog2.nativeElement.close();

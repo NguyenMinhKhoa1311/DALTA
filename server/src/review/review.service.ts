@@ -53,7 +53,10 @@ export class ReviewService {
   }
   async findReviewsByCarId(id: string) {
     try{
-      const reviews = await this.reviewModel.find({carId: id}).exec();
+      const reviews = await this.reviewModel.find({carId: id})
+      .populate('userId','name email', this.userModel)
+      .populate('carId','name', this.carModel)
+      .exec();
       return reviews;
     }
     catch(err){

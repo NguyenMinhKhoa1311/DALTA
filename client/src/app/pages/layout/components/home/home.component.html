@@ -229,18 +229,18 @@
                     </div>
                 </div>
             </div>
-            <div class="list_comment">
-                <div class="list_comment_box">
+            <div class="list_comment" *ngIf="isGetReviewSuccess">
+                <div class="list_comment_box" *ngFor="let item of reviews">
                     <div class="avatar_review">
                         <div class="review_img">
                             <img src="../../../../../assets/images/avatar.jpg" alt="">
                         </div>
                         <div class="review_name">
-                            <p>Nguyễn Văn A</p>
+                            <p>{{item.userId.name}}</p>
                         </div>
                     </div>
                     <div class="content_comment">
-                        <p>Xe chạy êm</p>
+                        <p>{{item.comment}}</p>
                     </div>
                 </div>
             </div>
