@@ -30,6 +30,8 @@ import { paymentReducer } from './ngrx/reducers/payment.reducer';
 import { PaymentEffects } from './ngrx/effects/payment.effects';
 import { revenueReducer } from './ngrx/reducers/revenue.reducer';
 import { RevenueEffects } from './ngrx/effects/revenue.effects';
+import { reviewReducer } from './ngrx/reducers/review.reducer';
+import { ReviewEffects } from './ngrx/effects/review.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -48,6 +50,7 @@ import { RevenueEffects } from './ngrx/effects/revenue.effects';
       reservation: reservationReducer,
       payment: paymentReducer,
       revenue: revenueReducer,
+      review: reviewReducer,
     }),
     EffectsModule.forRoot([
       CarEffects,
@@ -59,6 +62,7 @@ import { RevenueEffects } from './ngrx/effects/revenue.effects';
       ReservationEffects,
       PaymentEffects,
       RevenueEffects,
+      ReviewEffects,
     ]),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
