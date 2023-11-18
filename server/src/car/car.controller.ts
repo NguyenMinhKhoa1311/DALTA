@@ -41,7 +41,6 @@ export class CarController {
   @Get()
   async findByIsConfirmed(@Query('isConfirmed') isConfirmed: boolean) {
     try{
-      console.log(isConfirmed);
       const cars = await this.carService.findByIsConfirmed(isConfirmed);
       return cars;
     }
@@ -62,6 +61,16 @@ export class CarController {
     }
   }
   
+  @Get("byObjectId")
+  async findByObjectId(@Query('id') id: string) {
+    try{
+      const car = await this.carService.findByObjectId(id);
+      return car;
+    }
+    catch(err){
+      throw err;
+    }
+  }
 
 
 

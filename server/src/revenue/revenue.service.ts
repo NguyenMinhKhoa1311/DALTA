@@ -57,9 +57,6 @@ export class RevenueService {
       const revenue = await this.revenueModel.findOne({carId: id, month: month})
       .populate('carId','name', this.carModel)
       .exec();
-      // if(!revenue){
-      //   throw new HttpException('Revenue not found', 404);
-      // }
       return revenue;
     }catch(err){
       throw new HttpException(err.message, err.status);

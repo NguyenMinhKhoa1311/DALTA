@@ -3,5 +3,6 @@ export class CreateRevenueDto {
         public carId: string,
         public total: number,
         public month: number,
+        public year: number,
     ){}
 }

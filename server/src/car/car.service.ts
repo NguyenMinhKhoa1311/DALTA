@@ -60,6 +60,21 @@ export class CarService {
     }
   }
 
+  findByObjectId(objectId: string){
+    try{
+      const cars = this.carModel.findById(objectId)
+      .populate('image','urls', this.storageModel)
+      .populate('manufacturerId','name', this.manufacturerModel)
+      .populate('categoryId','name', this.categoryModel)
+      .populate('ownerId','name email phone address', this.userModel)
+      .exec();
+      return cars;
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status);
+    }
+  }
+
 
   async findOne(id: string) {
     try{

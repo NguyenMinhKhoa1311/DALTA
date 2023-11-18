@@ -61,7 +61,7 @@ export class RevenueController {
     try {
       let revenue = await this.revenueService.findOneByIdAndMonth(id, updateRevenueDto.month);
       if(!revenue) {
-        let createRevenueDto = new CreateRevenueDto(id, updateRevenueDto.total, updateRevenueDto.month);
+        let createRevenueDto = new CreateRevenueDto(id, updateRevenueDto.total, updateRevenueDto.month, updateRevenueDto.year);
         return await this.revenueService.create(createRevenueDto);
       }
       return await this.revenueService.updateTotal(id, updateRevenueDto.total, updateRevenueDto.month);

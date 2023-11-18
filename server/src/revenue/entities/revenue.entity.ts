@@ -18,6 +18,9 @@ export class Revenue {
     @Prop({required: true})
     month: number;
 
+    @Prop({required: true})
+    year: number;
+
 
 }
 export const RevenueSchema = SchemaFactory.createForClass(Revenue);

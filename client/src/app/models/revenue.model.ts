@@ -5,4 +5,5 @@ export interface Revenue {
     carId: Car;
     total: number;
     month: number;
+    year: number;
     }

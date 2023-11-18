@@ -2,10 +2,17 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
+import { log } from 'console';
+import { CarService } from 'src/car/car.service';
+import { StorageService } from 'src/storage/storage.service';
 
 @Controller('reservation')
 export class ReservationsController {
-  constructor(private readonly reservationsService: ReservationsService) {}
+  constructor(
+    private readonly reservationsService: ReservationsService,
+    private readonly carService: CarService,
+    private readonly storageService: StorageService,
+    ) {}
 
   @Post('create')
   async create(@Body() createReservationDto: CreateReservationDto) {
