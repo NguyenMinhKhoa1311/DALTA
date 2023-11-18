@@ -14,6 +14,7 @@ import { Car } from 'src/app/models/car.model';
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { RevenueState } from 'src/app/ngrx/states/revenue.state';
+import { Storage } from 'src/app/models/storage.model';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -105,6 +106,7 @@ export class HistoryComponent implements OnDestroy{
       endDate: '',
       total: 0,
       status: true,
+      image: <Storage>{},
     }
     this.paymentData = {
       paymentId: '',
@@ -125,6 +127,7 @@ export class HistoryComponent implements OnDestroy{
     endDate: '',
     total: 0,
     status: false,
+    image: <Storage>{},
   };
 
 
@@ -141,13 +144,27 @@ export class HistoryComponent implements OnDestroy{
     carId: '1',
     total: 0,
     month: 1,
+    year:  new Date().getFullYear(),
   };
+  getMonth(dateString: string): number {
+    const date = new Date(dateString);
+    return date.getMonth();
+  }
+  getYear(dateString: string): number {
+    const date = new Date(dateString);
+    console.log(date.getFullYear());
+    
+    return date.getFullYear();
+  }
 
   payForReservation() {
+    console.log('debug');
+    
     (pdfMake as any).vfs = pdfFonts.pdfMake.vfs; // Associate virtual file system from pdfFonts with pdfMake
     this.revenueData.carId = this.selectedReservation.carId._id;
     this.revenueData.total = this.selectedReservation.total;
-    this.revenueData.month = new Date().getMonth()+1;
+    this.revenueData.month = this.getMonth(this.selectedReservation.startDate);
+    this.revenueData.year = this.getYear(this.selectedReservation.startDate);
     let docDefinition = {
         content: [
           `Hóa đơn thanh toán`,
@@ -158,9 +175,11 @@ export class HistoryComponent implements OnDestroy{
           `Tổng tiền: ${this.selectedReservation.total}`,
         ]
     }
+    console.log(this.revenueData);
+
+    pdfMake.createPdf(docDefinition).download(`HoaDon${this.selectedReservation._id}`);
 
     
-    pdfMake.createPdf(docDefinition).download(`HoaDon${this.selectedReservation._id}`);
     this.store.dispatch(ReveueActions.updateTotal({ revenue: this.revenueData }));
     this.paymentData.dayPayment = new Date().toISOString();
     this.store.dispatch(PaymentActions.create({ payment: this.paymentData }));

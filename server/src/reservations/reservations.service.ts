@@ -6,6 +6,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Car } from 'src/car/entities/car.entity';
 import { User } from 'src/user/entities/user.entity';
+import { Storage } from 'src/storage/entities/storage.entity';
 
 @Injectable()
 export class ReservationsService {
@@ -14,6 +15,7 @@ export class ReservationsService {
     @InjectModel(Reservation.name) private readonly reservationModel: Model<Reservation>,
     @InjectModel(Car.name) private readonly carModel: Model<Car>,
     @InjectModel(User.name) private readonly userModel: Model<User>,
+    @InjectModel(Storage.name) private readonly storageModel: Model<Storage>,
     ){}
   async create(createReservationDto: CreateReservationDto) {
     try{
@@ -30,6 +32,7 @@ export class ReservationsService {
       const reservations = await this.reservationModel.find()
         .populate('carId', 'name carId', this.carModel)
         .populate('customerId', 'name ', this.userModel)
+        .populate('image', 'urls', this.storageModel)
         .exec();
       return reservations;
     } catch (err) {
@@ -39,8 +42,9 @@ export class ReservationsService {
   async findReservationsByCustomerId(customerId: string){
     try{
       const reservations = await this.reservationModel.find({customerId: customerId})
-      .populate('carId','name carId', this.carModel)
-      .populate('customerId','name', this.userModel)    
+      .populate('carId','name carId image', this.carModel)
+      .populate('customerId','name', this.userModel)
+      .populate('image', 'urls', this.storageModel)    
       .exec();
       return reservations;
     }
@@ -53,7 +57,8 @@ export class ReservationsService {
     try{
       const reservations = await this.reservationModel.findById(id)
       .populate('carId','name carId', this.carModel)
-      .populate('customerId','name', this.userModel)    
+      .populate('customerId','name', this.userModel)   
+      .populate('image', 'urls', this.storageModel) 
       .exec();
       return reservations;
     }
@@ -66,7 +71,8 @@ export class ReservationsService {
     try{
       const reservation = await this.reservationModel.findOne({reservationId: id})
       .populate('carId','name carId', this.carModel)
-      .populate('customerId','name', this.userModel)      
+      .populate('customerId','name', this.userModel)   
+      .populate('image', 'urls', this.storageModel)   
       .exec();
       return reservation;
     }

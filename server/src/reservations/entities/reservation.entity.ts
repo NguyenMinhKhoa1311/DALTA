@@ -18,6 +18,13 @@ export class Reservation {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',})
     customerId: string;
+    
+    @Prop({
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Storage',
+    })
+    image: string;
+    
 
     @Prop({required: true})
     startDate: string;

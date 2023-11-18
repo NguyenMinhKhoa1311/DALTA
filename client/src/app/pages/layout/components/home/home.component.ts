@@ -266,6 +266,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       endDate: '',
       status: false,
       total: 0,
+      image:car.image._id,
     };
     this.store.dispatch(ReviewActions.get({ carId: car._id }));
   }
@@ -303,6 +304,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     endDate: '',
     status: false,
     total: 0,
+    image:'',
   };
 
   updateTotalDays() {
@@ -348,6 +350,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         endDate: checkoutDate.toUTCString(),
         status: false,
         total: this.totalCost,
+        image:car.image._id,
       };
       this.store.dispatch(
         ReservationActions.create({ reservation: this.reservationData })
