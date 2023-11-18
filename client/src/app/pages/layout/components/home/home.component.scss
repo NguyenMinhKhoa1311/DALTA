@@ -349,6 +349,24 @@
                             font-size: 24px;
                             font-weight: 500;
                         }
+
+                        .rate {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+
+                            img {
+                                width: 15px;
+                                height: 15px;
+                            }
+
+                            p {
+                                margin: 0 0 0 5px;
+                                font-size: 12px;
+
+                            }
+                        }
+
                     }
                 }
 
@@ -379,14 +397,17 @@
 
             .list_comment {
                 width: 100%;
-                border: 1px solid #e0e0e0;
+
                 margin-top: 1rem;
-                border-radius: 8px;
+
 
                 .list_comment_box {
-                    padding: 12px 18px;
+                    padding: 12px 30px;
                     display: flex;
                     flex-direction: column;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 8px;
+                    margin-bottom: 10px;
 
                     .avatar_review {
                         height: 100%;
@@ -407,6 +428,18 @@
                             p {
                                 font-size: 20px;
                                 font-weight: 500;
+                            }
+
+                            img {
+                                width: 20px;
+                                height: 20px;
+                            }
+
+                            .rate_view {
+                                display: flex;
+                                flex-direction: row;
+
+                                .star {}
                             }
                         }
                     }

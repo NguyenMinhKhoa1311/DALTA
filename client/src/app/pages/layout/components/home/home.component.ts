@@ -37,8 +37,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   user: User = <User>{};
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
-  reviews$ = this.store.select("review", "reviewList");
-  reviews:Review[] = [];
+  reviews$ = this.store.select('review', 'reviewList');
+  reviews: Review[] = [];
   isGetReviewSuccess = false;
   isCreateReservationSuccess$ = this.store.select(
     'reservation',
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   reservation_id: string = '';
   selectedDays: number = 1;
   totalCost: number = 0;
-
+  avg_rating: any = 0;
   constructor(
     private store: Store<{
       car: CarState;
@@ -65,17 +65,25 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     this.reviews$.subscribe((val) => {
-
       if (val.length > 0) {
-  
-        
         this.reviews = val;
         this.isGetReviewSuccess = true;
         console.log(this.reviews);
-
+        this.calculateAverageRating();
       }
-    })
+    });
   }
+
+  calculateAverageRating() {
+    if (this.reviews.length > 0) {
+      let totalRating = 0;
+      this.reviews.forEach((review) => {
+        totalRating += review.rating;
+      });
+      this.avg_rating = totalRating / this.reviews.length;
+    }
+  }
+
   ngOnDestroy(): void {
     this.store.dispatch(ReservationActions.reset());
   }
