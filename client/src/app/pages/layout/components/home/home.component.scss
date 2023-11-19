@@ -815,3 +815,30 @@
         }
     }
 }
+
+#filter_dialog {
+    border: none;
+    border-radius: 0.5rem;
+
+    #top_dialog {
+        height: 5%;
+        width: 100%;
+        border-bottom: 1px solid #cac8c8;
+        display: flex;
+        flex-direction: row;
+
+        .title {}
+
+        .btnClose {
+            display: flex;
+            flex-direction: row-reverse;
+            cursor: pointer;
+
+            .large-icon {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    #main_dialog {}
+}

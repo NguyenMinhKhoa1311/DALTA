@@ -21,6 +21,20 @@
 
             .history_content {
                 margin: 1rem;
+                display: flex;
+                flex-direction: row;
+
+                .img_dialog {
+
+                    width: 400px;
+                    margin-right: 10px;
+
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
 
                 .price_btn {
                     button {

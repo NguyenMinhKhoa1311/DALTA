@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild, inject } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import * as ResevationActions from 'src/app/ngrx/actions/reservation.actions';
 import * as UserActions from 'src/app/ngrx/actions/user.actions';
 import * as PaymentActions from 'src/app/ngrx/actions/payment.actions';
@@ -11,7 +18,7 @@ import { Store } from '@ngrx/store';
 import { User } from 'src/app/models/user.model';
 import { Reservation } from 'src/app/models/reservation.model';
 import { Car } from 'src/app/models/car.model';
-import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { RevenueState } from 'src/app/ngrx/states/revenue.state';
 import { Storage } from 'src/app/models/storage.model';
@@ -20,7 +27,7 @@ import { Storage } from 'src/app/models/storage.model';
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss'],
 })
-export class HistoryComponent implements OnDestroy{
+export class HistoryComponent implements OnDestroy {
   user: User = <User>{};
   user$ = this.store.select('user', 'user');
   reservation$ = this.store.select('reservation', 'reservationList');
@@ -35,7 +42,7 @@ export class HistoryComponent implements OnDestroy{
       user: UserState;
       reservation: ReservationState;
       payment: PaymentState;
-      revenue: RevenueState
+      revenue: RevenueState;
     }>
   ) {
     this.user$.subscribe((user) => {
@@ -43,11 +50,10 @@ export class HistoryComponent implements OnDestroy{
         console.log(user);
         this.store.dispatch(ResevationActions.get({ customerId: user._id }));
         this.user = user;
-      }else{
+      } else {
         const userAsJson = sessionStorage.getItem('user');
         this.user = JSON.parse(userAsJson || '');
         this.store.dispatch(UserActions.storedUser(this.user));
-
       }
     });
     this.reservation$.subscribe((reservationList) => {
@@ -60,33 +66,30 @@ export class HistoryComponent implements OnDestroy{
         this.closePaymentDialog();
       }
     });
-
   }
   ngOnDestroy(): void {
     this.store.dispatch(ResevationActions.reset());
   }
 
   generateRandomId(length: number): string {
-    const chars = "0123456789abcdefghijklmnopqrstuvwxyz";
+    const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
     const result = new Array(length);
     for (let i = 0; i < length; i++) {
       result[i] = chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    
-    return result.join("");
-    
-  }
 
+    return result.join('');
+  }
 
   @ViewChild('appDialog3', { static: true })
   dialog3!: ElementRef<HTMLDialogElement>;
   cdr3 = inject(ChangeDetectorRef);
-  
+
   openPaymentDialog(reservation: Reservation) {
     const randomId = this.generateRandomId(10);
     this.paymentData = {
-      paymentId: this.selectedReservation._id+this.user._id+randomId,
-      dayPayment: "",
+      paymentId: this.selectedReservation._id + this.user._id + randomId,
+      dayPayment: '',
       reservationId: reservation._id,
       customerId: this.user._id,
     };
@@ -107,7 +110,7 @@ export class HistoryComponent implements OnDestroy{
       total: 0,
       status: true,
       image: <Storage>{},
-    }
+    };
     this.paymentData = {
       paymentId: '',
       dayPayment: '',
@@ -130,9 +133,6 @@ export class HistoryComponent implements OnDestroy{
     image: <Storage>{},
   };
 
-
-
-
   paymentData: any = {
     paymentId: '1',
     dayPayment: '1',
@@ -144,7 +144,7 @@ export class HistoryComponent implements OnDestroy{
     carId: '1',
     total: 0,
     month: 1,
-    year:  new Date().getFullYear(),
+    year: new Date().getFullYear(),
   };
   getMonth(dateString: string): number {
     const date = new Date(dateString);
@@ -153,34 +153,40 @@ export class HistoryComponent implements OnDestroy{
   getYear(dateString: string): number {
     const date = new Date(dateString);
     console.log(date.getFullYear());
-    
+
     return date.getFullYear();
   }
 
   payForReservation() {
     console.log('debug');
-    
+
     (pdfMake as any).vfs = pdfFonts.pdfMake.vfs; // Associate virtual file system from pdfFonts with pdfMake
     this.revenueData.carId = this.selectedReservation.carId._id;
     this.revenueData.total = this.selectedReservation.total;
     this.revenueData.month = this.getMonth(this.selectedReservation.startDate);
     this.revenueData.year = this.getYear(this.selectedReservation.startDate);
     let docDefinition = {
-        content: [
-          `Hóa đơn thanh toán`,
-          `Tên khách hàng: ${this.selectedReservation.customerId.name}`,
-          `Tên xe: ${this.selectedReservation.carId.name}`,
-          `Ngày bắt đầu: ${this.selectedReservation.startDate}`,
-          `Ngày kết thúc: ${this.selectedReservation.endDate}`,
-          `Tổng tiền: ${this.selectedReservation.total}`,
-        ]
-    }
+      content: [
+        `Hóa đơn thanh toán`,
+        `Tên khách hàng: ${this.selectedReservation.customerId.name}`,
+        `Tên xe: ${this.selectedReservation.carId.name}`,
+        `Ngày bắt đầu: ${this.selectedReservation.startDate}`,
+        `Ngày kết thúc: ${this.selectedReservation.endDate}`,
+        `Tổng tiền: ${this.selectedReservation.total}`,
+      ],
+    };
     console.log(this.revenueData);
 
-    pdfMake.createPdf(docDefinition).download(`HoaDon${this.selectedReservation._id}`);
+    pdfMake
+      .createPdf(docDefinition)
+      .download(`HoaDon${this.selectedReservation._id}`);
 
-    
-    this.store.dispatch(ReveueActions.updateTotal({ revenue: this.revenueData }));
+    this.store.dispatch(
+      ResevationActions.updateStatus({ reservation: this.selectedReservation })
+    );
+    this.store.dispatch(
+      ReveueActions.updateTotal({ revenue: this.revenueData })
+    );
     this.paymentData.dayPayment = new Date().toISOString();
     this.store.dispatch(PaymentActions.create({ payment: this.paymentData }));
   }

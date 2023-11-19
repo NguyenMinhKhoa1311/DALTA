@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedDays: number = 1;
   totalCost: number = 0;
   avg_rating: any = 0;
+
   constructor(
     private store: Store<{
       car: CarState;
@@ -274,9 +275,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       endDate: '',
       status: false,
       total: 0,
-      image:car.image._id,
+      image: car.image._id,
     };
     this.store.dispatch(ReviewActions.get({ carId: car._id }));
+    this.totalCost = this.selectCar.price + 7900 * 2;
   }
   closeRentcarDialog() {
     this.dialog2.nativeElement.close();
@@ -300,7 +302,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       dateCheckin.valueAsDate = today;
       dateCheckout.valueAsDate = tomorrow;
       this.selectedDays = 1;
-      this.totalCost = 0;
+      this.selectCar.price = 0;
     });
   }
 
@@ -312,7 +314,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     endDate: '',
     status: false,
     total: 0,
-    image:'',
+    image: '',
   };
 
   updateTotalDays() {
@@ -358,7 +360,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         endDate: checkoutDate.toUTCString(),
         status: false,
         total: this.totalCost,
-        image:car.image._id,
+        image: car.image._id,
       };
       this.store.dispatch(
         ReservationActions.create({ reservation: this.reservationData })
@@ -366,5 +368,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       console.log('Ngày không hợp lệ');
     }
+  }
+
+  @ViewChild('appDialog4', { static: true })
+  dialog4!: ElementRef<HTMLDialogElement>;
+  cdr4 = inject(ChangeDetectorRef);
+
+  openFilterDialog() {
+    this.dialog4.nativeElement.showModal();
+    this.cdr4.detectChanges();
+  }
+  closeFilterDialog() {
+    this.dialog4.nativeElement.close();
+    this.cdr4.detectChanges();
   }
 }
