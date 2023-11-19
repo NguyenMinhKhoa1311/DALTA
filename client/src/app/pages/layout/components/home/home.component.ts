@@ -37,8 +37,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   user: User = <User>{};
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
-  reviews$ = this.store.select("review", "reviewList");
-  reviews:Review[] = [];
+  reviews$ = this.store.select('review', 'reviewList');
+  reviews: Review[] = [];
   isGetReviewSuccess = false;
   isCreateReservationSuccess$ = this.store.select(
     'reservation',
@@ -47,6 +47,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   reservation_id: string = '';
   selectedDays: number = 1;
   totalCost: number = 0;
+  avg_rating: any = 0;
 
   constructor(
     private store: Store<{
@@ -65,17 +66,25 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
     this.reviews$.subscribe((val) => {
-
       if (val.length > 0) {
-  
-        
         this.reviews = val;
         this.isGetReviewSuccess = true;
         console.log(this.reviews);
-
+        this.calculateAverageRating();
       }
-    })
+    });
   }
+
+  calculateAverageRating() {
+    if (this.reviews.length > 0) {
+      let totalRating = 0;
+      this.reviews.forEach((review) => {
+        totalRating += review.rating;
+      });
+      this.avg_rating = totalRating / this.reviews.length;
+    }
+  }
+
   ngOnDestroy(): void {
     this.store.dispatch(ReservationActions.reset());
   }
@@ -266,9 +275,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       endDate: '',
       status: false,
       total: 0,
-      image:car.image._id,
+      image: car.image._id,
     };
     this.store.dispatch(ReviewActions.get({ carId: car._id }));
+    this.totalCost = this.selectCar.price + 7900 * 2;
   }
   closeRentcarDialog() {
     this.dialog2.nativeElement.close();
@@ -292,7 +302,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       dateCheckin.valueAsDate = today;
       dateCheckout.valueAsDate = tomorrow;
       this.selectedDays = 1;
-      this.totalCost = 0;
+      this.selectCar.price = 0;
     });
   }
 
@@ -304,7 +314,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     endDate: '',
     status: false,
     total: 0,
-    image:'',
+    image: '',
   };
 
   updateTotalDays() {
@@ -350,7 +360,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         endDate: checkoutDate.toUTCString(),
         status: false,
         total: this.totalCost,
-        image:car.image._id,
+        image: car.image._id,
       };
       this.store.dispatch(
         ReservationActions.create({ reservation: this.reservationData })
@@ -358,5 +368,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       console.log('Ngày không hợp lệ');
     }
+  }
+
+  @ViewChild('appDialog4', { static: true })
+  dialog4!: ElementRef<HTMLDialogElement>;
+  cdr4 = inject(ChangeDetectorRef);
+
+  openFilterDialog() {
+    this.dialog4.nativeElement.showModal();
+    this.cdr4.detectChanges();
+  }
+  closeFilterDialog() {
+    this.dialog4.nativeElement.close();
+    this.cdr4.detectChanges();
   }
 }

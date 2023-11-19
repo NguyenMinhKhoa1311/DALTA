@@ -10,7 +10,7 @@
         <div class="filter">
             <div class="filter_box">
                 <img src="../../../../../assets/images/sort.png" alt="">
-                <span>Filter</span>
+                <span (click)="openFilterDialog()">Filter</span>
             </div>
         </div>
     </div>
@@ -189,7 +189,7 @@
                                 <p>Tổng cộng</p>
                             </div>
                             <div class="total_bill_value">
-                                <p id="total-cost">0$</p>
+                                <p id="total-cost">{{totalCost}}$</p>
                             </div>
                         </div>
                         <div class="btn_submit">
@@ -211,6 +211,11 @@
                     </div>
                     <div class="owner_name">
                         <p>{{selectCar.ownerId.name}}</p>
+                        <div class="rate">
+                            <img src="../../../../../assets/images/star.png" alt="">
+                            <p>{{avg_rating}}.0 </p>
+                        </div>
+
                     </div>
                 </div>
 
@@ -234,9 +239,17 @@
                     <div class="avatar_review">
                         <div class="review_img">
                             <img src="../../../../../assets/images/avatar.jpg" alt="">
+
                         </div>
                         <div class="review_name">
                             <p>{{item.userId.name}}</p>
+                            <div class="rate_view">
+                                <div class="star" *ngFor="let i of [].constructor(item.rating)">
+                                    <img src="../../../../../assets/images/star.png" alt=""
+                                        [ngClass]="{ 'active': true }" />
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="content_comment">
@@ -259,5 +272,22 @@
         <div class="btn_close">
             <button (click)="closePaymentDialog()">Close</button>
         </div>
+    </div>
+</dialog>
+
+<dialog id="filter_dialog" style="color: #1f1a1c" #appDialog4>
+    <div id="top_dialog">
+        <div class="title">
+            <h4>Loại xe</h4>
+        </div>
+        <div class="btnClose" (click)="closeFilterDialog()">
+            <i class="fa-regular fa-circle-xmark large-icon"></i>
+        </div>
+    </div>
+    <div id="main_dialog">
+        <div>
+            <p>Vui lòng sang trang history thanh toán để hoàn tất đặt xe</p>
+        </div>
+
     </div>
 </dialog>
