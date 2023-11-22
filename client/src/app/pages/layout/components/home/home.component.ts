@@ -382,4 +382,21 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dialog4.nativeElement.close();
     this.cdr4.detectChanges();
   }
+
+  @ViewChild('appDialog5', { static: true })
+  dialog5!: ElementRef<HTMLDialogElement>;
+  cdr5 = inject(ChangeDetectorRef);
+
+  openCommentDialog() {
+    this.dialog5.nativeElement.showModal();
+    this.cdr5.detectChanges();
+  }
+  closeCommentDialog() {
+    this.dialog5.nativeElement.close();
+    this.cdr5.detectChanges();
+  }
+  commentForm = new FormGroup({
+    comment: new FormControl(''),
+    rate: new FormControl(''),
+  });
 }
