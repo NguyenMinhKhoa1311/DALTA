@@ -234,12 +234,12 @@
                     </div>
                 </div>
             </div>
+            <p style="cursor: pointer;" (click)="openCommentDialog()">Đánh giá</p>
             <div class="list_comment" *ngIf="isGetReviewSuccess">
                 <div class="list_comment_box" *ngFor="let item of reviews">
                     <div class="avatar_review">
                         <div class="review_img">
                             <img src="../../../../../assets/images/avatar.jpg" alt="">
-
                         </div>
                         <div class="review_name">
                             <p>{{item.userId.name}}</p>
@@ -287,6 +287,25 @@
     <div id="main_dialog">
         <div>
             <p>Vui lòng sang trang history thanh toán để hoàn tất đặt xe</p>
+        </div>
+
+    </div>
+</dialog>
+
+<dialog id="comment_dialog" style="color: #1f1a1c" #appDialog5>
+    <div id="top_dialog">
+        <div class="title">
+            <h4>Đánh giá</h4>
+        </div>
+        <div class="btnClose" (click)="closeCommentDialog()">
+            <i class="fa-regular fa-circle-xmark large-icon"></i>
+        </div>
+    </div>
+    <div id="main_dialog">
+        <div [formGroup]="commentForm">
+            <div class="input">
+                <input type="text" class="input1" placeholder="comment" required formControlName="comment">
+            </div>
         </div>
 
     </div>
