@@ -399,4 +399,29 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     comment: new FormControl(''),
     rate: new FormControl(''),
   });
+
+  submitComment() {
+    const comment = this.commentForm.get('comment')?.value;
+    const rate = this.commentForm.get('rate')?.value;
+    const review = {
+      carId: this.selectCar._id,
+      customerId: this.user._id,
+      comment: comment,
+      rating: rate,
+    };
+    this.store.dispatch(ReviewActions.create({ review: review }));
+    this.closeCommentDialog();
+  }
+  onStarClick(index: number) {
+    for (let i = 1; i <= 5; i++) {
+      const starElement = document.querySelector(`.fa-star:nth-child(${i})`);
+      if (starElement) {
+        if (i <= index) {
+          starElement.classList.add('active');
+        } else {
+          starElement.classList.remove('active');
+        }
+      }
+    }
+  }
 }

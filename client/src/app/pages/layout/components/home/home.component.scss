@@ -875,5 +875,18 @@
         }
     }
 
-    #main_dialog {}
+    #main_dialog {
+        .star-rating {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .fa-star {
+            color: #ccc;
+        }
+
+        .fa-star.active {
+            color: #f00;
+        }
+    }
 }
