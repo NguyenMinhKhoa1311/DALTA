@@ -11,4 +11,7 @@ export class ReviewService {
   getReviews(carId: string) {
     return this.httpClient.get<Review[]>(`http://localhost:3000/review/getByCarId?id=${carId}`);
   }
+  createReview(review: any) {
+    return this.httpClient.post('http://localhost:3000/review/create', review);
+  }
 }

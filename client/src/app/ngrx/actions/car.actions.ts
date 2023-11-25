@@ -46,3 +46,4 @@ export const confirmFailure = createAction(
   '[car] confirm failure',
   props<{ confirmErrMess: string }>()
 );
+export const resetIsAddSuccess = createAction('[car] reset is add success');
