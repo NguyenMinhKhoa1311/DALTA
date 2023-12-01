@@ -110,6 +110,21 @@
         .profile_menu {
             font-size: 1.2rem;
         }
+
+        .btn_login {
+            margin: 0 auto;
+            //border: solid 1px #4B60EE;
+            border-radius: 0.625rem;
+            background-color: #4B60EE;
+            cursor: pointer;
+
+            p {
+                margin: 0;
+                font-size: 0.75rem;
+                padding: 8px;
+                color: white;
+            }
+        }
     }
 
 

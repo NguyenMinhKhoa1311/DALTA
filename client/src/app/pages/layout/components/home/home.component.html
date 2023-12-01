@@ -3,14 +3,14 @@
         <div class="search">
             <div class="search_box">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search car name, model">
+                <input type="text" placeholder="Tìm kiếm tên xe, hãng xe">
             </div>
 
         </div>
         <div class="filter">
             <div class="filter_box">
                 <img src="../../../../../assets/images/sort.png" alt="">
-                <span (click)="openFilterDialog()">Filter</span>
+                <span (click)="openFilterDialog()">Bộ lọc</span>
             </div>
         </div>
     </div>
@@ -47,11 +47,11 @@
                     </div>
                     <div class="cart_price">
                         <div class="price_btn">
-                            <button (click)="openRentcarDialog(car)">Rent Now</button>
+                            <button (click)="openRentcarDialog(car)">THUÊ</button>
                         </div>
                         <div class="price_value">
-                            <h3>${{car.price}}</h3>
-                            <span>/DAY</span>
+                            <h3>{{car.price}} VNĐ</h3>
+                            <span>/Ngày</span>
                         </div>
 
                     </div>
@@ -155,7 +155,7 @@
                                 <p>Đơn giá thuê</p>
                             </div>
                             <div class="price_car_value">
-                                <p>{{selectCar.price}}$/Day</p>
+                                <p>{{selectCar.price}} VNĐ/Ngày</p>
                             </div>
                         </div>
                         <div class="service_fee">
@@ -163,7 +163,7 @@
                                 <p>Phí dịch vụ</p>
                             </div>
                             <div class="service_fee_value">
-                                <p>7900$/Day</p>
+                                <p>7900 VNĐ/Ngày</p>
                             </div>
                         </div>
                         <div class="insurance_fee">
@@ -171,7 +171,7 @@
                                 <p>Phí bảo hiểm</p>
                             </div>
                             <div class="insurance_fee_value">
-                                <p>7900$/Day</p>
+                                <p>7900 VNĐ/Ngày</p>
                             </div>
                         </div>
                         <div class="line_page"></div>
@@ -180,7 +180,7 @@
                                 <p>Tổng phí thuê xe</p>
                             </div>
                             <div class="total_car_fee_value">
-                                <p>{{selectCar.price}}$ x {{selectedDays}} ngày</p>
+                                <p>{{selectCar.price}} VNĐ x {{selectedDays}} ngày</p>
                             </div>
                         </div>
                         <div class="line_page"></div>
@@ -189,12 +189,12 @@
                                 <p>Tổng cộng</p>
                             </div>
                             <div class="total_bill_value">
-                                <p id="total-cost">{{totalCost}}$</p>
+                                <p id="total-cost">{{totalCost}} VNĐ</p>
                             </div>
                         </div>
                         <div class="btn_submit">
                             <button (click)="submit(selectCar)">
-                                RENT NOW
+                                THUÊ NGAY
                             </button>
                         </div>
                     </div>
@@ -301,6 +301,7 @@
             <i class="fa-regular fa-circle-xmark large-icon"></i>
         </div>
     </div>
+    <div class="line_page"></div>
     <div id="main_dialog">
         <div class="star-rating">
             <i class="fa-solid fa-star" (click)="onStarClick(1)"></i>
@@ -309,14 +310,14 @@
             <i class="fa-solid fa-star" (click)="onStarClick(4)"></i>
             <i class="fa-solid fa-star" (click)="onStarClick(5)"></i>
         </div>
-        <div [formGroup]="commentForm">
-            <div class="input">
-                <input type="text" class="input1" placeholder="comment" required formControlName="comment">
+        <div class="body_comment">
+            <div class="row box_comment col-md-11" [formGroup]="commentForm">
+                <textarea id="comment-textarea" class="commentar" placeholder="Add a comment..." required
+                    formControlName="comment"></textarea>
             </div>
         </div>
         <div class="btn_submit">
-            <button (click)="submitComment()">Submit</button>
+            <button (click)="submitComment()">Đăng</button>
         </div>
-
     </div>
 </dialog>
