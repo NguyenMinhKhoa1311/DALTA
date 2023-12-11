@@ -36,3 +36,7 @@ export const storedUser = createAction(
   (user: User) => ({ user })
 )
 
+export const resetUser = createAction(
+  '[User] Reset User'
+);
+

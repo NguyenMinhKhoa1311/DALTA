@@ -54,6 +54,8 @@ export const authReducer = createReducer(
   }),
 
   on(LoginActions.logoutSuccess, (state, action) => {
+    console.log('logout success');
+    
     let newState: AuthState = {
       ...state,
       isLoading: false,
@@ -78,5 +80,16 @@ export const authReducer = createReducer(
       ...state,
       userFirebase,
     };
+  }),
+  on(LoginActions.resetState, (state, action) => {
+    let newState: AuthState = {
+      ...state,
+      userFirebase: <UserFirebase>{},
+      isLoading: false,
+      isSuccessful: false,
+      errorMessage: '',
+      isLogoutSuccess: false,
+    };
+    return newState;
   })
 );

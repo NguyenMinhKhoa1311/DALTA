@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@
 import { CarService } from './car.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
+import { UpdateStatusDto } from './dto/update-status-car.dto';
 import { ManufacturerService } from 'src/manufacturer/manufacturer.service';
 import { CategoryService } from 'src/category/category.service';
 
@@ -94,6 +95,25 @@ export class CarController {
       throw err;
     }
   }
+
+  @Put('allstatus')
+  async updateAllStatus(@Body() updateStatusDto: UpdateStatusDto) {
+    try {
+      const { ids, status } = updateStatusDto;
+  
+      const updatedCars = await Promise.all(
+        ids.map(async (id) => {
+          const updatedCar = await this.carService.updateStatus(id, status);
+          return updatedCar;
+        })
+      );
+  
+      return updatedCars;
+    } catch (err) {
+      throw err;
+    }
+  }
+
   @Put('isConfirmed')
   async updateIsConfirmed(@Query('id') id: string, @Body() isConfirmed: any) {
     try{

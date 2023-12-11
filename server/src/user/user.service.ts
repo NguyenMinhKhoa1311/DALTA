@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './entities/user.entity';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 
 @Injectable()
 export class UserService {
@@ -35,7 +35,22 @@ export class UserService {
   async findByEmail(email: string) {
     try{
       const user = await this.userModel.findOne({email: email}).exec();
+      if (!user) {
+        let userCLone = {
+          _id: "404 user not found",
+          uid: "404 user not found",
+          email: "404 user not found",
+          password: "404 user not found",
+          name: "404 user not found",
+          avatar: "404 user not found",
+          phone: "404 user not found",
+          Adress: "404 user not found",
+          role: "404 user not found",
+      }
+      return userCLone;
+      }
       return user;
+      
     }
     catch(err){
       throw new HttpException(err.message, err.status)

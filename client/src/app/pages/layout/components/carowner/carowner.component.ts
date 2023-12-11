@@ -157,6 +157,8 @@ export class CarownerComponent implements OnInit, OnDestroy {
     });
     this.isCreateCarSuccess$.subscribe((val) => {
       if (val) {
+        console.log(val);
+        
         alert('add car successfully wait for admin confirm car');
         this.addCarData = {
           carId: '',
