@@ -173,6 +173,14 @@ export const carReducer = createReducer(
       confirmErrMess: action.confirmErrMess,
     };
     return newState;
-  })
+  }),
+  on(CarActions.resetIsAddSuccess, (state, action) => {
+    let newState: CarState = {
+        ...state,
+        isAddSuccess: false,
+        isAddLoading: false,
+    };
+    return newState;
+  }),
 
 );

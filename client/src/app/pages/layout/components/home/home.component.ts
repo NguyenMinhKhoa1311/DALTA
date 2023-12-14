@@ -410,11 +410,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   submitComment() {
     const comment = this.commentForm.get('comment')?.value;
     const rate = this.commentForm.get('rate')?.value;
+    console.log(rate);
     const review = {
+      reviewId: this.generateRandomId(10),
       carId: this.selectCar._id,
-      customerId: this.user._id,
+      userId: this.user._id,
       comment: comment,
       rating: rate,
+      dayReview: new Date().toUTCString(),
     };
     this.store.dispatch(ReviewActions.create({ review: review }));
     this.closeCommentDialog();

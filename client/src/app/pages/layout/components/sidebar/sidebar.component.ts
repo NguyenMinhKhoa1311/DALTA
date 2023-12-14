@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import * as AuthActions from 'src/app/ngrx/actions/auth.actions';
+import * as UserAction from 'src/app/ngrx/actions/user.actions';
 import { Store } from '@ngrx/store';
 import { AuthState } from 'src/app/ngrx/states/auth.state';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -58,6 +59,7 @@ export class SidebarComponent {
 
   route$ = this.router.events;
   user$ = this.store.select('user', 'user');
+  auth$ = this.store.select('auth', "isLogoutSuccess");
 
   userForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -76,6 +78,15 @@ export class SidebarComponent {
         this.userForm.controls.email.setValue(user.user.email);
         this.userForm.controls.name.setValue(user.user.name);
         this.userForm.controls.uid.setValue(user.user.uid);
+      }
+    });
+    this.auth$.subscribe((res) => {
+      if (res) {
+        console.log(res);
+        sessionStorage.clear();
+        this.router.navigate(['/login']);
+        this.store.dispatch(AuthActions.resetState());
+        this.store.dispatch(UserAction.resetUser());
       }
     });
     combineLatest({

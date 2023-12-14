@@ -89,5 +89,21 @@ export const userReducer = createReducer(
       ...state,
       user: user
     }
+  }),
+
+  on(UserActions.resetUser, (state, {type}) =>{
+    console.log(type);
+    
+    return {
+      ...state,
+      isGetLoading: false,
+      isGetSuccess: false,
+      getErrMess: '',
+      user: <User>{},
+      isCreateSussess: false,
+      isCreateLoading: false,
+      createErrMess: '',
+
+    }
   })
 );

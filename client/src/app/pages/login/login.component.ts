@@ -19,6 +19,8 @@ export class LoginComponent {
   isLoginWithGoogle = false;
   user$ = this.store.select('user', 'user');
   userFirebase: UserFirebase = <UserFirebase>{};
+  userFirebase$ = this.store.select('auth', 'userFirebase');
+  isGetSuccessUser = false;
 
   constructor(
     private auth: Auth,
@@ -26,7 +28,9 @@ export class LoginComponent {
     private router: Router
   ) {
     onAuthStateChanged(this.auth, (user) => {
-      if (user) {
+      console.log(user);
+      
+      if (user && user.email != undefined && user.email!="") {
         this.isLoginWithGoogle = true;
         this.userFirebase = {
           uid: user.uid,
@@ -34,44 +38,50 @@ export class LoginComponent {
           name: user.displayName || '',
           picture: user.photoURL || '',
         };
-        this.store.dispatch(AuthAcitons.storedUserFirebase(this.userFirebase));
+        this.store.dispatch(UserActions.getByEmail({ email: user.email||"" }));
       }
     });
-    this.store.select('auth').subscribe((state) => {
-      if (state.isSuccessful) {
-        this.store.dispatch(
-          UserActions.getByEmail({ email: this.accountData.email })
-        );
-      }
-    });
+
+
 
     this.user$.subscribe((user) => {
-      console.log(user);
-
-      if (user != <User>{} && user != undefined && user != null) {
-        console.log('vo dc');
+      if (user != <User>{} && user != undefined && user != null&& user.email !=undefined) {
+        this.isGetSuccessUser = true;
+        console.log('có User: ' + user.email);
+        console.log(this.accountData);
+        console.log(this.userFirebase);
+        console.log(this.isLoginWithGoogle);
         
+        console.log('isGetSuccessUser: ' + this.isGetSuccessUser);
 
-        if (
-          this.accountData.password != '' &&
-          this.accountData.email != '' &&
-          !this.isLoginWithGoogle
-        ) {
+        if ( this.accountData.password != '' && this.accountData.email != '' && !this.isLoginWithGoogle) {
+          console.log('isGetSuccessUser: ' + this.isGetSuccessUser);
+            console.log('có tài khoản k phải tk gg');
           if (user.password == this.accountData.password) {
+            console.log('isGetSuccessUser: ' + this.isGetSuccessUser);
             this.router.navigate(['/base/home']);
-            console.log('vô tại đây');
+            this.isGetSuccessUser = false;
+            console.log('đăng nhập với tk thường');
+            this.accountData = {
+              email: '',
+              password: '',
+            };
           }
         } else {
-          if (this.userFirebase.email == user.email && this.isLoginWithGoogle) {
+          if ( this.isLoginWithGoogle && this.userFirebase.email == user.email) {
+            console.log('isGetSuccessUser: ' + this.isGetSuccessUser);
             this.router.navigate(['/base/home']);
-            console.log('vô tại đây');
+            console.log('đăng nhập với gg');
+            this.isGetSuccessUser = false;
           }
         }
-      } else {
-        if (this.isLoginWithGoogle) {
+      } 
+      if (this.isGetSuccessUser && user.email == "404 user not found")
+      {
+
           console.log(this.userFirebase);
           this.router.navigate(['/register']);
-        }
+
       }
     });
   }

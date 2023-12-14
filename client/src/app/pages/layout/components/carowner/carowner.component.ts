@@ -33,6 +33,8 @@ export class CarownerComponent implements OnInit, OnDestroy {
   user$ = this.store.select('user', 'user');
   user: User = <User>{};
 
+  isCreateCarSuccess$ = this.store.select('car', 'isAddSuccess');
+
   fileName: string = '';
   createImageSuccess$ = this.store.select('storage', 'isCreateSuccess');
 
@@ -153,6 +155,32 @@ export class CarownerComponent implements OnInit, OnDestroy {
         this.store.dispatch(CarAction.add({ car: this.addCarData }));
       }
     });
+    this.isCreateCarSuccess$.subscribe((val) => {
+      if (val) {
+        console.log(val);
+        
+        alert('add car successfully wait for admin confirm car');
+        this.addCarData = {
+          carId: '',
+          categoryId: '',
+          manufacturerId: '',
+          ownerId: '',
+          name: '',
+          model: '',
+          price: 0,
+          description: '',
+          location: '',
+          seat: 0,
+          door: 0,
+          status: true,
+          image: '',
+          isConfirmed: false,
+          deleveryService: false,
+        };
+        this.store.dispatch(CarAction.resetIsAddSuccess());
+      }
+    })
+
   }
   ngOnDestroy(): void {}
 

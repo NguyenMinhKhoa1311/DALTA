@@ -20,6 +20,18 @@ export class ReviewEffects {
             catchError((error) =>
             of(ReviewActions.getFailure({ errorMessage: error }))
             )
-        ))))
+        ))));
+    createReview$ = createEffect(() =>
+    this.action$.pipe(
+        ofType(ReviewActions.create),
+        exhaustMap((action) =>
+        this.reviewService.createReview(action.review).pipe(
+            map((review) =>
+            ReviewActions.createSuccess()
+            ),
+            catchError((error) =>
+            of(ReviewActions.createFailure({ errorMessage: error }))
+            )
+        ))));
     
 }

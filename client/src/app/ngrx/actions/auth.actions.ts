@@ -23,3 +23,6 @@ export const storedUserFirebase = createAction(
   '[Auth] stored user firebase',
  (userFirebase: UserFirebase) => ({ userFirebase })
  );
+
+ export const resetState = createAction('[Auth] reset state');
+
