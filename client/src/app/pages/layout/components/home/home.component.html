@@ -50,7 +50,7 @@
                             <button (click)="openRentcarDialog(car)">THUÊ</button>
                         </div>
                         <div class="price_value">
-                            <h3>{{car.price}} VNĐ</h3>
+                            <h3>{{formatPrice(car.price)}} VNĐ</h3>
                             <span>/Ngày</span>
                         </div>
 
@@ -155,7 +155,7 @@
                                 <p>Đơn giá thuê</p>
                             </div>
                             <div class="price_car_value">
-                                <p>{{selectCar.price}} VNĐ/Ngày</p>
+                                <p>{{formatPrice(selectCar.price)}} VNĐ/Ngày</p>
                             </div>
                         </div>
                         <div class="service_fee">
@@ -180,7 +180,7 @@
                                 <p>Tổng phí thuê xe</p>
                             </div>
                             <div class="total_car_fee_value">
-                                <p>{{selectCar.price}} VNĐ x {{selectedDays}} ngày</p>
+                                <p>{{formatPrice(selectCar.price)}} VNĐ x {{selectedDays}} ngày</p>
                             </div>
                         </div>
                         <div class="line_page"></div>
@@ -189,7 +189,7 @@
                                 <p>Tổng cộng</p>
                             </div>
                             <div class="total_bill_value">
-                                <p id="total-cost">{{totalCost}} VNĐ</p>
+                                <p id="total-cost">{{formatPrice(totalCost)}} VNĐ</p>
                             </div>
                         </div>
                         <div class="btn_submit">
