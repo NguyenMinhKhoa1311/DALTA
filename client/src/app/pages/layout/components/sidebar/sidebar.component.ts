@@ -27,25 +27,25 @@ export class SidebarComponent {
   pages: Page[] = [
     {
       id: 0,
-      name: 'Trang Chủ',
+      name: 'Home',
       link: 'base/home',
       icon: 'fa-solid fa-house',
     },
     {
       id: 1,
-      name: 'Thanh Toán',
+      name: 'History',
       link: 'base/history',
       icon: 'fa-solid fa-clock-rotate-left',
     },
     {
       id: 2,
-      name: 'Đăng Xe',
+      name: 'Car Owner',
       link: 'base/carowner',
       icon: 'fa-solid fa-car-side',
     },
     {
       id: 3,
-      name: 'Thông Tin',
+      name: 'About',
       link: 'base/about',
       icon: 'fa-regular fa-address-card',
     },
@@ -93,27 +93,37 @@ export class SidebarComponent {
       route: this.route$,
       user: this.user$,
     }).subscribe((res) => {
-      if (res.user.role != 'Admin') {
-        if (this.pages.length == 5) {
-          this.pages.splice(4, 1);
-          this.pages[this.pages.length - 1].id = this.pages.length - 1;
-        }
-        if (this.router.url != this.url) {
-          this.url = this.router.url;
-          this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
-          this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
-          this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
-          this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
-        }
-      } else {
-        if (this.router.url != this.url) {
-          this.url = this.router.url;
-          this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
-          this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
-          this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
-          this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
-          this.router.url === '/base/admin' ? (this.pageSelected = 4) : null;
-        }
+      // if (res.user.role != 'Admin') {
+      //   console.log(res.user.role);
+      //   console.log(this.pages.length);
+      //   if (this.pages.length == 5) {
+      //     this.pages.splice(4, 1);
+      //     this.pages[this.pages.length - 1].id = this.pages.length - 1;
+      //   }
+      //   if (this.router.url != this.url) {
+      //     this.url = this.router.url;
+      //     this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
+      //     this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
+      //     this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
+      //     this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
+      //   }
+      // } else {
+      //   if (this.router.url != this.url) {
+      //     this.url = this.router.url;
+      //     this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
+      //     this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
+      //     this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
+      //     this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
+      //     this.router.url === '/base/admin' ? (this.pageSelected = 4) : null;
+      //   }
+      // }
+      if (this.router.url != this.url) {
+        this.url = this.router.url;
+        this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
+        this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
+        this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
+        this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
+        this.router.url === '/base/admin' ? (this.pageSelected = 4) : null;
       }
     });
   }
@@ -125,17 +135,8 @@ export class SidebarComponent {
   logout() {
     this.store.dispatch(AuthActions.logout());
   }
-
   login() {
     //navigate to login page
     this.router.navigate(['/login']);
   }
 }
-// if (this.router.url != this.url) {
-//   this.url = this.router.url;
-//   this.router.url === '/base/home' ? (this.pageSelected = 0) : null;
-//   this.router.url === '/base/history' ? (this.pageSelected = 1) : null;
-//   this.router.url === '/base/carowner' ? (this.pageSelected = 2) : null;
-//   this.router.url === '/base/about' ? (this.pageSelected = 3) : null;
-//   this.router.url === '/base/admin' ? (this.pageSelected = 4) : null;
-// }
