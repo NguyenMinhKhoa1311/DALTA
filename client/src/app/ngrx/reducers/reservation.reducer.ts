@@ -21,6 +21,14 @@ export const initialState: ReservationState = {
   isGetOneLoading: false,
   isGetOneSuccess: false,
   getOneErrMess: '',
+  isGetBystartDateLoading: false,
+  isGetBystartDateSuccess: false,
+  getBystartDateErrMess: '',
+  reservationListByStartDate: [],
+  isGetByendDateLoading: false,
+  isGetByendDateSuccess: false,
+  getByendDateErrMess: '',
+  reservationListByEndDate: [],
 };
 
 export const reservationReducer = createReducer(
@@ -148,6 +156,14 @@ export const reservationReducer = createReducer(
       isGetOneLoading: false,
       isGetOneSuccess: false,
       getOneErrMess: '',
+      isGetBystartDateLoading: false,
+      isGetBystartDateSuccess: false,
+      getBystartDateErrMess: '',
+      reservationListByStartDate: [],
+      isGetByendDateLoading: false,
+      isGetByendDateSuccess: false,
+      getByendDateErrMess: '',
+      
     };
     return newState;
   }),
@@ -162,5 +178,73 @@ export const reservationReducer = createReducer(
         res._id === reservation._id ? { ...res, status: true } : res
       ),
     };
+  }),
+  on(ReservationActions.getReservationByStartDate, (state, action) => {
+    console.log(action.type);
+
+    let newState = {
+      ...state,
+      isGetBystartDateLoading: true,
+      isGetBystartDateSuccess: false,
+      getBystartDateErrMess: '',
+    };
+    return newState;
+  }),
+  on(ReservationActions.getReservationByStartDateSuccess, (state, action) => {
+    console.log(action.type);
+
+    let newState = {
+      ...state,
+      isGetBystartDateLoading: false,
+      isGetBystartDateSuccess: true,
+      getBystartDateErrMess: '',
+      reservationListByStartDate: action.reservations,
+    };
+    return newState;
+  }),
+  on(ReservationActions.getReservationByStartDateFailure, (state, action) => {
+    console.log(action.errorMessage);
+
+    let newState = {
+      ...state,
+      isGetBystartDateLoading: false,
+      isGetBystartDateSuccess: false,
+      getBystartDateErrMess: action.errorMessage,
+    };
+    return newState;
+  }),
+  on(ReservationActions.getReservationByEndDate, (state, action) => {
+    console.log(action.type);
+
+    let newState = {
+      ...state,
+      isGetByendDateLoading: true,
+      isGetByendDateSuccess: false,
+      getByendDateErrMess: '',
+    };
+    return newState;
+  }),
+  on(ReservationActions.getReservationByEndDateSuccess, (state, action) => {
+    console.log(action.type);
+
+    let newState = {
+      ...state,
+      isGetByendDateLoading: false,
+      isGetByendDateSuccess: true,
+      getByendDateErrMess: '',
+      reservationListByEndDate: action.reservations,
+    };
+    return newState;
+  }),
+  on(ReservationActions.getReservationByEndDateFailure, (state, action) => {
+    console.log(action.errorMessage);
+
+    let newState = {
+      ...state,
+      isGetByendDateLoading: false,
+      isGetByendDateSuccess: false,
+      getByendDateErrMess: action.errorMessage,
+    };
+    return newState;
   })
 );

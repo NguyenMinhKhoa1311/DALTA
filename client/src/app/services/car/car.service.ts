@@ -39,4 +39,11 @@ export class CarService {
       {status: true}
     );
   }
+
+  updateStatusAll(ids: string[], status: boolean) {
+    return this.httpClient.put<Car[] | any>(
+      `http://localhost:3000/car/allstatus`,
+      {ids, status}
+    );
+  }
 }

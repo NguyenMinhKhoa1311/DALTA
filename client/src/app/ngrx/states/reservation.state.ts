@@ -18,4 +18,12 @@ export interface ReservationState {
     isGetOneLoading: boolean;
     isGetOneSuccess: boolean;
     getOneErrMess: string;    
+    isGetBystartDateLoading: boolean;
+    isGetBystartDateSuccess: boolean;
+    getBystartDateErrMess: string;
+    reservationListByStartDate: Reservation[];
+    isGetByendDateLoading: boolean;
+    isGetByendDateSuccess: boolean;
+    getByendDateErrMess: string;
+    reservationListByEndDate: Reservation[];
     }

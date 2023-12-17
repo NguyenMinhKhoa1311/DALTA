@@ -21,6 +21,9 @@ export const initialState: CarState = {
   isConfirmLoading: false,
   isConfirmSuccess: false,
   confirmErrMess: '',
+  isUpdateStatusAllLoading:false,
+  isUpdateStatusAllSuccess:false,
+  updateStatusAllErrMess:'',
 
 };
 
@@ -179,6 +182,34 @@ export const carReducer = createReducer(
         ...state,
         isAddSuccess: false,
         isAddLoading: false,
+    };
+    return newState;
+  }),
+  on(CarActions.updateStatusAll, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isUpdateStatusAllLoading: true,
+      isUpdateStatusAllSuccess: false,
+      updateStatusAllErrMess: '',
+    };
+    return newState;
+  }
+  ),
+  on(CarActions.updateStatusAllSuccess, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isUpdateStatusAllLoading: false,
+      isUpdateStatusAllSuccess: true,
+      updateStatusAllErrMess: '',
+    };
+    return newState;
+  }),
+  on(CarActions.updateStatusAllFailure, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isUpdateStatusAllLoading: false,
+      isUpdateStatusAllSuccess: false,
+      updateStatusAllErrMess: action.updateStatusAllErrMess,
     };
     return newState;
   }),

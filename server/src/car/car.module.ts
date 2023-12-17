@@ -10,6 +10,7 @@ import { CategorySchema } from 'src/category/entities/category.entity';
 import { CategoryModule } from 'src/category/category.module';
 import { UserSchema } from 'src/user/entities/user.entity';
 import { StorageSchema } from 'src/storage/entities/storage.entity';
+import { ReservationsModule } from 'src/reservations/reservations.module';
 
 @Module({
   imports: [
@@ -31,7 +32,8 @@ import { StorageSchema } from 'src/storage/entities/storage.entity';
       }
     ]),
       forwardRef(() => ManufacturerModule),
-      forwardRef(() => CategoryModule)
+      forwardRef(() => CategoryModule),
+      forwardRef(() => ReservationsModule),
   ],
   controllers: [CarController],
   providers: [CarService],

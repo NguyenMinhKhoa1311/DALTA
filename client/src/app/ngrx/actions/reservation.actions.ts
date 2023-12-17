@@ -48,3 +48,36 @@ export const updateStatus = createAction(
   '[reservation] Update Status',
   props<{ reservation: Reservation }>()
 );
+
+export const getReservationByStartDate = createAction(
+  '[reservation] Get By Start Date',
+  props<{ startDate: string }>()
+);
+
+export const getReservationByStartDateSuccess = createAction(
+  '[reservation] Get By Start Date Success',
+  props<{ reservations: Reservation[] }>()
+);
+
+export const getReservationByStartDateFailure = createAction(
+  '[reservation] Get By Start Date Failure',
+  props<{ errorMessage: string }>()
+);
+
+export const getReservationByEndDate = createAction(
+  '[reservation] Get By End Date',
+  props<{ endDate: string }>()
+);
+
+export const getReservationByEndDateSuccess = createAction(
+  '[reservation] Get By End Date Success',
+  props<{ reservations: Reservation[] }>()
+);
+
+export const getReservationByEndDateFailure = createAction(
+  '[reservation] Get By End Date Failure',
+  props<{ errorMessage: string }>()
+);
+
+
+
