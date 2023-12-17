@@ -190,4 +190,14 @@ export class HistoryComponent implements OnDestroy {
     this.paymentData.dayPayment = new Date().toISOString();
     this.store.dispatch(PaymentActions.create({ payment: this.paymentData }));
   }
+
+  formatPrice(price: number) {
+    // Chuyển đổi số thành chuỗi và ngược lại
+    let priceString = price.toString();
+
+    // Sử dụng biểu thức chính quy để thêm dấu phẩy mỗi 3 số
+    priceString = priceString.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+    return priceString;
+  }
 }

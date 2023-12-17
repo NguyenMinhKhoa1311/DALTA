@@ -273,23 +273,29 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   };
 
   openRentcarDialog(car: Car) {
-    this.selectCar = car;
-    this.dialog2.nativeElement.showModal();
-    this.cdr2.detectChanges();
-    const randomId = this.generateRandomId(10);
-    this.reservationData = {
-      reservationId: car._id + this.user._id + randomId,
-      carId: car._id,
-      customerId: this.user._id,
-      startDate: '',
-      endDate: '',
-      status: false,
-      total: 0,
-      image: car.image._id,
-    };
-    this.store.dispatch(ReviewActions.get({ carId: car._id }));
-    this.totalCost = this.selectCar.price + 7900 * 2;
+    if (!this.user.uid) {
+      alert('Bạn cần đăng nhập để thuê xe');
+      return;
+    } else {
+      this.selectCar = car;
+      this.dialog2.nativeElement.showModal();
+      this.cdr2.detectChanges();
+      const randomId = this.generateRandomId(10);
+      this.reservationData = {
+        reservationId: car._id + this.user._id + randomId,
+        carId: car._id,
+        customerId: this.user._id,
+        startDate: '',
+        endDate: '',
+        status: false,
+        total: 0,
+        image: car.image._id,
+      };
+      this.store.dispatch(ReviewActions.get({ carId: car._id }));
+      this.totalCost = this.selectCar.price + 7900 * 2;
+    }
   }
+
   closeRentcarDialog() {
     this.dialog2.nativeElement.close();
     this.cdr2.detectChanges();
@@ -402,6 +408,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.cdr5.detectChanges();
   }
   closeCommentDialog() {
+    this.commentForm.reset();
     this.dialog5.nativeElement.close();
     this.cdr5.detectChanges();
   }
@@ -424,6 +431,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     };
     this.store.dispatch(ReviewActions.create({ review: review }));
     this.closeCommentDialog();
+    console.log(review);
   }
   onStarClick(index: any) {
     this.commentForm.get('rate')?.setValue(index);
@@ -437,5 +445,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     }
+  }
+
+  formatPrice(price: number) {
+    // Chuyển đổi số thành chuỗi và ngược lại
+    let priceString = price.toString();
+
+    // Sử dụng biểu thức chính quy để thêm dấu phẩy mỗi 3 số
+    priceString = priceString.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+    return priceString;
   }
 }

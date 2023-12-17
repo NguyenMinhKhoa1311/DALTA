@@ -11,9 +11,11 @@
                     <h2>Ngày kết thúc thuê: {{reservation.endDate | date: 'dd/MM/yyyy'}}</h2>
                     <h2 *ngIf="reservation.status == false">Trạng thái: Chưa thanh toán</h2>
                     <h2 *ngIf="reservation.status == true">Trạng thái: Đã thanh toán</h2>
-                    <h2>Tổng tiền: {{reservation.total}}</h2>
+                    <h2>Tổng tiền: {{formatPrice(reservation.total)}}</h2>
                     <div class="price_btn">
-                        <button style="margin-right: 5px;" (click)="openPaymentDialog(reservation)">Submit</button>
+                        <button style="margin-right: 5px; font-size: 0.8rem;"
+                            (click)="openPaymentDialog(reservation)">Xác
+                            nhận</button>
 
                     </div>
                 </div>
@@ -35,7 +37,7 @@
         </div>
         <div class="btn_both">
             <button (click)="payForReservation()">Thanh toán</button>
-            <button (click)="closePaymentDialog()">Close</button>
+            <button (click)="closePaymentDialog()">Đóng</button>
         </div>
     </div>
 </dialog>

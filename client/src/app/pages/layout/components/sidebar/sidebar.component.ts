@@ -59,7 +59,7 @@ export class SidebarComponent {
 
   route$ = this.router.events;
   user$ = this.store.select('user', 'user');
-  auth$ = this.store.select('auth', "isLogoutSuccess");
+  auth$ = this.store.select('auth', 'isLogoutSuccess');
 
   userForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -134,5 +134,9 @@ export class SidebarComponent {
 
   logout() {
     this.store.dispatch(AuthActions.logout());
+  }
+  login() {
+    //navigate to login page
+    this.router.navigate(['/login']);
   }
 }

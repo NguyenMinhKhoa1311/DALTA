@@ -15,8 +15,8 @@ import { RevenueModule } from './revenue/revenue.module';
 @Module({
   imports: [
     MongooseModule.forRoot(
-    'mongodb+srv://minhkhoa:13112002@atlascluster.8amvnf6.mongodb.net/',
-  ),
+      'mongodb+srv://minhkhoa:13112002@atlascluster.8amvnf6.mongodb.net/',
+    ),
     UserModule,
     CarModule,
     ManufacturerModule,
@@ -25,7 +25,8 @@ import { RevenueModule } from './revenue/revenue.module';
     ReservationsModule,
     PaymentModule,
     StorageModule,
-    RevenueModule,],
+    RevenueModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
