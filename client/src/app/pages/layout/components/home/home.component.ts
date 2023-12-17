@@ -60,6 +60,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }>,
     public dialog: MatDialog
   ) {
+    const dateCheck = new Date();
+    dateCheck.setUTCHours(0, 0, 0, 0);
+    const utcStringStartDate = dateCheck.toUTCString();
+    let endDate = dateCheck.setDate(dateCheck.getDate() - 1);
+    const utcStringEndDate = dateCheck.toUTCString();
+
+    console.log("Start date: " + utcStringStartDate);
+    console.log("End date: " + utcStringEndDate);
+    
+
     this.isCreateReservationSuccess$.subscribe((val) => {
       if (val) {
         this.openPaymentDialog();

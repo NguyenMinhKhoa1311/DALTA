@@ -5,6 +5,8 @@ import { UpdateCarDto } from './dto/update-car.dto';
 import { UpdateStatusDto } from './dto/update-status-car.dto';
 import { ManufacturerService } from 'src/manufacturer/manufacturer.service';
 import { CategoryService } from 'src/category/category.service';
+import { ReservationsService } from 'src/reservations/reservations.service';
+import { log } from 'console';
 
 @Controller('car')
 export class CarController {
@@ -12,6 +14,7 @@ export class CarController {
     private carService: CarService,
     private manufacturerSrevice: ManufacturerService,
     private categoryService: CategoryService,
+    private reservationService: ReservationsService,
      ) {}
 
   @Post('create')
@@ -113,6 +116,8 @@ export class CarController {
       throw err;
     }
   }
+
+  
 
   @Put('isConfirmed')
   async updateIsConfirmed(@Query('id') id: string, @Body() isConfirmed: any) {

@@ -132,4 +132,30 @@ export class CarEffects {
       )
     )
   );
+  updateAllStatus$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(CarActions.updateStatusAll),
+      exhaustMap((action) =>
+        this.carService.updateStatusAll(action.ids, action.status).pipe(
+          map((item) => {
+            if (item != undefined || item != null) {
+              if (item.message) {
+                return CarActions.updateStatusAllFailure({
+                  updateStatusAllErrMess: item.message,
+                });
+              }
+              return CarActions.updateStatusAllSuccess();
+            } else {
+              return CarActions.updateStatusAllFailure({
+                updateStatusAllErrMess: 'Car is undefined or null',
+              });
+            }
+          }),
+          catchError((error) =>
+            of(CarActions.updateStatusAllFailure({ updateStatusAllErrMess: error }))
+          )
+        )
+      )
+    )
+  );
 }

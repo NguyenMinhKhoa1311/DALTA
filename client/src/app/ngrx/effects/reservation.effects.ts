@@ -42,20 +42,51 @@ export class ReservationEffects{
                 )
             )));
 
-            getOne$ = createEffect(() =>
-            this.actions$.pipe(
-                ofType(ReservationActions.getOne),
-                exhaustMap((action) =>
-                    this.reservationService.getOne(action.reservationId).pipe(
-                        map((item) => {
-                            if(item != undefined || item != null){
-                                return ReservationActions.getOneSuccess({reservation: item});
-                            }else{
-                                return ReservationActions.getOneFailure({errorMessage: 'Reservation is undefined or null'});
-                            }
-                        }),
-                        catchError((error) => of(ReservationActions.getOneFailure({errorMessage: error})))
-                    )
-                )));
+        getOne$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ReservationActions.getOne),
+            exhaustMap((action) =>
+                this.reservationService.getOne(action.reservationId).pipe(
+                    map((item) => {
+                        if(item != undefined || item != null){
+                            return ReservationActions.getOneSuccess({reservation: item});
+                        }else{
+                            return ReservationActions.getOneFailure({errorMessage: 'Reservation is undefined or null'});
+                        }
+                    }),
+                    catchError((error) => of(ReservationActions.getOneFailure({errorMessage: error})))
+                )
+            )));
+        getBystartDate$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ReservationActions.getReservationByStartDate),
+            exhaustMap((action) =>
+                this.reservationService.getByStartDate(action.startDate).pipe(
+                    map((item) => {
+                        if(item != undefined || item != null){
+                            return ReservationActions.getReservationByStartDateSuccess({reservations: item});
+                        }else{
+                            return ReservationActions.getFailure({errorMessage: 'Reservation is undefined or null'});
+                        }
+                    }),
+                    catchError((error) => of(ReservationActions.getFailure({errorMessage: error})))
+                )
+            )));
+        getByendDate$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ReservationActions.getReservationByEndDate),
+            exhaustMap((action) =>
+                this.reservationService.getByEndDate(action.endDate).pipe(
+                    map((item) => {
+                        if(item != undefined || item != null){
+                            return ReservationActions.getReservationByEndDateSuccess({reservations: item});
+                        }else{
+                            return ReservationActions.getFailure({errorMessage: 'Reservation is undefined or null'});
+                        }
+                    }),
+                    catchError((error) => of(ReservationActions.getFailure({errorMessage: error})))
+                )
+            )));
+
 
 }

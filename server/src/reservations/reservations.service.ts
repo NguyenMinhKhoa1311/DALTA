@@ -81,6 +81,34 @@ export class ReservationsService {
     }
   }
 
+  async findByStartDate(startDate: string, status: boolean = true) {
+    try{
+      const reservation = await this.reservationModel.find({startDate: startDate, status: status})
+      .populate('carId','name carId', this.carModel)
+      .populate('customerId','name', this.userModel)   
+      .populate('image', 'urls', this.storageModel)   
+      .exec();
+      return reservation;
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status);
+    }
+  }
+
+  async findByEndDate(endDate: string, status: boolean = true) {
+    try{
+      const reservation = await this.reservationModel.find({endDate: endDate, status: status})
+      .populate('carId','name carId', this.carModel)
+      .populate('customerId','name', this.userModel)   
+      .populate('image', 'urls', this.storageModel)   
+      .exec();
+      return reservation;
+    }
+    catch(err){
+      throw new HttpException(err.message, err.status);
+    }
+  }
+
   async update(id: string, updateReservationDto: UpdateReservationDto) {
     try{
       const updatedReservation = await this.reservationModel.findOneAndUpdate(

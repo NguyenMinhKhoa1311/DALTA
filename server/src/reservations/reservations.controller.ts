@@ -70,6 +70,27 @@ export class ReservationsController {
       throw err;
     }
   }
+  @Get('byStartDate')
+  async findByStartDate(@Query('startDate') startDate: string) {
+    try {
+      const reservation = await this.reservationsService.findByStartDate(startDate);
+      return reservation;
+    }
+    catch(err) {
+      throw err;
+    }
+  }
+
+  @Get('byEndDate')
+  async findByEndDate(@Query('endDate') endDate: string) {
+    try {
+      const reservation = await this.reservationsService.findByEndDate(endDate);
+      return reservation;
+    }
+    catch(err) {
+      throw err;
+    }
+  }
 
   @Put('update')
   async update(@Query('id') id: string, @Body() updateReservationDto: UpdateReservationDto) {

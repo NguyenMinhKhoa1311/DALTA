@@ -23,4 +23,10 @@ export class ReservationService {
     
     return this.httpClient.get<Reservation>(`http://localhost:3000/reservation/byReservationId?id=${reservationId}`);
   }
+  getByStartDate(startDate: string){
+    return this.httpClient.get<Reservation[]>(`http://localhost:3000/reservation/byEndDate?startDate=${startDate}`);
+  }
+  getByEndDate(endDate: string){
+    return this.httpClient.get<Reservation[]>(`http://localhost:3000/reservation/byEndDate?endDate=${endDate}`);
+  }
 }
