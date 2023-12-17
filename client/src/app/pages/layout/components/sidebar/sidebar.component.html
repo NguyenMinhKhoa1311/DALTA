@@ -20,7 +20,7 @@
     </div>
 
 
-    <div id="profile">
+    <div id="profile" *ngIf="userForm.value.uid">
         <div class="profile_infor">
             <div class="profile_img">
                 <img src={{userForm.value.avatar}} alt="">
@@ -32,6 +32,12 @@
         </div>
         <div class="profile_menu">
             <i (click)="logout()" class="fa-solid fa-right-from-bracket"></i>
+        </div>
+    </div>
+
+    <div id="profile" *ngIf="!userForm.value.uid">
+        <div class="btn_login" (click)="login()">
+            <p>Đăng nhập</p>
         </div>
     </div>
 
