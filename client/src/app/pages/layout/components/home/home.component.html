@@ -46,7 +46,10 @@
                         </div>
                     </div>
                     <div class="cart_price">
-                        <div class="price_btn">
+                        <div class="price_btn_false" *ngIf="!car.status">
+                            <button>ĐÃ THUÊ</button>
+                        </div>
+                        <div class="price_btn" *ngIf="car.status">
                             <button (click)="openRentcarDialog(car)">THUÊ</button>
                         </div>
                         <div class="price_value">

@@ -169,6 +169,20 @@
                             }
                         }
 
+                        .price_btn_false {
+                            button {
+                                border-radius: 2rem;
+                                border: none;
+                                padding: 0.5rem;
+                                height: 2rem;
+                                width: 5rem;
+                                background-color: #ff0303;
+                                color: white;
+                                font-size: 11px;
+
+                            }
+                        }
+
                         .price_btn:hover {
                             button {
                                 background-color: #3c4ec7;

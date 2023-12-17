@@ -59,7 +59,7 @@ export class SidebarComponent {
 
   route$ = this.router.events;
   user$ = this.store.select('user', 'user');
-  auth$ = this.store.select('auth', "isLogoutSuccess");
+  auth$ = this.store.select('auth', 'isLogoutSuccess');
 
   userForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -94,8 +94,6 @@ export class SidebarComponent {
       user: this.user$,
     }).subscribe((res) => {
       if (res.user.role != 'Admin') {
-        console.log(res.user.role);
-        console.log(this.pages.length);
         if (this.pages.length == 5) {
           this.pages.splice(4, 1);
           this.pages[this.pages.length - 1].id = this.pages.length - 1;
