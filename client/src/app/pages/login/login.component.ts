@@ -76,7 +76,7 @@ export class LoginComponent {
           }
         }
       } 
-      if (this.isGetSuccessUser && user.email == "404 user not found")
+      if (this.isGetSuccessUser && user.email == "404 user not found"&& this.isLoginWithGoogle)
       {
 
           console.log(this.userFirebase);
