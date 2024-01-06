@@ -66,9 +66,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     let endDate = dateCheck.setDate(dateCheck.getDate() - 1);
     const utcStringEndDate = dateCheck.toUTCString();
 
-    console.log("Start date: " + utcStringStartDate);
-    console.log("End date: " + utcStringEndDate);
-    
+    console.log('Start date: ' + utcStringStartDate);
+    console.log('End date: ' + utcStringEndDate);
 
     this.isCreateReservationSuccess$.subscribe((val) => {
       if (val) {
