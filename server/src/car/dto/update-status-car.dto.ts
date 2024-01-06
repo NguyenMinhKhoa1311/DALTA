@@ -5,7 +5,4 @@ export class UpdateStatusDto {
   @IsArray()
   @IsString({ each: true })
   ids: string[];
-  
-  @IsBoolean()
-  status: boolean;
 }

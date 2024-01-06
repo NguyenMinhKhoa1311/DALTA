@@ -132,27 +132,54 @@ export class CarEffects {
       )
     )
   );
-  updateAllStatus$ = createEffect(() =>
+  updateAllStatusTrue$ = createEffect(() =>
     this.action$.pipe(
-      ofType(CarActions.updateStatusAll),
+      ofType(CarActions.updateStatusTrueAll),
       exhaustMap((action) =>
-        this.carService.updateStatusAll(action.ids, action.status).pipe(
+        this.carService.updateStatusAll(action.ids, true).pipe(
           map((item) => {
             if (item != undefined || item != null) {
               if (item.message) {
-                return CarActions.updateStatusAllFailure({
+                return CarActions.updateStatusTrueAllFailure({
                   updateStatusAllErrMess: item.message,
                 });
               }
-              return CarActions.updateStatusAllSuccess();
+              return CarActions.updateStatusTrueAllSuccess();
             } else {
-              return CarActions.updateStatusAllFailure({
+              return CarActions.updateStatusTrueAllFailure({
                 updateStatusAllErrMess: 'Car is undefined or null',
               });
             }
           }),
           catchError((error) =>
-            of(CarActions.updateStatusAllFailure({ updateStatusAllErrMess: error }))
+            of(CarActions.updateStatusTrueAllFailure({ updateStatusAllErrMess: error }))
+          )
+        )
+      )
+    )
+  );
+
+  updateAllStatusFalse$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(CarActions.updateStatusFalseAll),
+      exhaustMap((action) =>
+        this.carService.updateStatusAll(action.ids, false).pipe(
+          map((item) => {
+            if (item != undefined || item != null) {
+              if (item.message) {
+                return CarActions.updateStatusFalseAllFailure({
+                  updateStatusAllErrMess: item.message,
+                });
+              }
+              return CarActions.updateStatusFalseAllSuccess();
+            } else {
+              return CarActions.updateStatusFalseAllFailure({
+                updateStatusAllErrMess: 'Car is undefined or null',
+              });
+            }
+          }),
+          catchError((error) =>
+            of(CarActions.updateStatusFalseAllFailure({ updateStatusAllErrMess: error }))
           )
         )
       )

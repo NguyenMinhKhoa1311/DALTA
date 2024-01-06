@@ -26,6 +26,7 @@ import { ReservationState } from 'src/app/ngrx/states/reservation.state';
 import { PaymentState } from 'src/app/ngrx/states/payment.state';
 import { ReviewState } from 'src/app/ngrx/states/review.state';
 import { Review } from 'src/app/models/review.model';
+import { Reservation } from 'src/app/models/reservation.model';
 
 @Component({
   selector: 'app-home',
@@ -33,22 +34,45 @@ import { Review } from 'src/app/models/review.model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
-  carList: Car[] = [];
-  user: User = <User>{};
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
   reviews$ = this.store.select('review', 'reviewList');
-  reviews: Review[] = [];
-  isGetReviewSuccess = false;
   isCreateReservationSuccess$ = this.store.select(
     'reservation',
     'isCreateSuccess'
   );
+  reservationListByEndDate$ = this.store.select(
+    'reservation',
+    'reservationListByEndDate'
+  );
+  reservationListByStartDate$ = this.store.select(
+    'reservation',
+    'reservationListByStartDate'
+  );
+  isUpdateAllStatusTrue$ = this.store.select(
+    'car',
+    'isUpdateStatusAllTrueSuccess'
+  );
+  isUpdateAllStatusFalse$ = this.store.select(
+    'car',
+    'isUpdateStatusAllFalseSuccess'
+  );
+  reviews: Review[] = [];
+  carList: Car[] = [];
+  reservationListByEndDate: Reservation[] = [];
+  reservationListByStartDate: Reservation[] = [];
+  user: User = <User>{};
+  userToGetReservation: User = <User>{};
+  isGetReviewSuccess = false;
+  isFirstZeroInEndDate: boolean = false;
+  isFirstZeroInStartDate: boolean = false;
+  isUpdateStatusCarOneTime = false;
   reservation_id: string = '';
   selectedDays: number = 1;
   totalCost: number = 0;
   avg_rating: any = 0;
 
+  //Contructor
   constructor(
     private store: Store<{
       car: CarState;
@@ -60,15 +84,106 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     }>,
     public dialog: MatDialog
   ) {
+    //get endDate and startDate
     const dateCheck = new Date();
     dateCheck.setUTCHours(0, 0, 0, 0);
     const utcStringStartDate = dateCheck.toUTCString();
-    let endDate = dateCheck.setDate(dateCheck.getDate() - 1);
+    dateCheck.setDate(dateCheck.getDate() - 1);
     const utcStringEndDate = dateCheck.toUTCString();
 
     console.log('Start date: ' + utcStringStartDate);
     console.log('End date: ' + utcStringEndDate);
 
+    this.store.select('car').subscribe((val) => {
+      if (val != null && val != undefined) {
+        this.carList = val.carList;
+      }
+    });
+    this.store.dispatch(
+      ReservationActions.getReservationByEndDate({ endDate: utcStringEndDate })
+    );
+
+    this.user$.subscribe((user) => {
+      if (user._id != null && user._id != undefined) {
+        console.log(user);
+        this.user = user;
+        const userAsJson = JSON.stringify(user);
+        // Lưu đối tượng userAsJson vào sessionStorage
+        sessionStorage.setItem('user', userAsJson);
+        console.log('lưu vào sessionStorage');
+      } else {
+        console.log('lấy từ sessionStorage');
+
+        // Lấy đối tượng user từ sessionStorage
+        const userAsJson = sessionStorage.getItem('user');
+        console.log(userAsJson);
+        // Chuyển đổi chuỗi sang đối tượng user
+        this.user = JSON.parse(userAsJson || '');
+        this.store.dispatch(UserActions.storedUser(this.user));
+      }
+    });
+
+    //theo dõi get reservation by end date
+    this.reservationListByEndDate$.subscribe((val) => {
+      if (val.length > 0) {
+        const carIds = val.map((car) => car.carId.carId);
+        this.reservationListByEndDate = val;
+        console.log(carIds);
+        this.store.dispatch(CarAction.updateStatusTrueAll({ ids: carIds }));
+      } else if (this.isFirstZeroInEndDate) {
+        if (!this.isUpdateStatusCarOneTime) {
+          this.store.dispatch(
+            ReservationActions.getReservationByStartDate({
+              startDate: utcStringStartDate,
+            })
+          );
+          this.isUpdateStatusCarOneTime = true;
+        }
+      } else {
+        this.isFirstZeroInEndDate = true;
+      }
+    });
+    //theo dõi get reservation by start date
+    this.reservationListByStartDate$.subscribe((val) => {
+      if (val.length > 0) {
+        const carIds = val.map((car) => car.carId.carId);
+        this.reservationListByStartDate = val;
+        console.log(carIds);
+        this.store.dispatch(CarAction.updateStatusFalseAll({ ids: carIds }));
+      } else if (this.isFirstZeroInStartDate) {
+        console.log(this.isUpdateStatusCarOneTime);
+        console.log(this.isFirstZeroInStartDate);
+
+        this.store.dispatch(CarAction.get({ isConfirmed: true }));
+        this.isUpdateStatusCarOneTime = true;
+        this.isFirstZeroInStartDate = false;
+      } else {
+        this.isFirstZeroInStartDate = true;
+      }
+    });
+
+    //theo dõi update
+    this.isUpdateAllStatusFalse$.subscribe((val) => {
+      if (val) {
+        this.store.dispatch(CarAction.get({ isConfirmed: true }));
+        this.isFirstZeroInStartDate = false;
+      }
+    });
+    this.isUpdateAllStatusTrue$.subscribe((val) => {
+      if (val) {
+        console.log('gọi start in here');
+        if (!this.isUpdateStatusCarOneTime) {
+          this.store.dispatch(
+            ReservationActions.getReservationByStartDate({
+              startDate: utcStringStartDate,
+            })
+          );
+          this.isUpdateStatusCarOneTime = true;
+        }
+      }
+    });
+
+    //theo dõi create reservation
     this.isCreateReservationSuccess$.subscribe((val) => {
       if (val) {
         this.openPaymentDialog();
@@ -96,6 +211,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.store.dispatch(ReservationActions.reset());
+    this.isFirstZeroInEndDate = false;
+    this.isFirstZeroInStartDate = false;
   }
   generateRandomId(length: number): string {
     const chars = '0123456789abcdefghijklmnopqrstuvwxyz';
@@ -112,33 +229,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(userFirebase);
       }
     });
-    this.user$.subscribe((user) => {
-      if (user._id != null && user._id != undefined) {
-        console.log(user);
-        this.user = user;
-        const userAsJson = JSON.stringify(user);
-
-        // Lưu đối tượng userAsJson vào sessionStorage
-        sessionStorage.setItem('user', userAsJson);
-        console.log('lưu vào sessionStorage');
-      } else {
-        console.log('lấy từ sessionStorage');
-
-        // Lấy đối tượng user từ sessionStorage
-        const userAsJson = sessionStorage.getItem('user');
-        console.log(userAsJson);
-
-        // Chuyển đổi chuỗi sang đối tượng user
-        this.user = JSON.parse(userAsJson || '');
-        this.store.dispatch(UserActions.storedUser(this.user));
-      }
-    });
-    this.store.select('car').subscribe((val) => {
-      if (val != null && val != undefined) {
-        this.carList = val.carList;
-      }
-    });
-    this.store.dispatch(CarAction.get({ isConfirmed: true }));
 
     //date-pikcer
     const dateContainers = document.querySelectorAll('.input-container');

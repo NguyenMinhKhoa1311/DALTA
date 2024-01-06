@@ -48,16 +48,34 @@ export const confirmFailure = createAction(
 );
 export const resetIsAddSuccess = createAction('[car] reset is add success');
 
-export const updateStatusAll = createAction(
+export const updateStatusTrueAll = createAction(
   '[car] update status all',
-  props<{ ids: string[], status: boolean}>()
+  props<{ ids: string[]}>()
 );  
 
-export const updateStatusAllSuccess = createAction(
+export const updateStatusTrueAllSuccess = createAction(
+  '[car] update status all true success'
+);
+
+export const updateStatusTrueAllFailure = createAction(
+  '[car] update status all failure',
+  props<{ updateStatusAllErrMess: string }>()
+);
+
+export const updateStatusFalseAll = createAction(
+  '[car] update status false all',
+  props<{ ids: string[]}>()
+);
+
+export const updateStatusFalseAllSuccess = createAction(
   '[car] update status all success'
 );
 
-export const updateStatusAllFailure = createAction(
+export const updateStatusFalseAllFailure = createAction(
   '[car] update status all failure',
   props<{ updateStatusAllErrMess: string }>()
+);
+
+export const resetUpdateAllStatus = createAction(
+  '[car] reset update all status'
 );

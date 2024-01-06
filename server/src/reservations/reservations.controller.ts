@@ -73,7 +73,7 @@ export class ReservationsController {
   @Get('byStartDate')
   async findByStartDate(@Query('startDate') startDate: string) {
     try {
-      const reservation = await this.reservationsService.findByStartDate(startDate);
+      const reservation = await this.reservationsService.findByStartDate(startDate, true);
       return reservation;
     }
     catch(err) {
@@ -84,7 +84,7 @@ export class ReservationsController {
   @Get('byEndDate')
   async findByEndDate(@Query('endDate') endDate: string) {
     try {
-      const reservation = await this.reservationsService.findByEndDate(endDate);
+      const reservation = await this.reservationsService.findByEndDate(endDate, true);
       return reservation;
     }
     catch(err) {

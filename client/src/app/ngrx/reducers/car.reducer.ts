@@ -21,9 +21,12 @@ export const initialState: CarState = {
   isConfirmLoading: false,
   isConfirmSuccess: false,
   confirmErrMess: '',
-  isUpdateStatusAllLoading:false,
-  isUpdateStatusAllSuccess:false,
-  updateStatusAllErrMess:'',
+  isUpdateStatusTrueAllLoading:false,
+  isUpdateStatusAllTrueSuccess:false,
+  updateStatusAllTrueErrMess:'',
+  isUpdateStatusFalseAllLoading:false,
+  isUpdateStatusAllFalseSuccess:false,
+  updateStatusAllFalseErrMess: ''
 
 };
 
@@ -185,33 +188,74 @@ export const carReducer = createReducer(
     };
     return newState;
   }),
-  on(CarActions.updateStatusAll, (state, action) => {
+  on(CarActions.updateStatusTrueAll, (state, action) => {
+    console.log(action.type,action.ids);
     let newState: CarState = {
       ...state,
-      isUpdateStatusAllLoading: true,
-      isUpdateStatusAllSuccess: false,
-      updateStatusAllErrMess: '',
+      isUpdateStatusTrueAllLoading: true,
+      isUpdateStatusAllTrueSuccess: false,
+      updateStatusAllTrueErrMess: '',
     };
     return newState;
   }
   ),
-  on(CarActions.updateStatusAllSuccess, (state, action) => {
+  on(CarActions.updateStatusTrueAllSuccess, (state, action) => {
     let newState: CarState = {
       ...state,
-      isUpdateStatusAllLoading: false,
-      isUpdateStatusAllSuccess: true,
-      updateStatusAllErrMess: '',
+      isUpdateStatusTrueAllLoading: false,
+      isUpdateStatusAllTrueSuccess: true,
+      updateStatusAllTrueErrMess: '',
     };
     return newState;
   }),
-  on(CarActions.updateStatusAllFailure, (state, action) => {
+  on(CarActions.updateStatusTrueAllFailure, (state, action) => {
     let newState: CarState = {
       ...state,
-      isUpdateStatusAllLoading: false,
-      isUpdateStatusAllSuccess: false,
-      updateStatusAllErrMess: action.updateStatusAllErrMess,
+      isUpdateStatusTrueAllLoading: false,
+      isUpdateStatusAllTrueSuccess: false,
+      updateStatusAllTrueErrMess: action.updateStatusAllErrMess,
     };
     return newState;
   }),
+  on(CarActions.updateStatusFalseAll, (state, action) => {
+    console.log(action.type,action.ids);
+    
+    let newState: CarState = {
+      ...state,
+      isUpdateStatusFalseAllLoading: true,
+      isUpdateStatusAllFalseSuccess: false,
+      updateStatusAllFalseErrMess: '',
+    };
+    return newState;
+  }
+  ),
+  on(CarActions.updateStatusFalseAllSuccess, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isUpdateStatusFalseAllLoading: false,
+      isUpdateStatusAllFalseSuccess: true,
+      updateStatusAllFalseErrMess: '',
+    };
+    return newState;
+  }),
+  on(CarActions.updateStatusFalseAllFailure, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isUpdateStatusFalseAllLoading: false,
+      isUpdateStatusAllFalseSuccess: false,
+      updateStatusAllFalseErrMess: action.updateStatusAllErrMess,
+    };
+    return newState;
+  }),
+  on(CarActions.resetUpdateAllStatus, (state, action) => {
+    let newState: CarState = {
+      ...state,
+      isUpdateStatusAllTrueSuccess: false,
+      isUpdateStatusAllFalseSuccess: false,
+      updateStatusAllTrueErrMess: '',
+      updateStatusAllFalseErrMess: ''
+    };
+    return newState;
+  })
 
 );
