@@ -129,6 +129,8 @@ export class SidebarComponent {
   }
 
   selected(index: number) {
+    console.log('navigate nè');
+    
     this.router.navigate([this.pages[index].link]);
   }
 

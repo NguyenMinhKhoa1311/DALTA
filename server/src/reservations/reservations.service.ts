@@ -81,7 +81,7 @@ export class ReservationsService {
     }
   }
 
-  async findByStartDate(startDate: string, status: boolean = true) {
+  async findByStartDate(startDate: string, status: boolean) {
     try{
       const reservation = await this.reservationModel.find({startDate: startDate, status: status})
       .populate('carId','name carId', this.carModel)
@@ -95,7 +95,7 @@ export class ReservationsService {
     }
   }
 
-  async findByEndDate(endDate: string, status: boolean = true) {
+  async findByEndDate(endDate: string, status: boolean) {
     try{
       const reservation = await this.reservationModel.find({endDate: endDate, status: status})
       .populate('carId','name carId', this.carModel)

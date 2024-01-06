@@ -66,7 +66,7 @@ export const getReservationByStartDateFailure = createAction(
 
 export const getReservationByEndDate = createAction(
   '[reservation] Get By End Date',
-  props<{ endDate: string }>()
+  props<{ endDate: string}>()
 );
 
 export const getReservationByEndDateSuccess = createAction(

@@ -100,9 +100,9 @@ export class CarController {
   }
 
   @Put('allstatus')
-  async updateAllStatus(@Body() updateStatusDto: UpdateStatusDto) {
+  async updateAllStatus(@Body() updateStatusDto: UpdateStatusDto, @Query('status') status: boolean) {
     try {
-      const { ids, status } = updateStatusDto;
+      const { ids } = updateStatusDto;
   
       const updatedCars = await Promise.all(
         ids.map(async (id) => {

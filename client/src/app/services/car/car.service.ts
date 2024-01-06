@@ -42,8 +42,8 @@ export class CarService {
 
   updateStatusAll(ids: string[], status: boolean) {
     return this.httpClient.put<Car[] | any>(
-      `http://localhost:3000/car/allstatus`,
-      {ids, status}
+      `http://localhost:3000/car/allstatus?status=${status}`,
+      {ids}
     );
   }
 }

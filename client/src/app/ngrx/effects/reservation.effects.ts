@@ -66,10 +66,10 @@ export class ReservationEffects{
                         if(item != undefined || item != null){
                             return ReservationActions.getReservationByStartDateSuccess({reservations: item});
                         }else{
-                            return ReservationActions.getFailure({errorMessage: 'Reservation is undefined or null'});
+                            return ReservationActions.getReservationByStartDateFailure({errorMessage: 'Reservation is undefined or null'});
                         }
                     }),
-                    catchError((error) => of(ReservationActions.getFailure({errorMessage: error})))
+                    catchError((error) => of(ReservationActions.getReservationByStartDateFailure({errorMessage: error})))
                 )
             )));
         getByendDate$ = createEffect(() =>
@@ -81,10 +81,10 @@ export class ReservationEffects{
                         if(item != undefined || item != null){
                             return ReservationActions.getReservationByEndDateSuccess({reservations: item});
                         }else{
-                            return ReservationActions.getFailure({errorMessage: 'Reservation is undefined or null'});
+                            return ReservationActions.getReservationByEndDateFailure({errorMessage: 'Reservation is undefined or null'});
                         }
                     }),
-                    catchError((error) => of(ReservationActions.getFailure({errorMessage: error})))
+                    catchError((error) => of(ReservationActions.getReservationByEndDateFailure({errorMessage: error})))
                 )
             )));
 

@@ -58,6 +58,8 @@ export class LoginComponent {
           console.log('isGetSuccessUser: ' + this.isGetSuccessUser);
             console.log('có tài khoản k phải tk gg');
           if (user.password == this.accountData.password) {
+            const userAsJsoBth = JSON.stringify(user);
+            sessionStorage.setItem('user', userAsJsoBth);
             console.log('isGetSuccessUser: ' + this.isGetSuccessUser);
             this.router.navigate(['/base/home']);
             this.isGetSuccessUser = false;
@@ -69,7 +71,11 @@ export class LoginComponent {
           }
         } else {
           if ( this.isLoginWithGoogle && this.userFirebase.email == user.email) {
+
             console.log('isGetSuccessUser: ' + this.isGetSuccessUser);
+            const userAsJsonGG = JSON.stringify(user);
+            sessionStorage.setItem('user', userAsJsonGG);
+
             this.router.navigate(['/base/home']);
             console.log('đăng nhập với gg');
             this.isGetSuccessUser = false;
