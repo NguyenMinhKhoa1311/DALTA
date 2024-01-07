@@ -12,11 +12,12 @@
                     <h2 *ngIf="reservation.status == false">Trạng thái: Chưa thanh toán</h2>
                     <h2 *ngIf="reservation.status == true">Trạng thái: Đã thanh toán</h2>
                     <h2>Tổng tiền: {{formatPrice(reservation.total)}}</h2>
-                    <div class="price_btn">
+                    <div class="price_btn" *ngIf="reservation.status == false">
                         <button style="margin-right: 5px; font-size: 0.8rem;"
-                            (click)="openPaymentDialog(reservation)">Xác
-                            nhận</button>
-
+                            (click)="openPaymentDialog(reservation)">Xác nhận</button>
+                    </div>
+                    <div class="price_btn_2" *ngIf="reservation.status == true">
+                        <button style="margin-right: 5px; font-size: 0.8rem;">Xác nhận</button>
                     </div>
                 </div>
             </div>

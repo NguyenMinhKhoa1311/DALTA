@@ -34,19 +34,33 @@ import { Reservation } from 'src/app/models/reservation.model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
-
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
   reviews$ = this.store.select('review', 'reviewList');
-  isCreateReservationSuccess$ = this.store.select('reservation', 'isCreateSuccess');
-  reservationListByEndDate$ = this.store.select('reservation', 'reservationListByEndDate');
-  reservationListByStartDate$ = this.store.select('reservation', 'reservationListByStartDate');
-  isUpdateAllStatusTrue$ = this.store.select('car', 'isUpdateStatusAllTrueSuccess');
-  isUpdateAllStatusFalse$ = this.store.select('car', 'isUpdateStatusAllFalseSuccess');
+  isCreateReservationSuccess$ = this.store.select(
+    'reservation',
+    'isCreateSuccess'
+  );
+  reservationListByEndDate$ = this.store.select(
+    'reservation',
+    'reservationListByEndDate'
+  );
+  reservationListByStartDate$ = this.store.select(
+    'reservation',
+    'reservationListByStartDate'
+  );
+  isUpdateAllStatusTrue$ = this.store.select(
+    'car',
+    'isUpdateStatusAllTrueSuccess'
+  );
+  isUpdateAllStatusFalse$ = this.store.select(
+    'car',
+    'isUpdateStatusAllFalseSuccess'
+  );
   reviews: Review[] = [];
   carList: Car[] = [];
   reservationListByEndDate: Reservation[] = [];
-  reservationListByStartDate: Reservation[] = []; 
+  reservationListByStartDate: Reservation[] = [];
   user: User = <User>{};
   userToGetReservation: User = <User>{};
   isGetReviewSuccess = false;
@@ -57,7 +71,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedDays: number = 1;
   totalCost: number = 0;
   avg_rating: any = 0;
-
 
   //Contructor
   constructor(
@@ -78,15 +91,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     dateCheck.setDate(dateCheck.getDate() - 1);
     const utcStringEndDate = dateCheck.toUTCString();
 
-    console.log("Start date: " + utcStringStartDate);
-    console.log("End date: " + utcStringEndDate);
+    console.log('Start date: ' + utcStringStartDate);
+    console.log('End date: ' + utcStringEndDate);
 
     this.store.select('car').subscribe((val) => {
       if (val != null && val != undefined) {
         this.carList = val.carList;
       }
     });
-    this.store.dispatch(ReservationActions.getReservationByEndDate({ endDate: utcStringEndDate}));
+    this.store.dispatch(
+      ReservationActions.getReservationByEndDate({ endDate: utcStringEndDate })
+    );
 
     this.user$.subscribe((user) => {
       if (user._id != null && user._id != undefined) {
@@ -108,69 +123,65 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
-    
     //theo dõi get reservation by end date
     this.reservationListByEndDate$.subscribe((val) => {
-
-      if (val.length > 0 ) {
-        const carIds = val.map(car => car.carId.carId);
+      if (val.length > 0) {
+        const carIds = val.map((car) => car.carId.carId);
         this.reservationListByEndDate = val;
         console.log(carIds);
-        this.store.dispatch(CarAction.updateStatusTrueAll({ ids: carIds}));
-      }else if(this.isFirstZeroInEndDate){
-        if(!this.isUpdateStatusCarOneTime){
-          this.store.dispatch(ReservationActions.getReservationByStartDate({ startDate: utcStringStartDate }));
+        this.store.dispatch(CarAction.updateStatusTrueAll({ ids: carIds }));
+      } else if (this.isFirstZeroInEndDate) {
+        if (!this.isUpdateStatusCarOneTime) {
+          this.store.dispatch(
+            ReservationActions.getReservationByStartDate({
+              startDate: utcStringStartDate,
+            })
+          );
           this.isUpdateStatusCarOneTime = true;
         }
-
-      }else{
+      } else {
         this.isFirstZeroInEndDate = true;
       }
-    })
+    });
     //theo dõi get reservation by start date
     this.reservationListByStartDate$.subscribe((val) => {
       if (val.length > 0) {
-        const carIds = val.map(car => car.carId.carId);
+        const carIds = val.map((car) => car.carId.carId);
         this.reservationListByStartDate = val;
         console.log(carIds);
-        this.store.dispatch(CarAction.updateStatusFalseAll({ ids: carIds}));
-      }
-      else if(this.isFirstZeroInStartDate){
+        this.store.dispatch(CarAction.updateStatusFalseAll({ ids: carIds }));
+      } else if (this.isFirstZeroInStartDate) {
         console.log(this.isUpdateStatusCarOneTime);
         console.log(this.isFirstZeroInStartDate);
-        
-          this.store.dispatch(CarAction.get({ isConfirmed: true }));
-          this.isUpdateStatusCarOneTime = true;
-          this.isFirstZeroInStartDate = false;
 
-
-      } else{
+        this.store.dispatch(CarAction.get({ isConfirmed: true }));
+        this.isUpdateStatusCarOneTime = true;
+        this.isFirstZeroInStartDate = false;
+      } else {
         this.isFirstZeroInStartDate = true;
       }
-    })
+    });
 
     //theo dõi update
     this.isUpdateAllStatusFalse$.subscribe((val) => {
       if (val) {
         this.store.dispatch(CarAction.get({ isConfirmed: true }));
         this.isFirstZeroInStartDate = false;
-    }
-
-
-    })
+      }
+    });
     this.isUpdateAllStatusTrue$.subscribe((val) => {
-
       if (val) {
         console.log('gọi start in here');
-        if(!this.isUpdateStatusCarOneTime){
-          this.store.dispatch(ReservationActions.getReservationByStartDate({ startDate: utcStringStartDate}));
+        if (!this.isUpdateStatusCarOneTime) {
+          this.store.dispatch(
+            ReservationActions.getReservationByStartDate({
+              startDate: utcStringStartDate,
+            })
+          );
           this.isUpdateStatusCarOneTime = true;
         }
-
-
       }
-
-    })
+    });
 
     //theo dõi create reservation
     this.isCreateReservationSuccess$.subscribe((val) => {
@@ -218,8 +229,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(userFirebase);
       }
     });
-
-
 
     //date-pikcer
     const dateContainers = document.querySelectorAll('.input-container');
