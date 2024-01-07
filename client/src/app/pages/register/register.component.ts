@@ -56,7 +56,7 @@ export class RegisterComponent {
     });
     this.store.select('user', 'isCreateSussess').subscribe((state) => {
       if (state) {
-        this.router.navigate(['/base/home']);
+        this.router.navigate(['/base/login']);
       }
     });
   }
@@ -78,9 +78,9 @@ export class RegisterComponent {
       console.log(regisData);
     } else {
       let regisData: User = {
-        uid: this.regisForm.value.uid ?? '',
+        uid: this.regisForm.value.phone ?? '',
         _id: '',
-        avatar: this.regisForm.value.avatar ?? '',
+        avatar: 'https://ikay.vn/upload_images/images/2023/12/16/Nguyen-Van-Khai-CEO-cua-Ikay-Group.jpg',
         email: this.regisForm.value.email ?? '',
         name: this.regisForm.value.name ?? '',
         address: this.regisForm.value.address ?? '',
