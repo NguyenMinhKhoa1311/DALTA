@@ -105,14 +105,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       ReservationActions.getReservationByEndDate({ endDate: utcStringEndDate })
     );
 
-    this.isPostCommentSuccess$.subscribe((val) => {
-      if (val) {
-        if (this.car_id != '') {
-          this.closeCommentDialog();
-          this.store.dispatch(ReviewActions.get({ carId: this.car_id }));
-        }
-      }
-    });
+    // this.isPostCommentSuccess$.subscribe((val) => {
+    //   if (val) {
+    //     if (this.car_id != '') {
+    //       console.log('Comment success');
+    //       this.store.dispatch(ReviewActions.get({ carId: this.car_id }));
+    //       console.log(this.car_id);
+          
+
+
+    //     }
+    //   }
+    // });
 
     this.user$.subscribe((user) => {
       if (user._id != null && user._id != undefined) {
@@ -203,6 +207,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.reviews$.subscribe((val) => {
       if (val.length > 0) {
         this.reviews = val;
+
+        
         this.isGetReviewSuccess = true;
         console.log(this.reviews);
         this.calculateAverageRating();
@@ -393,6 +399,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       };
       this.store.dispatch(ReviewActions.get({ carId: car._id }));
       this.car_id = car._id;
+      console.log(this.car_id);
+      
       this.totalCost = this.selectCar.price + 7900 * 2;
     }
   }
@@ -513,6 +521,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dialog5.nativeElement.close();
     this.cdr5.detectChanges();
     this.car_id = '';
+    console.log(this.car_id);
+    
   }
   commentForm = new FormGroup({
     comment: new FormControl(''),
@@ -532,6 +542,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       dayReview: new Date().toUTCString(),
     };
     this.store.dispatch(ReviewActions.create({ review: review }));
+    this.closeCommentDialog();
 
     console.log(review);
   }
