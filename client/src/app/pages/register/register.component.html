@@ -30,10 +30,7 @@
                         <input type="text" class="input1" placeholder="Email" required formControlName="email">
                         <i class="fa-solid fa-envelope"></i>
                     </div>
-                    <div class="input" *ngIf="this.isLoginWithGoogle==false">
-                        <input type="text" class="input1" placeholder="Avatar" required formControlName="avatar">
-                        <i class="fa-solid fa-envelope"></i>
-                    </div>
+
                     <div class="input" *ngIf="this.isLoginWithGoogle==true">
                         <input type="text" class="input1" placeholder="{{userFirebase.email}}" required
                             formControlName="email">

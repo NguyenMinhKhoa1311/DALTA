@@ -10,7 +10,7 @@
         <div class="filter">
             <div class="filter_box">
                 <img src="../../../../../assets/images/sort.png" alt="">
-                <span >Bộ lọc</span>
+                <span>Bộ lọc</span>
             </div>
         </div>
     </div>
@@ -237,7 +237,7 @@
                     </div>
                 </div>
             </div>
-            <p style="cursor: pointer;" (click)="openCommentDialog()">Đánh giá</p>
+            <p style="cursor: pointer; margin: 0;" (click)="openCommentDialog()">Đánh giá</p>
             <div class="list_comment" *ngIf="isGetReviewSuccess">
                 <div class="list_comment_box" *ngFor="let item of reviews">
                     <div class="avatar_review">
@@ -270,7 +270,7 @@
     </div>
     <div id="main_dialog">
         <div>
-            <p>Vui lòng sang trang history thanh toán để hoàn tất đặt xe</p>
+            <p>Vui lòng sang trang thanh toán để hoàn tất đặt xe</p>
         </div>
         <div class="btn_close">
             <button (click)="closePaymentDialog()">Close</button>
