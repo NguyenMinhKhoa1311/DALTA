@@ -29,25 +29,25 @@ export class SidebarComponent {
   pages: Page[] = [
     {
       id: 0,
-      name: 'Home',
+      name: 'Trang chủ',
       link: 'base/home',
       icon: 'fa-solid fa-house',
     },
     {
       id: 1,
-      name: 'History',
+      name: 'Thanh toán',
       link: 'base/history',
       icon: 'fa-solid fa-clock-rotate-left',
     },
     {
       id: 2,
-      name: 'Car Owner',
+      name: 'Đăng xe',
       link: 'base/carowner',
       icon: 'fa-solid fa-car-side',
     },
     {
       id: 3,
-      name: 'About',
+      name: 'Thông tin',
       link: 'base/about',
       icon: 'fa-regular fa-address-card',
     },
@@ -144,7 +144,7 @@ export class SidebarComponent {
 
   selected(index: number) {
     console.log('navigate nè');
-    
+
     this.router.navigate([this.pages[index].link]);
   }
 

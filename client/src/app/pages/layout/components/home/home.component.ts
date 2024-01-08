@@ -34,6 +34,7 @@ import { Reservation } from 'src/app/models/reservation.model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
+  isPostCommentSuccess$ = this.store.select('review', 'isCreateReviewSuccess');
   userFirebase$ = this.store.select('auth', 'userFirebase');
   user$ = this.store.select('user', 'user');
   reviews$ = this.store.select('review', 'reviewList');
@@ -70,6 +71,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   reservation_id: string = '';
   selectedDays: number = 1;
   totalCost: number = 0;
+  car_id: string = '';
   avg_rating: any = 0;
 
   //Contructor
@@ -102,6 +104,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.store.dispatch(
       ReservationActions.getReservationByEndDate({ endDate: utcStringEndDate })
     );
+
+    this.isPostCommentSuccess$.subscribe((val) => {
+      if (val) {
+        if (this.car_id != '') {
+          this.closeCommentDialog();
+          this.store.dispatch(ReviewActions.get({ carId: this.car_id }));
+        }
+      }
+    });
 
     this.user$.subscribe((user) => {
       if (user._id != null && user._id != undefined) {
@@ -381,6 +392,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         image: car.image._id,
       };
       this.store.dispatch(ReviewActions.get({ carId: car._id }));
+      this.car_id = car._id;
       this.totalCost = this.selectCar.price + 7900 * 2;
     }
   }
@@ -500,6 +512,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.commentForm.reset();
     this.dialog5.nativeElement.close();
     this.cdr5.detectChanges();
+    this.car_id = '';
   }
   commentForm = new FormGroup({
     comment: new FormControl(''),
@@ -519,7 +532,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       dayReview: new Date().toUTCString(),
     };
     this.store.dispatch(ReviewActions.create({ review: review }));
-    this.closeCommentDialog();
+
     console.log(review);
   }
   onStarClick(index: any) {

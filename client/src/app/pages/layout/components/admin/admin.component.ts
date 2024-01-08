@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Car } from 'src/app/models/car.model';
 import * as CarAction from 'src/app/ngrx/actions/car.actions';
@@ -27,31 +34,28 @@ export class AdminComponent implements OnInit {
       }
     });
     this.confirmedCar$.subscribe((val) => {
-      if(val) {
+      if (val) {
         this.store.dispatch(CarAction.get({ isConfirmed: false }));
+        this.closeRentcarDialog();
       }
     });
     this.removeCar$.subscribe((val) => {
-      if(val) {
+      if (val) {
         this.closeRentcarDialog();
         this.store.dispatch(CarAction.get({ isConfirmed: false }));
       }
     });
-    
   }
 
   confirmCar(carId: string) {
     this.store.dispatch(CarAction.confirm({ carId }));
-
   }
   removeCar(carId: string) {
     this.store.dispatch(CarAction.remove({ carId }));
-
   }
 
   ngOnInit(): void {
     this.store.dispatch(CarAction.get({ isConfirmed: false }));
-
   }
 
   @ViewChild('appDialog2', { static: true })

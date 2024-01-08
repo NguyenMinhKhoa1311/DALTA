@@ -45,8 +45,8 @@
           </div>
           <div class="cart_price">
             <div class="price_btn">
-              <button style="margin-right: 5px;" (click)="openRentcarDialog(car)">Detail</button>
-              <button (click)="removeCar(car.carId)">Reject</button>
+              <button style="margin-right: 5px;" (click)="openRentcarDialog(car)">Chi tiết</button>
+              <button (click)="removeCar(car.carId)">Từ chối</button>
             </div>
             <div class="price_value">
               <h3>${{ car.price }}</h3>
@@ -134,8 +134,8 @@
           <p>{{selectCar.description}}</p>
         </div>
         <div class="price_btn">
-          <button style="margin-right: 5px;" (click)="confirmCar(selectCar.carId)">Submit</button>
-          <button (click)="removeCar(selectCar.carId)">Reject</button>
+          <button style="margin-right: 5px;" (click)="confirmCar(selectCar.carId)">Xác nhận</button>
+          <button (click)="removeCar(selectCar.carId)">Từ chối</button>
         </div>
       </div>
     </div>

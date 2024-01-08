@@ -124,7 +124,7 @@ export class CarownerComponent implements OnInit, OnDestroy {
       if (user._id != undefined && user._id != null) {
         this.user = user;
         console.log(this.user);
-      }  else {
+      } else {
         console.log('lấy từ sessionStorage');
 
         // Lấy đối tượng user từ sessionStorage
@@ -158,8 +158,8 @@ export class CarownerComponent implements OnInit, OnDestroy {
     this.isCreateCarSuccess$.subscribe((val) => {
       if (val) {
         console.log(val);
-        
-        alert('add car successfully wait for admin confirm car');
+
+        alert('Đăng xe thành công, vui lòng đợi quản trị viên kiểm duyệt!');
         this.addCarData = {
           carId: '',
           categoryId: '',
@@ -179,8 +179,7 @@ export class CarownerComponent implements OnInit, OnDestroy {
         };
         this.store.dispatch(CarAction.resetIsAddSuccess());
       }
-    })
-
+    });
   }
   ngOnDestroy(): void {}
 
